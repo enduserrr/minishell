@@ -22,6 +22,11 @@ $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME)
 
 clean : 
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
+	@cd libft && make clean
+
+fclean : clean
+	@rm -f $(NAME)
+	@cd libft && make fclean
 
 all: $(NAME)
