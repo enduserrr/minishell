@@ -1,0 +1,27 @@
+Eli eli.. 
+
+kaikki mita oon tehny on vaa arvailua, kaikki voidaan fiksaa ja teha uudestaan. mikaan ei oo valmista vaan vaatii viikkotolkulla hiomista.
+mut ompahan jotain.. 
+
+En vielakaan oo iha varma miten naita brancheja ajetaan, joten tein tahan omaan branchiin tammosen. 
+ - simppeli Makefile
+ - simppeli .h file
+    - jossa simppeli struct sisalla 
+ - simppeli main.c 
+ - sit toi minishell.c, jossa on run() funktio. 
+
+
+keretaan varmaan spekuloimaan rakenteita tarkemmin myohemmin, 
+mut tein vaan tammosen valimallin passatin et paasee testaa samalla ku kirjottaa koodia. 
+Noi buildinit mita teen on varmasti sit kylla muokattavissa 
+ihan sen mukaan millanen structi tai lista tai mika tahansa se parsen lopputulos ikina tuleekaan olemaan. 
+
+mikaan ei myoskaa oo valmista, kuha vaan committaan jotain sinne, mihi paasee sit lisailee 
+kaikkee shitia sen mukaan ku tieto lisaa tuskaa ja tajuaa et taahan on ihan vituillaan, 
+niinku tassa kohtaa kaikki varmasti onkin.. 
+
+muutaman sun projektin Makefilen katoin ja nayttaa et osaat teha huomattavasti fiksumpia Makefileja
+niin voidaan menna sun tekemalla. Voidaan myos kayttaa sun libft, jos haluut. Voidaan myos hioo .h fileen ihan minkalaisia vaan structeja. 
+eli toisinsanoen kaikki mita oon kirjottanu, voidaan hyvilla mielin pyyhkia yli ja teha fiksummin, 
+jos on hyvia ideoita mita kaikkee sinne haluut
+
