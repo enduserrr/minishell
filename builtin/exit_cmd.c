@@ -14,12 +14,38 @@
 #include "../includes/minishell.h"
 
 /*
- * Command exit frees everything and closes program
+ * Command exit frees everything and closes program 
+ * Exit with no options - but theres no mention about arguments.. 
+ * exit "sddsss"  --> exit: numeric argument required
+ * exit 6 "ffff" --> exit: too many arguments --> Continue program 
+ * exit 6  --> exits with exit code 6 
  */
 
 void exit_cmd(t_tools *tools)
 {
-    free_all(tools);
-    printf("exit\n");
-    exit(EXIT_SUCCESS);
+    int flag;
+
+    flag = 0;
+    tools->exit_code = 0;
+    printf("exit");
+    if (tools->split_rl[1] != NULL)
+    {
+        tools->exit_code = ft_atoi(tools->split_rl[1]);
+        if (!tools->exit_code)
+        {
+            printf(": %s: numeric argument required", tools->split_rl[1]);
+            tools->exit_code = 255;
+        }
+        else if (tools->exit_code && tools->split_rl[2])
+        {
+            printf(": too many arguments");
+            flag = -1; 
+        }
+    }
+    printf("\n");
+    if (flag == 0)
+    {
+        free_all(tools);
+        exit(tools->exit_code);
+    }
 }

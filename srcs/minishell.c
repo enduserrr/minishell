@@ -25,10 +25,7 @@ void kaikki_mita_parsetukseen_tulee()
 void if_builtin(t_tools *tools)
 {
     if (ft_strncmp(tools->split_rl[0], "exit", 4) == 0)
-    {
         exit_cmd(tools);
-        exit(EXIT_SUCCESS);
-    }
     if (ft_strncmp(tools->split_rl[0], "cd", 2) == 0)
         cd_cmd(tools);
     if (ft_strncmp(tools->split_rl[0], "env", 3) == 0)

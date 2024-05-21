@@ -27,6 +27,7 @@ typedef struct s_tools
     char    *prev_path;
     char    **paths;
     char    **envp;
+    int     exit_code;
     int     end; 
 
 }   t_tools;

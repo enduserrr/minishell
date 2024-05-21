@@ -25,3 +25,33 @@ niin voidaan menna sun tekemalla. Voidaan myos kayttaa sun libft, jos haluut. Vo
 eli toisinsanoen kaikki mita oon kirjottanu, voidaan hyvilla mielin pyyhkia yli ja teha fiksummin, 
 jos on hyvia ideoita mita kaikkee sinne haluut
 
+
+log
+21.5.2025 
+Builtin
+
+- echo 
+   - toimii jotenkin -- ei viela sen tarkemmin katsottu mita kaikkea pitaa tehda tai handlata
+
+- cd 
+   - toimii iha ok. -- errorhandling aika olematon ja segfaulttien mahdollisuus on viela aika iso
+
+- pwd 
+   - toimii jotenkin -- ei viela sen tarkemmin katsottu mita kaikkea pitaa tehda tai handlata
+   - parametrit ja bufferi varmaan ainakin pitaa kattoo kuntoon
+
+- env
+   - toimii jotenkin -- ei viela sen tarkemmin katsottu mita kaikkea pitaa tehda tai handlata
+
+- exit 
+   - toimii lahes kokonaan. -- pitaa viel sit fiksaa vapautukset ja errorhandling myohemmin ku tietaa
+     enemman miten parsetetaan ja mita kaikkee on vapautettavana. 
+
+
+- export 
+   - ei viela aloitettu
+   - paska ja taysin turha saa nahda teenko ollenkaan
+
+- unset 
+   - ei viela aloitettu
+   - seuraavaksi tyon alle.

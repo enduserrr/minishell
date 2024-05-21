@@ -83,14 +83,12 @@ void    cd_cmd(t_tools *tools)
     char *pwd;
 
     pwd = getcwd(NULL, 0);
-    printf("rl[0]: %s\n", tools->split_rl[0]);
-    printf("rl[1]: %s\n", tools->split_rl[1]);
     if (tools->split_rl[1] == NULL)
     {
         get_path(tools, "HOME=");
-        chdir(tools->path); 
+        chdir(tools->path);
     }
-    if (ft_strncmp(tools->split_rl[1], "..", 2) == 0)
+    else if (ft_strncmp(tools->split_rl[1], "..", 2) == 0)
     {
         trim_last(tools, pwd);
         chdir(tools->prev_path);
