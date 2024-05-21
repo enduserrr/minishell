@@ -15,15 +15,11 @@
 
 /*
  * cd without cmd: somehow work -- need more test and error handling
- *      - segfault if already home
+ * cd without cmd and unsetted HOME works now. 
  * cd with path: somehow works -- need more test and error handling
- * 
  * cd with .. : somehow works -- need more test and error handling
- * 
  * cd with dir name : somehow works -- need more test and error handling
- * 
- * 
- * what happens after unsetting path? and what is supposed to happen.. 
+ * cd with invalid dir name : works -- need more testing
  * 
  */
 void    trim_path(t_tools *tools, char *temp_path, char *str)
@@ -49,52 +45,62 @@ void    get_path(t_tools *tools, char *str)
     i = 0;
     while(tools->envp[i] != NULL)
     {
-        if (ft_strncmp(tools->envp[i], str, 5) == 0)
+        if (ft_strncmp(tools->envp[i], str, ft_strlen(str)) == 0)
             temp_path = tools->envp[i];
         i ++;
     }
-    trim_path(tools, temp_path, str);
+    if (!temp_path)
+        printf("cd: HOME not set\n"); 
+    else
+        trim_path(tools, temp_path, str);
 }
 
-void trim_last(t_tools *tools, char *dir)
+void trim_last(t_tools *tools)
 {
+    char *pwd;
     int i;
     int len;
 
+    pwd = getcwd(NULL, 0);
+    if (!pwd)
+        perror("pwd");
     i = 0;
-    len = ft_strlen(dir);
+    len = ft_strlen(pwd);
     while (len > 1)
     {
-        if (dir[len] == '/')
+        if (pwd[len] == '/')
             break ;
         len --;
     }
     tools->prev_path = malloc(len * sizeof(char));
     while(i < len)
     {
-        tools->prev_path[i] = dir[i];
+        tools->prev_path[i] = pwd[i];
         i ++;
     }
-    tools->prev_path[i] = '\0'; 
+    tools->prev_path[i] = '\0';
+    if (pwd)
+        free(pwd);
 }
 
 void    cd_cmd(t_tools *tools)
 {
-    char *pwd;
-
-    pwd = getcwd(NULL, 0);
     if (tools->split_rl[1] == NULL)
     {
         get_path(tools, "HOME=");
-        chdir(tools->path);
+        if (chdir(tools->path) == -1)
+            perror("cd");
     }
     else if (ft_strncmp(tools->split_rl[1], "..", 2) == 0)
     {
-        trim_last(tools, pwd);
-        chdir(tools->prev_path);
+        trim_last(tools);
+        if (chdir(tools->prev_path) == -1)
+            perror("cd");
         free(tools->prev_path); 
     }
     else
-        chdir(tools->split_rl[1]);
-    free(pwd);
+    {
+        if (chdir(tools->split_rl[1]) == -1)
+            perror("cd");
+    }
 }

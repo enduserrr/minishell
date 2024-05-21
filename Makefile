@@ -11,7 +11,9 @@ SRCS = 	main.c \
 		builtin/env_cmd.c \
 		builtin/exit_cmd.c \
 		builtin/echo_cmd.c \
-		builtin/pwd_cmd.c
+		builtin/pwd_cmd.c \
+		builtin/unset_cmd.c \
+		builtin/export_cmd.c \
 
 OBJ = $(SRCS:.c=.o)
 
