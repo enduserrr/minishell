@@ -24,6 +24,7 @@ typedef struct s_tools
     char    *rl;
     char    **split_rl;
     char    *path;
+    char    *prev_path;
     char    **paths;
     char    **envp;
     int     end; 
@@ -31,7 +32,6 @@ typedef struct s_tools
 }   t_tools;
 
 void run(char **envp);
-void parse(t_tools *tools);
 
 //builtins
 void exit_cmd(t_tools *tools);
