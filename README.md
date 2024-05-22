@@ -1,9 +1,8 @@
-# minishell_wip
+# MINISHELL
 
-## GIT STUFF
+## GIT
 
 ### Branching
-
 - git fetch origin / fetch the remote branches
 - git branch -r /list all remote branches
 - git branch /list local branches
@@ -17,7 +16,6 @@
 When working on the project start by fetching remote branches, creating them locally with 'checkout' and switching to the correct one to work inside of. Then when pushing 'git push origin <branch_name>'
 
 ### History
-
 Temporary:
 - git log /find the commit hash you want to go to
 - git checkout <commit_hash> /temporarily checkout an earlier commit
