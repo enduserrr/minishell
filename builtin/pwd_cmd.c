@@ -13,23 +13,23 @@
 #include "../includes/minishell.h"
 
 /*
- * Shows current working directory 
+ * Shows current working directory
  * tools argumenttina, vain varmuuden vuoksi. otetaan pois jos ei tule kayttoa.
- * 
- * -- dont know yet how this getcwd error is supposed to handle properly -- 
+ *
+ * -- dont know yet how this getcwd error is supposed to handle properly --
  */
 
-void pwd_cmd(t_tools *tools)
+void	pwd_cmd(t_tools *tools)
 {
-    char *pwd;
-    (void)tools->path;
+	char	*pwd;
 
-    pwd = getcwd(NULL, 0);
-    if (!pwd)
-        perror("pwd: ");
-    else
-    {
-        printf("%s\n", pwd);
-        free(pwd);
-    }
+	(void)tools->path;
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		perror("pwd: ");
+	else
+	{
+		printf("%s\n", pwd);
+		free(pwd);
+	}
 }

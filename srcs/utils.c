@@ -12,25 +12,23 @@
 
 #include "../includes/minishell.h"
 
-
-
-void free_array(char **arr)
+void	free_array(char **arr)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (arr[i])
-    {
-        free(arr[i]);
-        i++;
-    }
-    free(arr);
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
 
-void free_all(t_tools *tools)
+void	free_all(t_tools *tools)
 {
-    //if (tools->path != 0)  // ei viela mitaan mika tarvitsee vapautusta
-        //free(tools->path);
-    if (tools->split_rl != 0)
-        free_array(tools->split_rl);
+	// if (tools->path != 0)  // ei viela mitaan mika tarvitsee vapautusta
+	// free(tools->path);
+	if (tools->split_rl != 0)
+		free_array(tools->split_rl);
 }

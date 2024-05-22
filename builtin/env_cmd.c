@@ -10,22 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/minishell.h"
-
 
 /*
  * Command env outputs list of environment variables
  */
 
-void env_cmd(t_tools *tools)
+void	env_cmd(t_tools *tools)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while(tools->envp[i])
-    {
-        printf("%s\n", tools->envp[i]);
-        i ++;
-    }
+	i = 0;
+	while (tools->envp[i])
+	{
+		printf("%s\n", tools->envp[i]);
+		i++;
+	}
 }

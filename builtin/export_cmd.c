@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-void export_cmd(t_tools *tools)
+void	export_cmd(t_tools *tools)
 {
-    printf("%s: ei tee viela mitaan\n", tools->split_rl[0]);
+	printf("%s: ei tee viela mitaan\n", tools->split_rl[0]);
 }

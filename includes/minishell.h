@@ -13,38 +13,38 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include "../libft/libft.h"
-# include <readline/readline.h>
+# include "../libft/libft.h"
 # include <readline/history.h>
+# include <readline/readline.h>
+# include <stdio.h>
+# include <unistd.h>
 
 typedef struct s_tools
 {
-    char    *rl;
-    char    **split_rl;
-    char    *path;
-    char    *prev_path;
-    char    **paths;
-    char    **envp;
-    int     exit_code;
-    int     end; 
+	char	*rl;
+	char	**split_rl;
+	char	*path;
+	char	*prev_path;
+	char	**paths;
+	char	**envp;
+	int		exit_code;
+	int		end;
 
-}   t_tools;
+}			t_tools;
 
-void run(char **envp);
+void		run(char **envp);
 
-//builtins
-void exit_cmd(t_tools *tools);
-void cd_cmd(t_tools *tools);
-void env_cmd(t_tools *tools);
-void echo_cmd(t_tools *tools);
-void pwd_cmd(t_tools *tools);
-void unset_cmd(t_tools *tools);
-void export_cmd(t_tools *tools);
+// builtins
+void		exit_cmd(t_tools *tools);
+void		cd_cmd(t_tools *tools);
+void		env_cmd(t_tools *tools);
+void		echo_cmd(t_tools *tools);
+void		pwd_cmd(t_tools *tools);
+void		unset_cmd(t_tools *tools);
+void		export_cmd(t_tools *tools);
 
-//utils.c
-void free_array(char **arr);
-void free_all(t_tools *tools);
+// utils.c
+void		free_array(char **arr);
+void		free_all(t_tools *tools);
 
 #endif
