@@ -21,9 +21,5 @@ void	env_cmd(t_tools *tools)
 	int	i;
 
 	i = 0;
-	while (tools->envp[i])
-	{
-		printf("%s\n", tools->envp[i]);
-		i++;
-	}
+	print_env(tools->env_list);
 }

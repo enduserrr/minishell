@@ -46,10 +46,11 @@ void	run(char **envp)
 
 	tools = (t_tools){0};
 	tools.envp = envp;
+	create_env_list(&tools);
 	while (1)
 	{
 		tools.rl = readline("$>");
-		kaikki_mita_parsetukseen_tulee();
+        kaikki_mita_parsetukseen_tulee();
 		tools.split_rl = ft_split(tools.rl, ' ');
 		free(tools.rl);
 		if_builtin(&tools);

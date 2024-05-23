@@ -29,6 +29,18 @@ void	free_all(t_tools *tools)
 {
 	// if (tools->path != 0)  // ei viela mitaan mika tarvitsee vapautusta
 	// free(tools->path);
+	free_env(tools);
 	if (tools->split_rl != 0)
 		free_array(tools->split_rl);
+}
+
+int     ft_arraylen(char **arr)
+{
+    int len;
+
+    len = 0; 
+    while(arr[len] != NULL)
+        len ++;
+    return (len);
+
 }

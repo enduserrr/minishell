@@ -7,6 +7,7 @@ FLAGS = -Wall -Wextra -Werror -lreadline
 SRCS = 	main.c \
 		srcs/minishell.c \
 		srcs/utils.c \
+		srcs/env_list.c \
 		builtin/cd_cmd.c \
 		builtin/env_cmd.c \
 		builtin/exit_cmd.c \
