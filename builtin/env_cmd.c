@@ -18,8 +18,5 @@
 
 void	env_cmd(t_tools *tools)
 {
-	int	i;
-
-	i = 0;
 	print_env(tools->env_list);
 }

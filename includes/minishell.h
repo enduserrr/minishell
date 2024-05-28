@@ -22,7 +22,8 @@
 
 typedef struct s_env
 {
-	char			*var;
+	char			*key;
+	char			*value;
 	struct s_env 	*next;
 
 }			t_env;
@@ -60,6 +61,8 @@ void		export_cmd(t_tools *tools);
 void   		create_env_list(t_tools *tools);
 void    	print_env(t_env *env);
 void 		free_env(t_tools *tools);
+void    	print_env(t_env *env);
+int    		ft_listlen(t_env *env);
 
 // utils.c
 void		free_array(char **arr);

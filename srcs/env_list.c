@@ -12,11 +12,6 @@
 
 #include "../includes/minishell.h"
 
-/*
- * for freeing env_list from t_tools->env_list 
- */
-
-
 void free_env(t_tools *tools)
 {
     t_env   *current;
@@ -26,29 +21,26 @@ void free_env(t_tools *tools)
     while(current != NULL)
     {   
         temp = current->next;
-        free(current->var);
+        free(current->key);
+        free(current->value);
         free(current);
         current = temp; 
     }
 
 }
 
-/*
- * add element end of the list 
- * might be usefull to add more data than just one str dont know yet... 
- *  -  example key value pair:
- *  -  temp->key = HOME= 
- *  -  temp->value = Users/eleppala
- */
-
 void    add(t_env *env, t_tools *tools, int i)
 {
     t_env   *temp;
-    t_env  *temp2;
+    t_env   *temp2;
+    char    **temp_arr;
 
     temp2 = env;
     temp = malloc(sizeof(t_env));
-    temp->var = ft_strdup(tools->envp[i]);
+    temp_arr = ft_split(tools->envp[i], '=');
+    temp->key = ft_strdup(temp_arr[0]);
+    temp->value = ft_strdup(temp_arr[1]);
+    free_array(temp_arr);
     temp->next = NULL;
     while(temp2->next != NULL)
         temp2 = temp2->next;
@@ -62,17 +54,13 @@ void    add(t_env *env, t_tools *tools, int i)
 void    print_env(t_env *env)
 {
     t_env *ptr;
-    int i;
 
-    i = 0;
     ptr = env;
     while(ptr != NULL)
     {
-        printf("%s\n", ptr->var);
+        printf("%s=%s\n", ptr->key, ptr->value);
         ptr = ptr->next;
-        i ++;
     }
-
 }
 
 /*
@@ -82,12 +70,16 @@ void    print_env(t_env *env)
 
 void   create_env_list(t_tools *tools)
 {
-    t_env *env;
-    int i;
+    t_env   *env;
+    char    **temp_arr;
+    int     i;
 
     i = 1;
     env = malloc(sizeof(t_env));
-    env->var = ft_strdup(tools->envp[0]);
+    temp_arr = ft_split(tools->envp[0], '=');
+    env->key = ft_strdup(temp_arr[0]);
+    env->value = ft_strdup(temp_arr[1]);
+    free_array(temp_arr);
     env->next = NULL; 
     while(i < ft_arraylen(tools->envp))
     {

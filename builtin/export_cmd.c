@@ -13,49 +13,54 @@
 #include "../includes/minishell.h"
 
 /*
- * export without args --> show env list
- *  - env list pitaisi olla aakkosjarjestyksessa (ehka)
- * 
- * 
+ * Export shows envlist like export does: 
+ *  - declare -x USER="eleppala"
+ *  
+ * Puutteet: 
+ *  - export lista aakkosjarjestykseen
+ *  - jonkunlainen check, jos variable on jo olemassa 
+ *  - uuden variablen lisaaminen aakkosjarjestettyyn listaan
  */
 
-void    add_list(t_tools *tools)
+void    add_new(t_tools *tools, char *str)
 {
-    int i;
-    int j;
-    char *temp;
+    t_env   *temp;
+    t_env   *new;
+    char    **temp_arr;
 
-    i = 0;
-    j = 0;
-    tools->new_envp = malloc((ft_arraylen(tools->envp) + 2) * sizeof(char));
-    while(tools->envp[i] != NULL)
-    {
-        tools->new_envp[i] = tools->envp[i]; 
-        i ++;
-    }
-    temp = ft_strdup(tools->split_rl[1]);
-    tools->new_envp[i] = temp;
-    tools->new_envp[i + 1] = NULL;
-    tools->envp = tools->new_envp;
+    temp_arr = ft_split(str, '=');
+    new = malloc(sizeof(t_env));
+    new->key = ft_strdup(temp_arr[0]);
+    new->value = ft_strdup(temp_arr[1]);
+    new->next = NULL;
+    free_array(temp_arr);
+    temp = tools->env_list;
+    while (temp->next != NULL)
+        temp = temp->next;
+    temp->next = new;
 }
 
-void    output_list(t_tools *tools)
+/*
+ * outputs envlist like export does, 
+ *  - later make them in alphabetical order, good for now
+ */
+
+void    output_export(t_env *env)
 {
-	int i;
-    
-    i = 0;
-    while(tools->envp[i] != NULL)
+    t_env *ptr;
+
+    ptr = env;
+    while(ptr != NULL)
     {
-        printf("declare -x ");
-        printf("%s\n", tools->envp[i]);
-        i ++;
+        printf("declare -x %s=\"%s\" \n", ptr->key, ptr->value);
+        ptr = ptr->next;
     }
 }
 
 void	export_cmd(t_tools *tools)
 {
     if (tools->split_rl[1] == NULL)
-        output_list(tools);
+        output_export(tools->env_list);
     if (tools->split_rl[1])
-        add_list(tools); 
+        add_new(tools, tools->split_rl[1]);
 }
