@@ -62,7 +62,7 @@ void   		create_env_list(t_tools *tools);
 void    	print_env(t_env *env);
 void 		free_env(t_tools *tools);
 void    	print_env(t_env *env);
-int    		ft_listlen(t_env *env);
+void   		update_pwds(t_tools *tools, char *old_pwd);
 
 // utils.c
 void		free_array(char **arr);

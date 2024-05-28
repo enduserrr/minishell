@@ -28,6 +28,7 @@
  * --> selvita miten tarkasti error viestin pitaa
  * matsata bashhiin
  */
+
 void	trim_path(t_tools *tools, char *temp_path, char *str)
 {
 	int	i;
@@ -91,22 +92,28 @@ void	trim_last(t_tools *tools)
 
 void	cd_cmd(t_tools *tools)
 {
+	char *old_pwd;
+	
+	old_pwd = getcwd(NULL, 0);
 	if (tools->split_rl[1] == NULL)
 	{
 		get_path(tools, "HOME=");
 		if (chdir(tools->path) == -1)
 			perror("cd");
+		update_pwds(tools, old_pwd);
 	}
 	else if (ft_strncmp(tools->split_rl[1], "..", 2) == 0)
 	{
 		trim_last(tools);
 		if (chdir(tools->prev_path) == -1)
 			perror("cd");
+		update_pwds(tools, old_pwd);
 		free(tools->prev_path);
 	}
 	else
 	{
 		if (chdir(tools->split_rl[1]) == -1)
 			perror("cd");
+		update_pwds(tools, old_pwd);
 	}
 }
