@@ -26,28 +26,47 @@ int		keylen(t_tools *tools)
 	return (len);
 }
 
+static t_env	*free_node(t_env *node)
+{
+	free(node->key);
+	node->key = NULL;
+	free(node->value);
+	node->value = NULL;
+	free(node);
+	node = NULL;
+	return node; 
+}
+
 void	remove_variable(t_tools *tools)
 {
 	t_env *temp;
-	//t_env *temp2;
+	t_env *temp2;
 
 	temp = tools->env_list;
+	temp2 = tools->env_list->next;
 	while(temp->next != NULL)
 	{
-		if (ft_strncmp(temp->key, tools->split_rl[1], keylen(tools)) == 0)
+		if (ft_strncmp(temp2->key, tools->split_rl[1], keylen(tools)) == 0)
 		{		
-			//temp2 = temp;
-			temp->key = temp->next->key;
-			temp->value = temp->next->value;
-			temp->next->next = temp->next->next->next;
-			temp = temp->next;
-		}
+			if (temp2->next == NULL)
+			{
+				temp2 = free_node(temp2);
+				temp->next = NULL;
+				break ; 
+			}
+			temp->next = temp2->next;
+			temp2 = free_node(temp2);
+			break ;
+		}	
 		temp = temp->next;
+		temp2 = temp2->next; 
 	}
-
 }
 
 void	unset_cmd(t_tools *tools)
 {
-	remove_variable(tools);
+	if (!tools->split_rl[1])
+		return ;
+	if (tools->split_rl[1] != NULL && !tools->split_rl[2])
+		remove_variable(tools);
 }
