@@ -49,12 +49,17 @@ void	run(char **envp)
 	create_env_list(&tools);
 	while (1)
 	{
-		tools.rl = readline("$>");
-        kaikki_mita_parsetukseen_tulee();
-		tools.split_rl = ft_split(tools.rl, ' ');
-		free(tools.rl);
-		if_builtin(&tools);
-		free_array(tools.split_rl);
-		tools.split_rl = NULL;
+		tools.rl = readline("$> ");
+		if (ft_strlen(tools.rl) != 0)
+		{
+			kaikki_mita_parsetukseen_tulee();
+			tools.split_rl = ft_split(tools.rl, ' ');
+			if (!tools.split_rl)
+				perror("malloc");
+			free(tools.rl);
+			if_builtin(&tools);
+			free_array(tools.split_rl);
+			tools.split_rl = NULL;
+		}
 	}
 }

@@ -92,8 +92,8 @@ void	trim_last(t_tools *tools)
 
 void	cd_cmd(t_tools *tools)
 {
-	char *old_pwd;
-	
+	char	*old_pwd;
+
 	old_pwd = getcwd(NULL, 0);
 	if (tools->split_rl[1] == NULL)
 	{
