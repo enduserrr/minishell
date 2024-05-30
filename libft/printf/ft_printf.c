@@ -68,8 +68,8 @@ static	int	next(const char *s, va_list args, int count, int i)
 		count = ft_unsigned_int(va_arg(args, int), count);
 	else if (s[i] == 'p')
 		count = ft_pointer((unsigned long long)va_arg(args, void *), count);
-	//else if (s[i] == 'x' || s[i] == 'X')
-		//count = ft_puthexa((unsigned int)va_arg(args, void *), count, s[i]);
+	else if (s[i] == 'x' || s[i] == 'X')
+		count = ft_puthexa((unsigned int)va_arg(args, void *), count, s[i]);
 	return (count);
 }
 

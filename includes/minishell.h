@@ -52,15 +52,13 @@ void				exit_cmd(t_tools *tools);
 void				cd_cmd(t_tools *tools);
 void				env_cmd(t_tools *tools);
 void				echo_cmd(t_tools *tools);
-void				pwd_cmd(t_tools *tools);
+void				pwd_cmd();
 void				unset_cmd(t_tools *tools);
 void				export_cmd(t_tools *tools);
 
 // srcs
 void				create_env_list(t_tools *tools);
-void				print_env(t_env *env);
 void				free_env(t_tools *tools);
-void				print_env(t_env *env);
 void				update_pwds(t_tools *tools, char *old_pwd);
 
 // utils.c

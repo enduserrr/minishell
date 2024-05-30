@@ -13,8 +13,22 @@
 #include "../includes/minishell.h"
 
 /*
- *  - unset works now with multiple arguments 
+ *  - unset works now with multiple arguments
+ *  - unset has argument validation   
  */
+
+static int	validate_arg(char *str)
+{
+	int	i;
+
+	i = 1;
+	if (ft_isalpha(str[0]) == 0)
+	{
+		printf("unset: `%s': is not a valid identifier\n", str);
+		return (-1);
+	}
+	return (0);
+}
 
 static t_env	*free_node(t_env *node)
 {
@@ -65,12 +79,22 @@ void	unset_cmd(t_tools *tools)
 	i = 1;
 	if (!tools->split_rl[1])
 		return ;
-	else
+	while(tools->split_rl[i] != NULL)
 	{
-		while(tools->split_rl[i] != NULL)
-		{
+		if (validate_arg(tools->split_rl[i]) == 0)
 			remove_variable(tools, i);
-			i ++;
-		}
+		i ++;
 	}
 }
+
+/*
+ * DELETE THIS
+ * 
+ * unset will delete given argument from env_list
+ * 
+ * unset without argument does nothing
+ * argument needs to start with alphabet
+ *  - if not outputs error, if not outputs error
+ * 	- with multiple args deletes all matching key/value pairs from env_list
+ *  - if multiple args includes one unvalid arg it shows error, but still does the job.
+ */

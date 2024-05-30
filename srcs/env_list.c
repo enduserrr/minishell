@@ -46,27 +46,6 @@ void	add(t_env *env, t_tools *tools, int i)
 	temp2->next = temp;
 }
 
-/*
- * for now print_env is only for testing..
- */
-
-void	print_env(t_env *env)
-{
-	t_env	*ptr;
-
-	ptr = env;
-	while (ptr != NULL)
-	{
-		printf("%s=%s\n", ptr->key, ptr->value);
-		ptr = ptr->next;
-	}
-}
-
-/*
- * Create first element of t_env *env, loop trough env list
- * add environment variables one by one to a linked list
- */
-
 void	create_env_list(t_tools *tools)
 {
 	t_env	*env;
@@ -87,3 +66,12 @@ void	create_env_list(t_tools *tools)
 	}
 	tools->env_list = env;
 }
+
+/*
+ * DELETE THIS
+ * 
+ * Create env_list in start of the run
+ * env_list is a linked list and it starts from tools->env_list 
+ * env_list will be filled with environment variables (key/value pairs)
+ *	- MAIL=student@studen.hive.fi
+ */

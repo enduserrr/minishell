@@ -12,15 +12,6 @@
 
 #include "../includes/minishell.h"
 
-/*
- * Command echo outputs text after command
- * -n option deletes newline char after text
- * cmd without text, output "\n"
- * exit code is 0 on succes, >0 if an error occures
- *
- * -------Need more testing and fixing--------
- */
-
 void	echo_cmd(t_tools *tools)
 {
 	int	i;
@@ -36,9 +27,19 @@ void	echo_cmd(t_tools *tools)
 	}
 	while (tools->split_rl[i])
 	{
-		printf("%s ", tools->split_rl[i]);
+		printf("%s", tools->split_rl[i]);
 		i++;
 	}
 	if (flag == 0)
 		printf("\n");
 }
+
+/*
+ * DELETE THIS
+ * 
+ * echo without args	--> "emptyline\n"
+ * echo "hello"			--> "hello\n"
+ * echo	-n 				--> "emptyline" (without new line)
+ * echo -n "hello"		--> "hello" (without new line)
+ *
+ */

@@ -33,7 +33,7 @@ void	if_builtin(t_tools *tools)
 	if (ft_strncmp(tools->split_rl[0], "echo", 4) == 0)
 		echo_cmd(tools);
 	if (ft_strncmp(tools->split_rl[0], "pwd", 3) == 0)
-		pwd_cmd(tools);
+		pwd_cmd();
 	if (ft_strncmp(tools->split_rl[0], "unset", 5) == 0)
 		unset_cmd(tools);
 	if (ft_strncmp(tools->split_rl[0], "export", 6) == 0)
