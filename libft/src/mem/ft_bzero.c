@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_cmd.c                                          :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 22:37:59 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/20 22:38:02 by eleppala         ###   ########.fr       */
+/*   Created: 2023/10/26 15:16:24 by asalo             #+#    #+#             */
+/*   Updated: 2024/03/19 21:14:03 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-/*
- * Command env outputs list of environment variables
- */
-
-void	env_cmd(t_tools *tools)
+/**
+ * @brief	Set's the specified block of memory to zero.
+*/
+void	ft_bzero(void *s, size_t n)
 {
-	print_env(tools->env_list);
+	while (n--)
+		*(char *)s++ = 0;
 }

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   exit_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalo <asalo@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:38:10 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/22 14:21:11 by asalo            ###   ########.fr       */
+/*   Updated: 2024/05/20 22:38:13 by eleppala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/**
- * @brief	Command exit frees everything and closes program
- * 			Exit with no options - but theres no mention about arguments..
- *			exit "sddsss"  --> exit: numeric argument required
- *			exit 6 "ffff" --> exit: too many arguments --> Continue program
- *			exit 6  --> exits with exit code 6
-*/
+/*
+ * Command exit frees everything and closes program
+ * Exit with no options - but theres no mention about arguments..
+ * exit "sddsss"  --> exit: numeric argument required
+ * exit 6 "ffff" --> exit: too many arguments --> Continue program
+ * exit 6  --> exits with exit code 6
+ */
 
 void	exit_cmd(t_tools *tools)
 {

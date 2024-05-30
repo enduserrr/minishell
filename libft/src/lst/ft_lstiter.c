@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_cmd.c                                          :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 22:37:59 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/20 22:38:02 by eleppala         ###   ########.fr       */
+/*   Created: 2023/11/04 14:03:52 by asalo             #+#    #+#             */
+/*   Updated: 2023/12/05 11:49:03 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-/*
- * Command env outputs list of environment variables
- */
-
-void	env_cmd(t_tools *tools)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	print_env(tools->env_list);
+	if (!f)
+		return ;
+	while (lst != 0)
+	{
+		(*f)(lst->content);
+		lst = lst->next;
+	}
 }

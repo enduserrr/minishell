@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   echo_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalo <asalo@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:37:44 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/22 14:20:14 by asalo            ###   ########.fr       */
+/*   Updated: 2024/05/20 22:37:47 by eleppala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-
-/**
- * @brief	Command echo outputs text after command
- *			-n option deletes newline char after text
- *			cmd without text, output "\n"
- *			exit code is 0 on succes, >0 if an error occures
-*/
+/*
+ * Command echo outputs text after command
+ * -n option deletes newline char after text
+ * cmd without text, output "\n"
+ * exit code is 0 on succes, >0 if an error occures
+ *
+ * -------Need more testing and fixing--------
+ */
 
 void	echo_cmd(t_tools *tools)
 {

@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalo <asalo@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:58:12 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/22 14:22:34 by asalo            ###   ########.fr       */
+/*   Updated: 2024/05/07 13:58:16 by eleppala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/**
- * @brief	readline loppiin niin kauan etta komento on "exit"
- *			tassa kohtaa iha vaa checkina jos komento on joku builtin.
-*/
+/*
+ * readline loppiin niin kauan etta komento on "exit"
+ * tassa kohtaa iha vaa checkina jos komento on joku builtin.
+ */
+
 void	kaikki_mita_parsetukseen_tulee(void)
 {
 	// Tassa kohtaa joku varmaan parsettaa jotakin, ehka muutaman filen verran.
@@ -45,10 +46,11 @@ void	run(char **envp)
 
 	tools = (t_tools){0};
 	tools.envp = envp;
+	create_env_list(&tools);
 	while (1)
 	{
 		tools.rl = readline("$>");
-		kaikki_mita_parsetukseen_tulee();
+        kaikki_mita_parsetukseen_tulee();
 		tools.split_rl = ft_split(tools.rl, ' ');
 		free(tools.rl);
 		if_builtin(&tools);

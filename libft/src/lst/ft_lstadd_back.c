@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_cmd.c                                          :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 22:37:59 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/20 22:38:02 by eleppala         ###   ########.fr       */
+/*   Created: 2023/11/04 13:30:27 by asalo             #+#    #+#             */
+/*   Updated: 2023/12/05 11:48:50 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-/*
- * Command env outputs list of environment variables
- */
-
-void	env_cmd(t_tools *tools)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	print_env(tools->env_list);
+	if (!lst || !new)
+		return ;
+	if (*lst)
+	{
+		ft_lstlast(*lst)->next = new;
+	}
+	else
+		*lst = new;
 }
