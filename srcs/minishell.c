@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:58:12 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/07 13:58:16 by eleppala         ###   ########.fr       */
+/*   Updated: 2024/06/01 12:14:05 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	run(char **envp)
 	while (1)
 	{
 		tools.rl = readline("$>");
-        kaikki_mita_parsetukseen_tulee();
+        /*kaikki_mita_parsetukseen_tulee();*/
 		tools.split_rl = ft_split(tools.rl, ' ');
 		free(tools.rl);
 		if_builtin(&tools);
