@@ -12,10 +12,11 @@
 
 #include "../includes/minishell.h"
 
-void	pwd_cmd()
+void	pwd_cmd(t_tools *tools)
 {
 	char	*pwd;
 
+	tools->exit_code = 0;
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		perror("pwd: ");
@@ -28,9 +29,9 @@ void	pwd_cmd()
 
 /*
  * DELETE THIS
- * 
- * outputs curret pwd 
- * 
+ *
+ * outputs curret pwd
+ *
  * getcwd(NULL, 0) works, but don't know do i we need to do changes
- * 
+ *
  */

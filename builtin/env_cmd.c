@@ -28,11 +28,12 @@ void	print_env(t_env *env)
 void	env_cmd(t_tools *tools)
 {
 	print_env(tools->env_list);
+	tools->exit_code = 0;
 }
 
 /*
  * DELETE THIS
- * 
- * outputs env variables  
- * outputs only variables that has key and value. 
+ *
+ * outputs env variables
+ * outputs only variables that has key and value.
  */

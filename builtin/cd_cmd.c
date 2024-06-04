@@ -18,10 +18,10 @@ static void	cd_error(t_tools *tools)
 	tools->exit_code = 1;
 }
 
-void	trim_last(t_tools *tools, char *pwd)
+static void	trim_last(t_tools *tools, char *pwd)
 {
-	int		i;
-	int		len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = ft_strlen(pwd);
@@ -44,12 +44,12 @@ void	trim_last(t_tools *tools, char *pwd)
 
 static int	get_home(t_tools *tools)
 {
-	t_env *temp;
+	t_env	*temp;
 
 	temp = tools->env_list;
-	while(temp != NULL)
+	while (temp != NULL)
 	{
-		if(ft_strncmp(temp->key, "HOME", 4) == 0 && temp->value !=  NULL)
+		if (ft_strncmp(temp->key, "HOME", 4) == 0 && temp->value != NULL)
 		{
 			if (chdir(temp->value) == -1)
 			{
@@ -93,20 +93,26 @@ void	cd_cmd(t_tools *tools)
  *  works already similar as regular cd with limits of subject:
  * 	- updates env_list: PWD && OLDPWD on every movement
  *  - outputs correct errors in error cases
- * 
- * 
- *  FEATURES: 
- * 	cd without args 				--> home 							--> exit_code 0
- * 	cd without args (unset HOME)	--> "home not set"  				--> exit_code 1
- *  cd without args (HOME=badpath)	--> "no such file or dir"			--> exit_code 1
- *  cd with .. 						--> previous_directory from path	--> exit_code 0
- *  cd with <dir_name>  			--> moves to that dir				--> exit_code 1
- *  cd /path/paths/pathsss/ 		--> moves to end of path 			--> exit_code 0
- * 
- * 
+ *
+ *
+ *  FEATURES:
+
+													* 	cd without args 				--> home 							--> exit_code 0
+
+							* 	cd without args (unset HOME)	--> "home not set"  				--> exit_code 1
+
+					*  cd without args (HOME=badpath)	--> "no such file or dir"			--> exit_code 1
+
+								*  cd with .. 						--> previous_directory from path	--> exit_code 0
+
+								*  cd with <dir_name>  			--> moves to that dir				--> exit_code 1
+ *  cd
+						/path/paths/pathsss/ 		--> moves to end of path 			--> exit_code 0
+ *
+ *
  * exit_code:
- * in most cases its going to be 0 
+ * in most cases its going to be 0
  *  - set it to zero in beginning and modify only when needed
- * 
- * 
+ *
+ *
  */

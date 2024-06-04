@@ -69,9 +69,9 @@ void	create_env_list(t_tools *tools)
 
 /*
  * DELETE THIS
- * 
+ *
  * Create env_list in start of the run
- * env_list is a linked list and it starts from tools->env_list 
+ * env_list is a linked list and it starts from tools->env_list
  * env_list will be filled with environment variables (key/value pairs)
  *	- MAIL=student@studen.hive.fi
  */

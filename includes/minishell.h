@@ -52,7 +52,7 @@ void				exit_cmd(t_tools *tools);
 void				cd_cmd(t_tools *tools);
 void				env_cmd(t_tools *tools);
 void				echo_cmd(t_tools *tools);
-void				pwd_cmd();
+void				pwd_cmd(t_tools *tools);
 void				unset_cmd(t_tools *tools);
 void				export_cmd(t_tools *tools);
 

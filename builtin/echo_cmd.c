@@ -37,16 +37,16 @@ void	echo_cmd(t_tools *tools)
 
 /*
  * DELETE THIS
- * 
+ *
  * echo without args	--> "emptyline\n"
  * echo "hello"			--> "hello\n"
  * echo	-n 				--> "emptyline" (without new line)
  * echo -n "hello"		--> "hello" (without new line)
  *
- * 
- * 
- *  TEST THESE: 
- *  - echo hello $? <--> echo $? hello 
- *  	- differrent exit_code 
- * 
+ *
+ *
+ *  TEST THESE:
+ *  - echo hello $? <--> echo $? hello
+ *  	- differrent exit_code
+ *
  */
