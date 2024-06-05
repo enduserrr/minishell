@@ -48,3 +48,12 @@ void	exit_cmd(t_tools *tools)
 		exit(tools->exit_code);
 	}
 }
+
+/*
+ * DELETE THIS
+ * 
+ * exit command exits and frees everything (might need updates with freeing later)
+ * exit can take argument, but it needs to be numeric
+ * 	- if non numeric outputs error and exits
+ * 	- if first is numeric and there are more args outputs "too many args"
+ */

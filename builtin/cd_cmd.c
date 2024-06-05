@@ -12,23 +12,6 @@
 
 #include "../includes/minishell.h"
 
-/*
- * cd without cmd: somehow work -- need more test and error handling
- * cd without cmd and unsetted HOME works now.
- * cd with path: somehow works -- need more test and error handling
- * cd with .. : somehow works -- need more test and error handling
- * cd with dir name : somehow works -- need more test and error handling
- * cd with invalid dir name : works -- need more testing
- *
- * env variable list PWD && OLDPWD --> taytyy paivittya kun navigoi..
- *  - ei mitaan hajua viela miten se tehdaan...
- *
- * error viestit melkein oikein esimerkki oma vs bash:
- * "cd: No such file or directory" <--> "cd: 'cmd': No such file or directory"
- * --> selvita miten tarkasti error viestin pitaa
- * matsata bashhiin
- */
-
 void	trim_path(t_tools *tools, char *temp_path, char *str)
 {
 	int	i;
@@ -92,8 +75,8 @@ void	trim_last(t_tools *tools)
 
 void	cd_cmd(t_tools *tools)
 {
-	char *old_pwd;
-	
+	char	*old_pwd;
+
 	old_pwd = getcwd(NULL, 0);
 	if (tools->split_rl[1] == NULL)
 	{
@@ -117,3 +100,15 @@ void	cd_cmd(t_tools *tools)
 		update_pwds(tools, old_pwd);
 	}
 }
+
+/*
+ * DELETE THIS
+ *
+ *  works already pretty similar than regular cd
+ * 
+ *  FEATURES: 
+ * 	cd without args 		--> home
+ *  cd with .. 				--> previous_directory from path
+ *  cd with <dir_name>  	--> moves to that dir
+ *  cd /path/paths/pathsss/ --> moves to dir in the end of path
+ */

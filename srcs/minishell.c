@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalo <asalo@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:58:12 by eleppala          #+#    #+#             */
-/*   Updated: 2024/06/01 12:14:05 by asalo            ###   ########.fr       */
+/*   Updated: 2024/05/07 13:58:16 by eleppala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	if_builtin(t_tools *tools)
 	if (ft_strncmp(tools->split_rl[0], "echo", 4) == 0)
 		echo_cmd(tools);
 	if (ft_strncmp(tools->split_rl[0], "pwd", 3) == 0)
-		pwd_cmd(tools);
+		pwd_cmd();
 	if (ft_strncmp(tools->split_rl[0], "unset", 5) == 0)
 		unset_cmd(tools);
 	if (ft_strncmp(tools->split_rl[0], "export", 6) == 0)
@@ -49,12 +49,17 @@ void	run(char **envp)
 	create_env_list(&tools);
 	while (1)
 	{
-		tools.rl = readline("$>");
-        /*kaikki_mita_parsetukseen_tulee();*/
-		tools.split_rl = ft_split(tools.rl, ' ');
-		free(tools.rl);
-		if_builtin(&tools);
-		free_array(tools.split_rl);
-		tools.split_rl = NULL;
+		tools.rl = readline("$> ");
+		if (ft_strlen(tools.rl) != 0)
+		{
+			kaikki_mita_parsetukseen_tulee();
+			tools.split_rl = ft_split(tools.rl, ' ');
+			if (!tools.split_rl)
+				perror("malloc");
+			free(tools.rl);
+			if_builtin(&tools);
+			free_array(tools.split_rl);
+			tools.split_rl = NULL;
+		}
 	}
 }

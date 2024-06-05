@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/06/04 08:27:56 by asalo            ###   ########.fr       */
+/*   Updated: 2024/06/04 08:57:00 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdio.h>
 # include <signal.h>
 // # include <unistd.h>/*already included in libft.h*/
-# include <reads/history.h>
-# include <reads/reads.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 
 /**
  * @brief	Global variable for signals.
@@ -112,6 +112,13 @@ void		pwd_cmd(t_tools *tools);
 void		unset_cmd(t_tools *tools);
 void		export_cmd(t_tools *tools);
 
+/*srcs*/
+void		create_env_list(t_tools *tools);
+void		print_env(t_env *env);
+void 		free_env(t_tools *tools);
+void		print_env(t_env *env);
+void		update_pwds(t_tools *tools, char *old_pwd);
+
 /*parse*/
 t_tkn		*get_tkns(char *s);
 t_tkn		*next_tkn(char *s, int *i);
@@ -124,13 +131,6 @@ void		skip_if(const char *str, t_bool *i);
 t_tkn		*next_sep(t_tkn *token, t_bool skip);
 t_tkn		*prev_sep(t_tkn *token, t_bool skip);
 t_tkn		*next_run(t_tkn *token, t_bool skip);
-
-/*srcs*/
-void		create_env_list(t_tools *tools);
-void		print_env(t_env *env);
-void 		free_env(t_tools *tools);
-void		print_env(t_env *env);
-void		update_pwds(t_tools *tools, char *old_pwd);
 
 /*utils.c*/
 void		free_array(char **arr);

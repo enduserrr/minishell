@@ -12,11 +12,27 @@
 
 #include "../includes/minishell.h"
 
-/*
- * Command env outputs list of environment variables
- */
+void	print_env(t_env *env)
+{
+	t_env	*ptr;
+
+	ptr = env;
+	while (ptr != NULL)
+	{
+		if (ptr->key && ptr->value)
+			printf("%s=%s\n", ptr->key, ptr->value);
+		ptr = ptr->next;
+	}
+}
 
 void	env_cmd(t_tools *tools)
 {
 	print_env(tools->env_list);
 }
+
+/*
+ * DELETE THIS
+ * 
+ * outputs env variables  
+ * outputs only variables that has key and value. 
+ */

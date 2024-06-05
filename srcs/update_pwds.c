@@ -12,45 +12,45 @@
 
 #include "../includes/minishell.h"
 
-static void update_old_pwd(char *old_pwd, t_tools *tools)
+static void	update_old_pwd(char *old_pwd, t_tools *tools)
 {
-    t_env *temp; 
+	t_env	*temp;
 
-    temp = tools->env_list;
-    while(temp->next != NULL)
-    {
-        if (ft_strncmp(temp->key, "OLDPWD", 6) == 0)
-        {    
-            free(temp->value);
-            temp->value = NULL;
-            temp->value = old_pwd;
-        }
-        temp = temp->next;
-    }
+	temp = tools->env_list;
+	while (temp->next != NULL)
+	{
+		if (ft_strncmp(temp->key, "OLDPWD", 6) == 0)
+		{
+			free(temp->value);
+			temp->value = NULL;
+			temp->value = old_pwd;
+		}
+		temp = temp->next;
+	}
 }
 
-static void update_pwd(char *pwd, t_tools *tools)
+static void	update_pwd(char *pwd, t_tools *tools)
 {
-    t_env *temp; 
+	t_env	*temp;
 
-    temp = tools->env_list;
-    while(temp->next != NULL)
-    {
-        if (ft_strncmp(temp->key, "PWD", 3) == 0)
-        {    
-            free(temp->value);
-            temp->value = NULL;
-            temp->value = pwd;
-        }
-        temp = temp->next;
-    }
+	temp = tools->env_list;
+	while (temp->next != NULL)
+	{
+		if (ft_strncmp(temp->key, "PWD", 3) == 0)
+		{
+			free(temp->value);
+			temp->value = NULL;
+			temp->value = pwd;
+		}
+		temp = temp->next;
+	}
 }
 
-void    update_pwds(t_tools *tools, char *old_pwd)
+void	update_pwds(t_tools *tools, char *old_pwd)
 {
-    char *pwd; 
+	char *pwd;
 
-    pwd = getcwd(NULL, 0); 
-    update_pwd(pwd, tools);
-    update_old_pwd(old_pwd, tools);
+	pwd = getcwd(NULL, 0);
+	update_pwd(pwd, tools);
+	update_old_pwd(old_pwd, tools);
 }

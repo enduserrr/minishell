@@ -34,13 +34,12 @@ void	free_all(t_tools *tools)
 		free_array(tools->split_rl);
 }
 
-int     ft_arraylen(char **arr)
+int	ft_arraylen(char **arr)
 {
-    int len;
+	int len;
 
-    len = 0; 
-    while(arr[len] != NULL)
-        len ++;
-    return (len);
-
+	len = 0;
+	while (arr[len] != NULL)
+		len++;
+	return (len);
 }

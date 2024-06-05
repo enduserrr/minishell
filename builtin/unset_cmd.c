@@ -12,18 +12,22 @@
 
 #include "../includes/minishell.h"
 
-int		keylen(t_tools *tools)
-{
-	int len;
+/*
+ *  - unset works now with multiple arguments
+ *  - unset has argument validation   
+ */
 
-	len = 0;
-	while(tools->split_rl[1][len] != '\0')
+static int	validate_arg(char *str)
+{
+	int	i;
+
+	i = 1;
+	if (ft_isalpha(str[0]) == 0)
 	{
-		if(tools->split_rl[1][len] == '=')
-			break ;
-		len ++;
+		printf("unset: `%s': is not a valid identifier\n", str);
+		return (-1);
 	}
-	return (len);
+	return (0);
 }
 
 static t_env	*free_node(t_env *node)
@@ -34,39 +38,63 @@ static t_env	*free_node(t_env *node)
 	node->value = NULL;
 	free(node);
 	node = NULL;
-	return node; 
+	return (node);
 }
 
-void	remove_variable(t_tools *tools)
+void	remove_variable(t_tools *tools, int i)
 {
-	t_env *temp;
-	t_env *temp2;
+	t_env	*temp;
+	t_env	*temp2;
 
 	temp = tools->env_list;
 	temp2 = tools->env_list->next;
-	while(temp->next != NULL)
+	if (ft_strncmp(tools->split_rl[i], temp->key, ft_strlen(temp->key)) == 0)
 	{
-		if (ft_strncmp(temp2->key, tools->split_rl[1], keylen(tools)) == 0)
-		{		
+		temp = free_node(temp);
+		tools->env_list = temp2;
+		return ;
+	}
+	while (temp->next != NULL)
+	{
+		if (ft_strncmp(tools->split_rl[i], temp2->key, ft_strlen(temp2->key)) == 0)
+		{
 			if (temp2->next == NULL)
 			{
 				temp2 = free_node(temp2);
 				temp->next = NULL;
-				break ; 
+				break ;
 			}
 			temp->next = temp2->next;
 			temp2 = free_node(temp2);
-			break ;
-		}	
+		}
 		temp = temp->next;
-		temp2 = temp2->next; 
+		temp2 = temp->next;
 	}
 }
 
 void	unset_cmd(t_tools *tools)
 {
+	int i;
+
+	i = 1;
 	if (!tools->split_rl[1])
 		return ;
-	if (tools->split_rl[1] != NULL && !tools->split_rl[2])
-		remove_variable(tools);
+	while(tools->split_rl[i] != NULL)
+	{
+		if (validate_arg(tools->split_rl[i]) == 0)
+			remove_variable(tools, i);
+		i ++;
+	}
 }
+
+/*
+ * DELETE THIS
+ * 
+ * unset will delete given argument from env_list
+ * 
+ * unset without argument does nothing
+ * argument needs to start with alphabet
+ *  - if not outputs error, if not outputs error
+ * 	- with multiple args deletes all matching key/value pairs from env_list
+ *  - if multiple args includes one unvalid arg it shows error, but still does the job.
+ */
