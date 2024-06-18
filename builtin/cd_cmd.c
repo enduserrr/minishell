@@ -97,17 +97,12 @@ void	cd_cmd(t_tools *tools)
  *
  *  FEATURES:
 
-													* 	cd without args 				--> home 							--> exit_code 0
-
-							* 	cd without args (unset HOME)	--> "home not set"  				--> exit_code 1
-
-					*  cd without args (HOME=badpath)	--> "no such file or dir"			--> exit_code 1
-
-								*  cd with .. 						--> previous_directory from path	--> exit_code 0
-
-								*  cd with <dir_name>  			--> moves to that dir				--> exit_code 1
- *  cd
-						/path/paths/pathsss/ 		--> moves to end of path 			--> exit_code 0
+ * 	cd without args 				--> home 							--> exit_code 0
+ * 	cd without args (unset HOME)	--> "home not set"  				--> exit_code 1
+ *  cd without args (HOME=badpath)	--> "no such file or dir"			--> exit_code 1
+ *  cd with .. 						--> previous_directory from path	--> exit_code 0
+ *  cd with <dir_name>  			--> moves to that dir				--> exit_code 1
+ *  cd/path/paths/pathsss/ 			--> moves to end of path 			--> exit_code 0
  *
  *
  * exit_code:
