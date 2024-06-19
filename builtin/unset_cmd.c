@@ -14,7 +14,7 @@
 
 /*
  *  - unset works now with multiple arguments
- *  - unset has argument validation   
+ *  - unset has argument validation
  */
 
 static int	validate_arg(char *str)
@@ -56,7 +56,8 @@ void	remove_variable(t_tools *tools, int i)
 	}
 	while (temp->next != NULL)
 	{
-		if (ft_strncmp(tools->split_rl[i], temp2->key, ft_strlen(temp2->key)) == 0)
+		if (ft_strncmp(tools->split_rl[i], temp2->key,
+				ft_strlen(temp2->key)) == 0)
 		{
 			if (temp2->next == NULL)
 			{
@@ -74,27 +75,29 @@ void	remove_variable(t_tools *tools, int i)
 
 void	unset_cmd(t_tools *tools)
 {
-	int i;
+	int	i;
 
 	i = 1;
+	tools->exit_code = 0;
 	if (!tools->split_rl[1])
 		return ;
-	while(tools->split_rl[i] != NULL)
+	while (tools->split_rl[i] != NULL)
 	{
 		if (validate_arg(tools->split_rl[i]) == 0)
 			remove_variable(tools, i);
-		i ++;
+		i++;
 	}
 }
 
 /*
  * DELETE THIS
- * 
+ *
  * unset will delete given argument from env_list
- * 
+ *
  * unset without argument does nothing
  * argument needs to start with alphabet
  *  - if not outputs error, if not outputs error
  * 	- with multiple args deletes all matching key/value pairs from env_list
- *  - if multiple args includes one unvalid arg it shows error, but still does the job.
+ *  - if multiple args includes one unvalid arg it shows error,
+	but still does the job.
  */

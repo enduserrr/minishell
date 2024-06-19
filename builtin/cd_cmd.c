@@ -12,48 +12,17 @@
 
 #include "../includes/minishell.h"
 
-void	trim_path(t_tools *tools, char *temp_path, char *str)
+static void	cd_error(t_tools *tools)
+{
+	perror("cd");
+	tools->exit_code = 1;
+}
+
+static void	trim_last(t_tools *tools, char *pwd)
 {
 	int	i;
 	int	len;
 
-	i = 0;
-	len = ft_strlen(str);
-	while (i < len)
-	{
-		temp_path++;
-		i++;
-	}
-	tools->path = temp_path;
-}
-
-void	get_path(t_tools *tools, char *str)
-{
-	int		i;
-	char	*temp_path;
-
-	i = 0;
-	while (tools->envp[i] != NULL)
-	{
-		if (ft_strncmp(tools->envp[i], str, ft_strlen(str)) == 0)
-			temp_path = tools->envp[i];
-		i++;
-	}
-	if (!temp_path)
-		printf("cd: HOME not set\n");
-	else
-		trim_path(tools, temp_path, str);
-}
-
-void	trim_last(t_tools *tools)
-{
-	char	*pwd;
-	int		i;
-	int		len;
-
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
-		perror("pwd");
 	i = 0;
 	len = ft_strlen(pwd);
 	while (len > 1)
@@ -63,52 +32,87 @@ void	trim_last(t_tools *tools)
 		len--;
 	}
 	tools->prev_path = malloc(len * sizeof(char));
+	if (!tools->prev_path)
+		perror("malloc: ");
 	while (i < len)
 	{
 		tools->prev_path[i] = pwd[i];
 		i++;
 	}
 	tools->prev_path[i] = '\0';
-	if (pwd)
-		free(pwd);
+}
+
+static int	get_home(t_tools *tools)
+{
+	t_env	*temp;
+
+	temp = tools->env_list;
+	while (temp != NULL)
+	{
+		if (ft_strncmp(temp->key, "HOME", 4) == 0 && temp->value != NULL)
+		{
+			if (chdir(temp->value) == -1)
+			{
+				perror("cd");
+				return (1);
+			}
+			return (0);
+		}
+		temp = temp->next;
+	}
+	printf("cd: HOME not set\n");
+	return (1);
 }
 
 void	cd_cmd(t_tools *tools)
 {
 	char	*old_pwd;
 
+	tools->exit_code = 0;
 	old_pwd = getcwd(NULL, 0);
 	if (tools->split_rl[1] == NULL)
-	{
-		get_path(tools, "HOME=");
-		if (chdir(tools->path) == -1)
-			perror("cd");
-		update_pwds(tools, old_pwd);
-	}
+		tools->exit_code = get_home(tools);
 	else if (ft_strncmp(tools->split_rl[1], "..", 2) == 0)
 	{
-		trim_last(tools);
+		trim_last(tools, old_pwd);
 		if (chdir(tools->prev_path) == -1)
-			perror("cd");
-		update_pwds(tools, old_pwd);
-		free(tools->prev_path);
+			cd_error(tools);
+		tools->prev_path = NULL;
 	}
 	else
 	{
 		if (chdir(tools->split_rl[1]) == -1)
-			perror("cd");
-		update_pwds(tools, old_pwd);
+			cd_error(tools);
 	}
+	update_pwds(tools, old_pwd);
 }
 
 /*
  * DELETE THIS
  *
- *  works already pretty similar than regular cd
- * 
- *  FEATURES: 
- * 	cd without args 		--> home
- *  cd with .. 				--> previous_directory from path
- *  cd with <dir_name>  	--> moves to that dir
- *  cd /path/paths/pathsss/ --> moves to dir in the end of path
+ *  works already similar as regular cd with limits of subject:
+ * 	- updates env_list: PWD && OLDPWD on every movement
+ *  - outputs correct errors in error cases
+ *
+ *
+ *  FEATURES:
+
+													* 	cd without args 				--> home 							--> exit_code 0
+
+							* 	cd without args (unset HOME)	--> "home not set"  				--> exit_code 1
+
+					*  cd without args (HOME=badpath)	--> "no such file or dir"			--> exit_code 1
+
+								*  cd with .. 						--> previous_directory from path	--> exit_code 0
+
+								*  cd with <dir_name>  			--> moves to that dir				--> exit_code 1
+ *  cd
+						/path/paths/pathsss/ 		--> moves to end of path 			--> exit_code 0
+ *
+ *
+ * exit_code:
+ * in most cases its going to be 0
+ *  - set it to zero in beginning and modify only when needed
+ *
+ *
  */

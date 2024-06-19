@@ -32,14 +32,21 @@ void	echo_cmd(t_tools *tools)
 	}
 	if (flag == 0)
 		printf("\n");
+	tools->exit_code = 0;
 }
 
 /*
  * DELETE THIS
- * 
+ *
  * echo without args	--> "emptyline\n"
  * echo "hello"			--> "hello\n"
  * echo	-n 				--> "emptyline" (without new line)
  * echo -n "hello"		--> "hello" (without new line)
+ *
+ *
+ *
+ *  TEST THESE:
+ *  - echo hello $? <--> echo $? hello
+ *  	- differrent exit_code
  *
  */
