@@ -30,7 +30,7 @@ void	exit_cmd(t_tools *tools)
 	if (tools->split_rl[1] != NULL)
 	{
 		tools->exit_code = ft_atoi(tools->split_rl[1]);
-		if (!tools->exit_code)
+		if (!tools->exit_code && tools->split_rl[1][0] != '0')
 		{
 			printf(": %s: numeric argument required", tools->split_rl[1]);
 			tools->exit_code = 255;
@@ -52,9 +52,17 @@ void	exit_cmd(t_tools *tools)
 /*
  * DELETE THIS
  *
-
-	* exit command exits and frees everything (might need updates with freeing later)
+ * exit command exits and frees everything (might need updates with freeing later)
  * exit can take argument, but it needs to be numeric
  * 	- if non numeric outputs error and exits
  * 	- if first is numeric and there are more args outputs "too many args"
+ * 
+ * FEATURES:
+ * 								
+ * 	Command:					output:						exit_code:	result:
+ *  exit without args			"Exit"						0			exit
+ * 	exit with numeric arg		"Exit"						(arg)		exit
+ *  exit with multiple args		"Too many arguments"		1			continue 
+ * 	exit with nonnumeric arg	"Numeric arg required.." 	255			exit
+ * 
  */

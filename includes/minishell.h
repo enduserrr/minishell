@@ -18,6 +18,7 @@
 # include "../libft/libft.h"
 # include <readline/history.h>
 # include <readline/readline.h>
+# define MALLOC_ERROR "Error: malloc fails"
 
 typedef struct s_env
 {

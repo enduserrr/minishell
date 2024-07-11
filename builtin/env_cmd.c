@@ -36,4 +36,5 @@ void	env_cmd(t_tools *tools)
  *
  * outputs env variables
  * outputs only variables that has key and value.
+ * 
  */

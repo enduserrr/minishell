@@ -46,7 +46,5 @@ void	echo_cmd(t_tools *tools)
  *
  *
  *  TEST THESE:
- *  - echo hello $? <--> echo $? hello
- *  	- differrent exit_code
  *
  */

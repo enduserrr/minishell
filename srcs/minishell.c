@@ -12,16 +12,6 @@
 
 #include "../includes/minishell.h"
 
-/*
- * readline loppiin niin kauan etta komento on "exit"
- * tassa kohtaa iha vaa checkina jos komento on joku builtin.
- */
-
-void	kaikki_mita_parsetukseen_tulee(void)
-{
-	// Tassa kohtaa joku varmaan parsettaa jotakin, ehka muutaman filen verran.
-}
-
 void	if_builtin(t_tools *tools)
 {
 	if (ft_strncmp(tools->split_rl[0], "exit", 4) == 0)
@@ -52,11 +42,11 @@ void	run(char **envp)
 		tools.rl = readline("$> ");
 		if (ft_strlen(tools.rl) != 0)
 		{
-			kaikki_mita_parsetukseen_tulee();
 			tools.split_rl = ft_split(tools.rl, ' ');
 			if (!tools.split_rl)
 				perror("malloc");
 			free(tools.rl);
+			tools.rl = NULL;
 			if_builtin(&tools);
 			free_array(tools.split_rl);
 			tools.split_rl = NULL;

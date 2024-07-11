@@ -36,6 +36,8 @@ void	add(t_env *env, t_tools *tools, int i)
 
 	temp2 = env;
 	temp = malloc(sizeof(t_env));
+	if (!temp)
+		perror("malloc");
 	temp_arr = ft_split(tools->envp[i], '=');
 	temp->key = ft_strdup(temp_arr[0]);
 	temp->value = ft_strdup(temp_arr[1]);
@@ -54,6 +56,8 @@ void	create_env_list(t_tools *tools)
 
 	i = 1;
 	env = malloc(sizeof(t_env));
+	if(!env)
+		perror("malloc");
 	temp_arr = ft_split(tools->envp[0], '=');
 	env->key = ft_strdup(temp_arr[0]);
 	env->value = ft_strdup(temp_arr[1]);
@@ -73,5 +77,5 @@ void	create_env_list(t_tools *tools)
  * Create env_list in start of the run
  * env_list is a linked list and it starts from tools->env_list
  * env_list will be filled with environment variables (key/value pairs)
- *	- MAIL=student@studen.hive.fi
+ *	- MAIL=student@student.hive.fi
  */

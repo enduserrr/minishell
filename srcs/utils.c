@@ -27,8 +27,8 @@ void	free_array(char **arr)
 
 void	free_all(t_tools *tools)
 {
-	// if (tools->path != 0)  // ei viela mitaan mika tarvitsee vapautusta
-	// free(tools->path);
+	if (tools->path != 0)
+		free(tools->path);
 	free_env(tools);
 	if (tools->split_rl != 0)
 		free_array(tools->split_rl);
