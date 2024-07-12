@@ -4,18 +4,7 @@ NAME = minishell
 CC = cc
 FLAGS = -Wall -Wextra -Werror -lreadline
 
-SRCS = 	main.c \
-		srcs/minishell.c \
-		srcs/utils.c \
-		srcs/env_list.c \
-		srcs/update_pwds.c \
-		builtin/cd_cmd.c \
-		builtin/env_cmd.c \
-		builtin/exit_cmd.c \
-		builtin/echo_cmd.c \
-		builtin/pwd_cmd.c \
-		builtin/unset_cmd.c \
-		builtin/export_cmd.c \
+SRCS = 
 
 OBJ = $(SRCS:.c=.o)
 
