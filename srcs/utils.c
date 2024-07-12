@@ -30,6 +30,7 @@ void	free_all(t_tools *tools)
 	if (tools->path != 0)
 		free(tools->path);
 	free_env(tools);
+	free_history(tools);
 	if (tools->split_rl != 0)
 		free_array(tools->split_rl);
 }

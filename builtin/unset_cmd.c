@@ -19,9 +19,6 @@
 
 static int	validate_arg(char *str)
 {
-	int	i;
-
-	i = 1;
 	if (ft_isalpha(str[0]) == 0)
 	{
 		printf("unset: `%s': is not a valid identifier\n", str);

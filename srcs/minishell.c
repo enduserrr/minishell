@@ -14,6 +14,11 @@
 
 void	if_builtin(t_tools *tools)
 {
+	//remove this after parsing (segfaults if input is ' ')
+	// ---------------------------------------------------
+	if (tools->split_rl[0] == NULL)
+		return ;				
+	// ---------------------------------------------------
 	if (ft_strncmp(tools->split_rl[0], "exit", 4) == 0)
 		exit_cmd(tools);
 	if (ft_strncmp(tools->split_rl[0], "cd", 2) == 0)
@@ -37,9 +42,11 @@ void	run(char **envp)
 	tools = (t_tools){0};
 	tools.envp = envp;
 	create_env_list(&tools);
+	create_history(&tools);
 	while (1)
 	{
 		tools.rl = readline("$> ");
+		add_to_history(&tools);
 		if (ft_strlen(tools.rl) != 0)
 		{
 			tools.split_rl = ft_split(tools.rl, ' ');

@@ -28,7 +28,7 @@ void	free_env(t_tools *tools)
 	}
 }
 
-void	add(t_env *env, t_tools *tools, int i)
+void	add_to_env(t_env *env, t_tools *tools, int i)
 {
 	t_env	*temp;
 	t_env	*temp2;
@@ -65,7 +65,7 @@ void	create_env_list(t_tools *tools)
 	env->next = NULL;
 	while (i < ft_arraylen(tools->envp))
 	{
-		add(env, tools, i);
+		add_to_env(env, tools, i);
 		i++;
 	}
 	tools->env_list = env;

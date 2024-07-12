@@ -20,13 +20,19 @@
 # include <readline/readline.h>
 # define MALLOC_ERROR "Error: malloc fails"
 
-typedef struct s_env
+typedef struct 		s_env
 {
 	char			*key;
 	char			*value;
 	struct s_env	*next;
 
 }					t_env;
+
+typedef struct 		s_hist
+{
+	char 			*cmd;
+	struct s_hist 	*next;
+} 					t_hist;
 
 typedef struct s_tools
 {
@@ -39,7 +45,9 @@ typedef struct s_tools
 
 	char			**envp;
 	char			**new_envp;
+	
 	t_env			*env_list;
+	t_hist			*history;
 
 	int				exit_code;
 	int				end;
@@ -66,5 +74,10 @@ void				update_pwds(t_tools *tools, char *old_pwd);
 void				free_array(char **arr);
 void				free_all(t_tools *tools);
 int					ft_arraylen(char **arr);
+
+// history.c
+void 				create_history(t_tools *tools);
+void 				add_to_history(t_tools *tools);
+void 				free_history(t_tools *tools);
 
 #endif
