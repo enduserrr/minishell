@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:49:51 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/14 15:09:58 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/14 15:26:08 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef enum    e_errors
 }   t_errors;
 
 /**
- * @brief	Token identifiers in binary values.
+ * @brief	Token identifiers in binary. (Fast!!)
 */
 enum e_tkn_id
 {
@@ -60,7 +60,7 @@ enum e_tkn_id
 }   t_tkn_id;
 
 /**
- * @brief   Binary values for builtins (faast!!)
+ * @brief   Nuiltin identifiers in binary.(Still fast!!)
 */
 typedef enum e_builtins
 {

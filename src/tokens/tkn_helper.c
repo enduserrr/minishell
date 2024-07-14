@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tkn_utils.c                                        :+:      :+:    :+:   */
+/*   tkn_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:00:26 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/14 14:54:41 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/14 15:24:47 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ t_token	*new_token(char *content)
 	t_token	*new;
 
 	if (!content)
-		return (ft_perror(MEM_ERR, "creating token content"), NULL);
+		return (set_stderr(MEM_ERR, "creating token content"), NULL);
 	new = malloc(sizeof(t_token));
 	if (!new)
-		return (ft_perror(MEM_ERR, "creating token"), free(content), NULL);
+		return (set_stderr(MEM_ERR, "creating token"), free(content), NULL);
 	new->id = WORD;
 	new->content = content;
 	new->next = NULL;

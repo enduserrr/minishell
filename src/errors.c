@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:52:11 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/14 15:02:48 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/14 15:24:27 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void put_stderr(char *s, char *context)
 	write(2, "\n", 1);
 }
 
-static int	set_put_stderr(int err, char *context)
+static int	set_stderr(int err, char *context)
 {
 	if (err == ERRNO_ERR)
 		return (perror(context), errno);
@@ -53,18 +53,13 @@ static int	set_put_stderr(int err, char *context)
 	return (0);
 }
 
-int	ft_perror_exe(char *exe, int err, char *context)
+int	handle_perror(int err, char *context)
 {
-	int	ret;
+	int	i;
 
-	put_stderr("%s: ", exe);
-	ret = set_put_stdrror(err, context);
+	write(2, "minishell: ", 11);
+	i = set_stderr(err, context);
 	if (err != ERRNO_ERR)
-		put_stderr("\n", NULL);
-	return (ret);
-}
-
-int	ft_perror(int err, char *context)
-{
-	return (ft_perror_exe("minishell", err, context));
+		write(2, "\n", 1);
+	return (i);
 }
