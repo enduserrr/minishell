@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:49:51 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/15 13:39:07 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/15 18:51:41 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,15 @@ enum e_tkn_id
 	PIPE = 0b01000010/*66*/
 }   t_tkn_id;
 
+typedef struct s_token
+{
+    char        	id;/*Should this be unsigned char for binary values*/
+    char        	*content;
+    struct s_token	*next;
+}   t_token;
+
 /**
- * @brief   Nuiltin identifiers in binary.(Still fast!!)
+ * @brief   Builtin identifiers in binary.(Still fast!!)
 */
 typedef enum e_builtins
 {
@@ -74,13 +81,6 @@ typedef enum e_builtins
 	B_ECHO = 0b00000100,/*4*/
 	B_ENV = 0b00001000,/*8*/
 };
-
-typedef struct s_token
-{
-    char        	id;/*Should this be unsigned char for binary values*/
-    char        	*content;
-    struct s_token	*next;
-}   t_token;
 
 typedef struct s_cmd
 {

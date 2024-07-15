@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tkn_eval.c                                         :+:      :+:    :+:   */
+/*   evals.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:18:25 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/14 15:24:36 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/15 19:24:56 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/tokens.h"
 
+
+/**
+ * @brief S
+ */
 static  void    eval_operators(t_token *tokens)
 {
     while (tokens)
@@ -48,20 +52,6 @@ static char *eval_redirs(t_token *tokens)
     return (0);
 }
 
-void    eval_commands(t_token *tokens)
-{
-    while (tokens)
-    {
-        while (tokens && tokens->id != WORD && tokens->id != COMMAND)
-            tokens = tokens->next;
-        if (!tokens)
-            return ;
-        tokens->id = COMMAND;
-        while (tokens &&  tokens->id != PIPE)
-            tokens = tokens->next;
-    }
-}
-
 static char *check_syntax(t_token *tokens)
 {
     	size_t	i;
@@ -86,6 +76,20 @@ static char *check_syntax(t_token *tokens)
 	if (quote)
 		return (tokens->content);
     return (0);
+}
+
+void    eval_commands(t_token *tokens)
+{
+    while (tokens)
+    {
+        while (tokens && tokens->id != WORD && tokens->id != COMMAND)
+            tokens = tokens->next;
+        if (!tokens)
+            return ;
+        tokens->id = COMMAND;
+        while (tokens &&  tokens->id != PIPE)
+            tokens = tokens->next;
+    }
 }
 
 int eval_tokens(t_token *tokens)
