@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*   parse_help.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:50 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/14 14:54:33 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/15 13:24:53 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,55 @@ void	put_cmd(t_cmd *cmds)
 		if (cmds)
 			printf("\e[0;33m↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓\e[0m\n");
 	}
+}
+
+static t_cmd	*new_cmd(size_t av_count)
+{
+	t_cmd	*new;
+
+	new = malloc(sizeof(t_cmd));
+	if (!new)
+		return (NULL);
+	new->path = NULL;
+	new->av = NULL;
+	new->io_redir = NULL;
+	new->fd_in = STDIN_FILENO;
+	new->fd_out = STDOUT_FILENO;
+	new->builtin = B_NO;
+	new->next = NULL;
+	if (av_count)
+		new->av = ft_calloc(av_count + 1, sizeof(char *));
+	if (av_count && !new->av)
+		return (free(new), NULL);
+	return (new);
+}
+
+t_cmd	*alloc_cmd(t_token *tokens)
+{
+	t_cmd	*commands;
+	t_cmd	*last;
+	t_token	*tmp;
+	size_t	count;
+
+	count = 0;
+	tmp = tokens;
+	while (tmp && tmp->id != PIPE)
+	{
+		if (tmp->id == COMMAND || tmp->id == WORD)
+			count++;
+		tmp = tmp->next;
+	}
+	commands = new_cmd(count);
+	last = commands;
+	while (last)
+	{
+		while (tokens && tokens->id != PIPE)
+			tokens = tokens->next;
+		if (!tokens)
+			return (commands);
+		tokens = tokens->next;
+		last->next = new_cmd(count);
+		last = last->next;
+	}
+	return (free_cmds(commands), NULL);
 }

@@ -6,12 +6,15 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:52:11 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/14 15:24:27 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/15 13:37:49 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/tokens.h"
 
+/**
+ * @brief	eprintf replacement
+ */
 static void put_stderr(char *s, char *context)
 {
     int	i;
@@ -40,7 +43,7 @@ static int	set_stderr(int err, char *context)
 	if (err == TKN_SYNTAX_ERR)
 		return (put_stderr("syntax error near unexpected token `%s'", context)
 			, err);
-	if (err == REDIR_ERR)
+	if (err == AMBIG_REDIR_ERR)
 		return (put_stderr("%s: ambiguous redirect", context), 1);
 	if (err == IS_DIR_ERR)
 		return (put_stderr("%s: is a directory", context), err);

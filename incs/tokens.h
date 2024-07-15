@@ -6,16 +6,16 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:49:51 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/14 15:26:08 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/15 13:39:07 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENS_H
 # define TOKENS_H
 
-# include <errno.h>
-# include "../libft/incs/libft.h"
+# include "minishell.h"
 
+/*Remove flag*/
 # define RMV -1
 
 # define EXIT_SUCCESS 1
@@ -34,7 +34,7 @@ typedef enum    e_errors
     UNSET_ERR = -1,
     MEM_ERR = 12,
     TKN_SYNTAX_ERR = 258,
-    REDIR_ERR = -2,
+    AMBIG_REDIR_ERR = -2,
     IS_DIR_ERR = 126,
     UNKNOWN_CMD_ERR = 127,
     NO_FILE_ERR = -3,

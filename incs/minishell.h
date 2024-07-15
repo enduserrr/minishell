@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/15 09:04:06 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/15 12:39:23 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include "../libft/incs/libft.h"
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <errno.h>
+# include <sys/stat.h>
+
 # define MALLOC_ERROR "Error: malloc fails"
 
 typedef struct s_env
