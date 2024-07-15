@@ -1,36 +1,41 @@
 
-NAME = minishell
+NAME	=	minishell
 
-CC = cc
-FLAGS = -Wall -Wextra -Werror -lreadline
+SRC_DIR	=	src
+OBJ_DIR	=	obj
+LIBFT	=	libft/libft.a
 
-SRCS = 	main.c \
-		srcs/minishell.c \
-		srcs/utils.c \
-		srcs/env_list.c \
-		srcs/update_pwds.c \
-		builtin/cd_cmd.c \
-		builtin/env_cmd.c \
-		builtin/exit_cmd.c \
-		builtin/echo_cmd.c \
-		builtin/pwd_cmd.c \
-		builtin/unset_cmd.c \
-		builtin/export_cmd.c \
+SRCS	=	$(addprefix $(SRC_DIR)/builtin_cmd/, cd.c echo.c env.c export.c pwd.c unset.c) \
+			$(addprefix $(SRC_DIR)/tokens/, cmds.c errors.c expand.c parse_help.c parse.c \
+				tkn_eval.c tkn_help.c tk_split.c tkns.c utils.c) \
+			$(addprefix $(SRC_DIR)/other/, env_list.c minishell.c update_pwds.c utils.c) \
+			$(addprefix $(SRC_DIR)/, main.c)
+OBJ		=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS:.c=.o))
 
-OBJ = $(SRCS:.c=.o)
+INC		=	-I incs
+CC		=	cc
+FLAGS	=	-Wall -Wextra -Werror -lreadline 
+RM		=	rm -f
 
-LIBFT = libft/libft.a
+$(OBJ_DIR)/%.o :	$(SRC_DIR)/%.c
+				@mkdir -p $(dir $@)
+				@$(CC) $(FLAGS) $(INCS) -c $< -o $@
 
-$(NAME): $(OBJ)
-	@cd libft && make
-	$(CC) $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME)
+all:	$(NAME)
 
-clean : 
-	@rm -f $(OBJ)
-	@cd libft && make clean
+$(NAME):	$(OBJ)
+			@make -C libft
+			@$(CC) $(OBJ) -o $(NAME)
 
-fclean : clean
-	@rm -f $(NAME)
-	@cd libft && make fclean
+clean:
+			$(RM) $(OBJ)
+			$(RM) -r $(OBJ_DIR)
+			@make clean -C libft
 
-all: $(NAME)
+fclean:		clean
+			@$(RM) $(NAME)
+			@make fclean -C libft
+
+re:			fclean all
+
+.PHONY	all clean fclean re
