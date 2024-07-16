@@ -13,12 +13,19 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include "../libft/libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
-# define MALLOC_ERROR "Error: malloc fails"
+// libraries
+# include <stdio.h>				//printf
+# include <unistd.h>			//execve
+# include <sys/wait.h>			//for waitpid
+# include "../libft/libft.h"	//libft
+# include <readline/history.h>	//readline
+# include <readline/readline.h>	//readline
+
+//errors
+# define MALLOC_ERROR 	"Error: malloc fails"
+
+# define WELCOME 	"\n\nThis shell is created by two shitty students.\nUse it  at your own risk.\nIts use is not recommended to anyone\n\n\n"
+
 
 typedef struct 		s_env
 {
@@ -41,7 +48,9 @@ typedef struct s_tools
 
 	char			*path;
 	char			*prev_path;
-	char			**paths;
+	char			**paths;		//splitted PATH
+	
+	char			*valid_path;
 
 	char			**envp;
 	char			**new_envp;
@@ -51,6 +60,8 @@ typedef struct s_tools
 
 	int				exit_code;
 	int				end;
+
+	int 			ret_value;
 
 }					t_tools;
 
@@ -79,5 +90,13 @@ int					ft_arraylen(char **arr);
 void 				create_history(t_tools *tools);
 void 				add_to_history(t_tools *tools);
 void 				free_history(t_tools *tools);
+
+// paths.c
+void 				create_paths(t_tools *tools);
+int					check_access(t_tools *tools);
+
+// execution.c
+void 				execute(t_tools *tools);
+void 				execution(t_tools *tools);
 
 #endif

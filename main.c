@@ -25,6 +25,7 @@ int	main(int argc, char **argv, char **envp)
 		printf("No args accepted");
 		return (0);
 	}
+	printf("%s", WELCOME);
 	run(envp);
 	return (0);
 }

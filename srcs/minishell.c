@@ -12,27 +12,33 @@
 
 #include "../includes/minishell.h"
 
-void	if_builtin(t_tools *tools)
+int	is_builtin(t_tools *tools)
 {
-	//remove this after parsing (segfaults if input is ' ')
-	// ---------------------------------------------------
-	if (tools->split_rl[0] == NULL)
-		return ;				
-	// ---------------------------------------------------
 	if (ft_strncmp(tools->split_rl[0], "exit", 4) == 0)
-		exit_cmd(tools);
+		return (exit_cmd(tools), 1);
 	if (ft_strncmp(tools->split_rl[0], "cd", 2) == 0)
-		cd_cmd(tools);
+		return (cd_cmd(tools), 1);
 	if (ft_strncmp(tools->split_rl[0], "env", 3) == 0)
-		env_cmd(tools);
+		return (env_cmd(tools), 1);
 	if (ft_strncmp(tools->split_rl[0], "echo", 4) == 0)
-		echo_cmd(tools);
+		return (echo_cmd(tools), 1);
 	if (ft_strncmp(tools->split_rl[0], "pwd", 3) == 0)
-		pwd_cmd(tools);
+		return (pwd_cmd(tools), 1);
 	if (ft_strncmp(tools->split_rl[0], "unset", 5) == 0)
-		unset_cmd(tools);
+		return (unset_cmd(tools), 1);
 	if (ft_strncmp(tools->split_rl[0], "export", 6) == 0)
-		export_cmd(tools);
+		return (export_cmd(tools), 1);
+	return (0);
+}
+
+void 	process_readline(t_tools *tools)
+{
+	if (tools->split_rl[0] == NULL)
+		return ;
+	if(is_builtin(tools) != 0)
+		return ;
+	execution(tools);
+	return  ;
 }
 
 void	run(char **envp)
@@ -43,9 +49,10 @@ void	run(char **envp)
 	tools.envp = envp;
 	create_env_list(&tools);
 	create_history(&tools);
+	create_paths(&tools);
 	while (1)
 	{
-		tools.rl = readline("$> ");
+		tools.rl = readline("SHITTYSHELL $> ");
 		add_to_history(&tools);
 		if (ft_strlen(tools.rl) != 0)
 		{
@@ -54,7 +61,7 @@ void	run(char **envp)
 				perror("malloc");
 			free(tools.rl);
 			tools.rl = NULL;
-			if_builtin(&tools);
+			process_readline(&tools);
 			free_array(tools.split_rl);
 			tools.split_rl = NULL;
 		}

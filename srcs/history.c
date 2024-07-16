@@ -14,6 +14,25 @@
 
 #include "../includes/minishell.h"
 
+/*
+//  For testing (if need to see whats in history)
+//------------------------------------------------
+void output_history(t_tools *tools)
+{
+    t_hist *temp;
+
+    temp = tools->history;
+    printf("----history----\n");
+    while(temp)
+    {
+        printf("%s\n", temp->cmd);
+        temp = temp->next;
+    }
+} 
+// --------------------------------------------------
+*/
+
+
 void free_history(t_tools *tools)
 {
     t_hist *current;
@@ -63,21 +82,3 @@ void create_history(t_tools *tools)
     history->next = NULL;
     tools->history = history;
 }
-
-/* 
-//  For testing (if need to see whats in history)
-//------------------------------------------------
-void output_history(t_tools *tools)
-{
-    t_hist *temp;
-
-    temp = tools->history;
-    printf("----history----\n");
-    while(temp)
-    {
-        printf("%s\n", temp->cmd);
-        temp = temp->next;
-    }
-} 
-// --------------------------------------------------
-*/
