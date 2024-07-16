@@ -1,6 +1,7 @@
 # MEMO
-* Make asprintf style function
-* Make str_insert function
+
+## NEXT:
+* ft_str_insert to tilde_expand,  
 * Error handling funcs (perror and others)
 * Tilde handling
 

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:20:32 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/15 12:51:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/16 17:56:08 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	backlash_escpe(char **s, char is_heredoc)
 		else if ((*s)[i] == quote)
 			quote = 0;
 		if ((*s)[i] == '\\' && (is_heredoc || !quote))
-			ft_str_insert(s, "", i, 1);
+			ft_str_insert(s, "", i, 1);/*Adds empty string?*/
 	}
 }
 
@@ -106,7 +106,7 @@ char	ft_expand(char **s, int status, char id)
 				return (handle_perror(AMBIG_REDIR_ERR, *s), RETURN_FAILURE);
 			return (RMV);
 		}
-		if (ft_str_insert(s, val, env, len))/*if val inserted succesfully*/
+		if (ft_str_insert(s, val, env, len) == (void *)0)/*if val inserted succesfully*/
 			env += ft_strlen(val);/*add val len to env len variable*/
 		free(val);
 		env = next_env(*s, env, id == HEREDOC);

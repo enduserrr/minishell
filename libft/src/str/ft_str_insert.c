@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:19:26 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/16 17:27:41 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/16 18:24:31 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,29 @@
  *          Copy the modified str back to 'ret'.
  *          Free temp.
  */
-void	*ft_str_insert(char *ret, const char *insert, size_t start, size_t len)
+void	*ft_str_insert(char **ret, const char *insert, size_t start, size_t len)
 {
 	size_t	new_len;
+	size_t	ret_len;
 	char	*temp;
 
-	if (!ret || !insert)
+	if (!ret)
 		return ((void *)1);
-	if (start > ft_strlen(ret))
+	if (!insert)
+		insert = "";
+	ret_len = ft_strlen(*ret);
+	if (start > ret_len)
 		return ((void *)1);
 	if (len > ft_strlen(insert))
 		len = ft_strlen(insert);
-	new_len = ft_strlen(ret) + len;
+	new_len = ret_len + len;
 	temp = (char *)malloc(new_len + 1);
 	if (!temp)
 		return ((void *)1);
-	ft_memcpy(temp, ret, start);
+	ft_memcpy(temp, *ret, start);
 	ft_memcpy(&temp[start], insert, len);
-	ft_memcpy(&temp[start + len], &ret[start], ft_strlen(ret) - start + 1);
-	ft_memcpy(ret, temp, new_len);
-	free(temp);
+	ft_memcpy(&temp[start + len], &(*ret)[start], ret_len - start + 1);
+	free(*ret);
+	*ret = temp;
 	return ((void *)0);
 }
