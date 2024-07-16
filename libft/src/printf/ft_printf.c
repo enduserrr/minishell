@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalo <asalo@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:24:57 by asalo             #+#    #+#             */
-/*   Updated: 2023/12/24 16:40:52 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/16 17:26:52 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../../incs/ft_printf.h"
 
 int	ft_find_format(char type, va_list ap, int temp)
 {

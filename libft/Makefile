@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asalo <asalo@student.hive.fi>              +#+  +:+       +#+         #
+#    By: asalo <asalo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 14:37:45 by asalo             #+#    #+#              #
-#    Updated: 2024/05/30 10:24:40 by asalo            ###   ########.fr        #
+#    Updated: 2024/07/16 17:31:20 by asalo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS	= $(addprefix $(SRC_DIR)/is/, ft_isalnum.c ft_isalpha.c \
 		$(addprefix $(SRC_DIR)/str/, ft_split.c ft_strchr.c ft_strdup.c \
 			ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c \
 			ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c \
-			ft_substr.c ft_strcmp.c) \
+			ft_substr.c ft_strcmp.c ft_str_insert.c) \
 		$(addprefix $(SRC_DIR)/lst/, ft_lstadd_back.c \
 			ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
 			ft_lstiter.c ft_lstlast.c ft_lstnew.c \
