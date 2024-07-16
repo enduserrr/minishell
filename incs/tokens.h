@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:49:51 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/15 18:51:41 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/16 10:23:59 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-/*Remove flag*/
+/*RM verbose/flag*/
 # define RMV -1
 
 # define EXIT_SUCCESS 1
@@ -28,6 +28,9 @@ typedef enum e_return_state
     RETURN_SUCCESS
 }   t_return_state;
 
+/**
+ * @brief	Enum underlying type usually signed int.
+*/
 typedef enum    e_errors
 {
     ERRNO_ERR,
@@ -41,33 +44,33 @@ typedef enum    e_errors
 }   t_errors;
 
 /**
- * @brief	Token identifiers in binary. (Fast!!)
+ * @brief	Token identifiers in binary.
 */
-enum e_tkn_id
+enum e_tkn_id /*Re-organice*/
 {
 	WORD = 0b00000001,/*1*/
 	IN_FILE = 0b00000101,/*5*/
 	OUT_FILE = 0b00001001,/*9*/
+	COMMAND = 0b01000001,/**/
+	OPERATOR = 0b00000010,/**/
+	IN_REDIR = 0b00000110,/* < */
+	OUT_REDIR = 0b00001010,/* > */
+	HEREDOC = 0b00010010,/* << */
 	HEREDOC_EOF = 0b00010001,/*17*/
-	OUT_A_FILE = 0b00100001,/*33*/
-	COMMAND = 0b01000001,/*65*/
-	OPERATOR = 0b00000010,/*2*/
-	IN_REDIR = 0b00000110,/*6*/
-	OUT_REDIR = 0b00001010,/*10*/
-	HEREDOC = 0b00010010,/*18*/
-	OUT_A_REDIR = 0b00100010,/*34*/
-	PIPE = 0b01000010/*66*/
+	OUT_A_REDIR = 0b00100010,/* >> */
+	OUT_A_FILE = 0b00100001,/**/
+	PIPE = 0b01000010/* | */
 }   t_tkn_id;
 
 typedef struct s_token
 {
-    char        	id;/*Should this be unsigned char for binary values*/
+    char        	id;
     char        	*content;
     struct s_token	*next;
 }   t_token;
 
 /**
- * @brief   Builtin identifiers in binary.(Still fast!!)
+ * @brief   Builtin identifiers in binary.
 */
 typedef enum e_builtins
 {
