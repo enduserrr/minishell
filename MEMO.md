@@ -1,6 +1,10 @@
 # MEMO
 
 ## NEXT:
+* Check parsing funcs and correct references
+* Prototype funcs needed from main to parse
+* Signal handling
+* Briefs for parsing funcs and a recap
 
 ## APPROX EXEC ORDER:
 ### 1. Main(int ac, char **av):
@@ -41,7 +45,7 @@
   * 
 
 ## USEFUL FUNCTIONS
-### Asprintf
+### Asprintf 
 `int asprintf(char **strp, const char *fmt, ...);`
 * Allocates sufficient memory for a formatted string with a terminating null character in the end which is to be stored to the buffer given to it as an argument
 * Return nb of the bytes allocated or -1 if an error occured
@@ -51,8 +55,6 @@
 `char *str_insert(char *s, char *c, size_t start, size_t len);`
 * Insert string into an other string starting from specified location for the specified length.
 * Allocates space needed for the new longer string
-
-### Strplen()
 
 ## About token id's
 (“2>&1” redirects STDERR to STDOUT. Since “2>1” means “redirect STDERR to file 1,” “&1” is added to refer to STDOUT, not a file.)
