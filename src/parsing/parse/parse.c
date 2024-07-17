@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 11:41:25 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 18:48:45 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/tokens.h"
+#include "../../../incs/tokens.h"
 
 static void remove_quotes(t_token *tokens)
 {
@@ -52,19 +52,20 @@ void    eval_commands(t_token *tokens)
 
 t_cmd   *parse(int *status, t_token *tokens)
 {
-    t_cmd   *command;
+    t_cmd   *commands;
 
-    if (expand_tokens(*status, &tokens) == RETURN_FAILURE || !tokens)
+    if (expand_tkns(*status, &tokens) == RETURN_FAILURE || !tokens)
     {
         *status = EXIT_FAILURE;/*Meaby rid this & exit set based on return state*/
-        return (free_tokens(tokens), 0);
+        return (free_tokens(tokens), NULL);
     }
     eval_commands(tokens);
     remove_quotes(tokens);
-    if (!command)
+    commands = create_cmd_table(tokens);
+    if (!commands)
     {
         *status = MEM_ERR;
-        return (free_tokens(tokens), 0);
+        return (free_tokens(tokens), NULL);
     }
-    return (command);
+    return (commands);
 }

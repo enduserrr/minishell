@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 12:45:07 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 19:11:42 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
  * @brief   ssize_t range from -1 to SIZE_MAX
  *          Like size_t plus range for return failure.
 */
+
+char	*ft_strcpy(char *dst, const char *src)
+{
+	int	i;
+
+	i = -1;
+	while (src[++i])
+		dst[i] = src[i];
+	dst[i] = '\0';
+	return (dst);
+}
+
 ssize_t set_char(char *s, char c, ssize_t i)
 {
     if (c == '/' && i < 0)
@@ -36,8 +48,10 @@ static void write_err(char *s, char *context)
 	while (s[i])
 		i++;
     if (context[j])
+	{
         while (context[j])
             j++;
+	}
 	write(2, "Error: ", 7);
 	write(2, s, i);
     write(2, " ", 1);

@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 13:00:59 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 18:34:37 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/tokens.h"
+#include "../../../incs/tokens.h"
 
 void	free_tokens(t_token *tokens)
 {
@@ -64,7 +64,7 @@ static t_token    *get_tkns(char *s)
 {
     t_token *tokens;
     t_token *last;
-    t_token *tkn;
+    char    *tkn;
 
     tkn = get_next(s);
     if (!tkn)
@@ -81,7 +81,7 @@ static t_token    *get_tkns(char *s)
         last->next = new_token(ft_strdup(tkn));
         last = last->next;
         if (!last)
-            return (free_tokens(tokens), 0);
+            return (free_tokens(tokens), NULL);
     }
     return (tokens);
 }
@@ -95,14 +95,14 @@ t_token *tokenizer(int *status, char *s)
     free(s);
     if (!tokens || split_at_operators(tokens) == RETURN_FAILURE)
     {
-        status = MEM_ERR;
-        return (free_tokens(tokens), 0);
+        *status = MEM_ERR;
+        return (free_tokens(tokens), NULL);
     }
     eval = check_tokens(tokens);
     if (eval != RETURN_SUCCESS)
     {
-        status = eval;
-        return (free_tokens(tokens), 0);
+        *status = eval;
+        return (free_tokens(tokens), NULL);
     }
     return (tokens);
 }

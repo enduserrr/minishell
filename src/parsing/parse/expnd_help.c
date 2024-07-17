@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:33:34 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 12:21:58 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 18:42:30 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static char *create_user_path(const char *username)
     if (!path)
         return (0);
     ft_memcpy(path, prefix, ft_strlen(prefix));
-    ft_memcpy(path[ft_strlen(prefix)], username, ft_strlen(username));
+    ft_memcpy(&path[ft_strlen(prefix)], username, ft_strlen(username));
     path[len] = '\0';
     return (path);
 }
 
-static void	tilde_expand(char **s, size_t i)
+static void	tilde_expander(char **s, size_t i)
 {
 	struct stat	stats;
 	ssize_t		end;
@@ -68,7 +68,7 @@ static void	assignement_tilde(char **s)
 		while (ft_isalnum((*s)[i]) || (*s)[i] == '_')
 			i++;
 	if (i && (*s)[i] == '=')
-		tilde_expand(s, i + 1);
+		tilde_expander(s, i + 1);
 }
 
 static t_token	*rm_token(t_token **top, t_token *remove)
@@ -108,7 +108,7 @@ char	expand_tkns(int status, t_token **tokens)
 		return_val = RETURN_SUCCESS;
 		if (tkn->id & WORD && tkn->id != HEREDOC_EOF)
 		{
-			tilde_expand(&tkn->content, 0);
+			tilde_expander(&tkn->content, 0);
 			assignement_tilde(&tkn->content);
 			return_val = ft_expand(&tkn->content, status, tkn->id);
 			if (return_val == RETURN_FAILURE)

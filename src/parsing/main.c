@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 22:45:34 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/15 09:05:23 by asalo            ###   ########.fr       */
+/*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
+/*   Updated: 2024/07/17 19:11:58 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
+#include "../../incs/tokens.h"
 
-void	pwd_cmd(t_tools *tools)
+int	main(int ac, char **av)
 {
-	char	*pwd;
+    t_token *tokens;
+    t_cmd   *commands;
 
-	tools->exit_code = 0;
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
-		perror("pwd: ");
-	else
-	{
-		printf("%s\n", pwd);
-		free(pwd);
-	}
+    if (ac == 2)
+    {
+        tokens = tokenizer(0, av[1]);
+        commands = parse(0, tokens);
+        put_cmd(commands);
+        free_cmds(commands);
+        free_tokens(tokens);
+    }
+    write(1, "\n", 1);
+    return (0);
 }
-
-/*
- * DELETE THIS
- *
- * outputs curret pwd
- *
- * getcwd(NULL, 0) works, but don't know do i we need to do changes
- *
- */

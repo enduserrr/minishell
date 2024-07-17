@@ -1,20 +1,17 @@
-
 NAME	=	minishell
 
 SRC_DIR	=	src
 OBJ_DIR	=	obj
-LIBFT	=	libft/libft.a
-
-SRCS	=	$(addprefix $(SRC_DIR)/builtin_cmd/, cd.c echo.c env.c export.c pwd.c unset.c) \
-			$(addprefix $(SRC_DIR)/tokens/, cmds.c errors.c expand.c parse_help.c parse.c \
-				tkn_eval.c tkn_help.c tk_split.c tkns.c utils.c) \
-			$(addprefix $(SRC_DIR)/other/, env_list.c minishell.c update_pwds.c utils.c) \
-			$(addprefix $(SRC_DIR)/, main.c)
+LIBFT	=	libft
+SRCS	=	$(addprefix $(SRC_DIR)/parsing/tokens/, checks.c tkn_helpers.c tkns.c) \
+			$(addprefix $(SRC_DIR)/parsing/parse/, cmds.c expnd_help.c parse_help.c \
+				expnd.c parse.c) \
+			$(addprefix $(SRC_DIR)/parsing/, utils.c main.c)
 OBJ		=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS:.c=.o))
 
-INC		=	-I incs
+INCS	=	-I incs/tokens.h
 CC		=	cc
-FLAGS	=	-Wall -Wextra -Werror -lreadline 
+FLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -f
 
 $(OBJ_DIR)/%.o :	$(SRC_DIR)/%.c
@@ -28,14 +25,14 @@ $(NAME):	$(OBJ)
 			@$(CC) $(OBJ) -o $(NAME)
 
 clean:
-			$(RM) $(OBJ)
-			$(RM) -r $(OBJ_DIR)
-			@make clean -C libft
+	$(RM) $(OBJ)
+	$(RM) -r $(OBJ_DIR)
+	@make clean -C $(LIBFT)
 
 fclean:		clean
-			@$(RM) $(NAME)
-			@make fclean -C libft
+	@$(RM) $(NAME)
+	@make fclean -C $(LIBFT)
 
 re:			fclean all
 
-.PHONY	all clean fclean re
+.PHONY:	all clean fclean re

@@ -6,21 +6,25 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:49:51 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 10:46:43 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 18:47:52 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENS_H
 # define TOKENS_H
 
-# include "minishell.h"
+/*# include "minishell.h"*/
+# include "../libft/incs/libft.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <errno.h>
+# include <sys/stat.h>
 
 /*'remove' flag/verbose*/
 # define RMV -1
-
-# define EXIT_SUCCESS 1
-# define EXIT_FAILURE 0
-
 
 typedef enum e_return_state
 {
@@ -72,7 +76,7 @@ typedef struct s_token
 /**
  * @brief   Builtin identifiers in binary.
 */
-typedef enum e_builtins
+enum e_builtins
 {
 	B_NO = 0b00000000,/*0*/
 	B_PARENT = 0b00000001,/*1*/
@@ -83,7 +87,7 @@ typedef enum e_builtins
 	B_PWD = 0b00000010,/*2*/
 	B_ECHO = 0b00000100,/*4*/
 	B_ENV = 0b00001000,/*8*/
-};
+}	t_builtins;
 
 typedef struct s_cmd
 {
@@ -93,18 +97,31 @@ typedef struct s_cmd
     int         fd_in;
     int         fd_out;
     char        builtin;
-	struct s_cmds	*next;
+	void		*next;
 }   t_cmd;
 
+/* Tokens */
 t_token *tokenizer(int *status, char *s);
-int		eval_tokens(t_token *tokens);
+t_token	*new_token(char *content);
+t_token *put_tkn(t_token *tokens, const char *title);
+size_t  unquoted_char(char *s, const char *chars, const char *quotes);
+int		check_tokens(t_token *tokens);
 char    split_at_operators(t_token *tokens);
+void	free_tokens(t_token *tokens);
+
+/* Parsing */
+t_cmd   *parse(int *status, t_token *tokens);
+t_cmd	*alloc_cmd(t_token *tokens);
+t_cmd	*create_cmd_table(t_token *tokens);
+void    eval_commands(t_token *tokens);
+void 	free_cmds(t_cmd *cmds);
+void	put_cmd(t_cmd *cmds);
+char	ft_expand(char **s, int status, char id);
+char	expand_tkns(int status, t_token **tokens);
 
 /* Utils */
-t_token	*new_token(char *content);
-void	free_tokens(t_token *tokens);
-size_t  unquoted_char(char *s, const char *chars, const char *quotes);
-t_token *put_tkn(t_token *tokens, const char *title);
-
+int		parsing_err(int err, char *context);
+ssize_t set_char(char *s, char c, ssize_t i);
+char	*ft_strcpy(char *dst, const char *src);
 
 #endif

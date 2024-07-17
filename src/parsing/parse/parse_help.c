@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:50 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 12:11:22 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 18:29:42 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/tokens.h"
+#include "../../../incs/tokens.h"
 
 /**
  * @brief "\e[1;33m" => escape (yellow text)
@@ -61,7 +61,7 @@ static t_cmd	*new_cmd(size_t av_count)
 	return (new);
 }
 
-void  free_cmds(t_cmd *cmds)
+void	free_cmds(t_cmd *cmds)
 {
     t_cmd   *tmp;
     size_t  i;
