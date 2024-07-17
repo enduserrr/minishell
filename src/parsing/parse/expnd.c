@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                           :+:      :+:    :+:   */
+/*   expnd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:20:32 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/16 17:56:08 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 12:19:34 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	backlash_escpe(char **s, char is_heredoc)
 		else if ((*s)[i] == quote)
 			quote = 0;
 		if ((*s)[i] == '\\' && (is_heredoc || !quote))
-			ft_str_insert(s, "", i, 1);/*Adds empty string?*/
+			ft_strinsrt(s, "", i, 1);
 	}
 }
 
@@ -103,10 +103,10 @@ char	ft_expand(char **s, int status, char id)
 		if (!val && env == 0 && len == ft_strlen(*s))
 		{
 			if (id == IN_FILE || id == OUT_FILE || id == OUT_A_FILE)
-				return (handle_perror(AMBIG_REDIR_ERR, *s), RETURN_FAILURE);
+				return (parsing_err(AMBIG_REDIR_ERR, *s), RETURN_FAILURE);
 			return (RMV);
 		}
-		if (ft_str_insert(s, val, env, len) == (void *)0)/*if val inserted succesfully*/
+		if (ft_strinsrt(s, val, env, len) == (void *)0)/*if val inserted succesfully*/
 			env += ft_strlen(val);/*add val len to env len variable*/
 		free(val);
 		env = next_env(*s, env, id == HEREDOC);

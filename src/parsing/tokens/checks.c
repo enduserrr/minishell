@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   evals.c                                            :+:      :+:    :+:   */
+/*   tkn_eval.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:18:25 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/15 19:24:56 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 13:00:32 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/tokens.h"
 
-
-/**
- * @brief S
- */
-static  void    eval_operators(t_token *tokens)
+static  void    check_operators(t_token *tokens)
 {
     while (tokens)
     {
@@ -34,7 +30,7 @@ static  void    eval_operators(t_token *tokens)
     }
 }
 
-static char *eval_redirs(t_token *tokens)
+static char *check_redirs(t_token *tokens)
 {
     while (tokens && tokens->next)
     {
@@ -78,31 +74,17 @@ static char *check_syntax(t_token *tokens)
     return (0);
 }
 
-void    eval_commands(t_token *tokens)
-{
-    while (tokens)
-    {
-        while (tokens && tokens->id != WORD && tokens->id != COMMAND)
-            tokens = tokens->next;
-        if (!tokens)
-            return ;
-        tokens->id = COMMAND;
-        while (tokens &&  tokens->id != PIPE)
-            tokens = tokens->next;
-    }
-}
-
-int eval_tokens(t_token *tokens)
+int check_tokens(t_token *tokens)
 {
     char    *context;
 
-    eval_operators(tokens);
-    context = eval_redirs(tokens);
+    check_operators(tokens);
+    context = check_redirs(tokens);
     if (context)
-        return (set_stderr(TKN_SYNTAX_ERR, context));
+        return (parsing_err(TKN_SYNTAX_ERR, context));
     eval_commands(tokens);
     context = check_syntax(tokens);
     if (context)
-        return (set_stderr(TKN_SYNTAX_ERR, context));
+        return (parsing_err(TKN_SYNTAX_ERR, context));
     return (RETURN_SUCCESS);
 }

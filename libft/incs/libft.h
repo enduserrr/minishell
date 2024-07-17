@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:43:35 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/16 17:32:27 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 12:40:54 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-void	*ft_str_insert(char *ret, const char *insert, size_t start, size_t len);
+ssize_t	ft_strichr(const char *s, int c);
+void	*ft_strinsrt(char **ret, const char *insert, size_t start, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
 int		ft_strcmp(const char *s1, const char *s2);

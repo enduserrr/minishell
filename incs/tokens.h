@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:49:51 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/16 10:23:59 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 10:46:43 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-/*RM verbose/flag*/
+/*'remove' flag/verbose*/
 # define RMV -1
 
 # define EXIT_SUCCESS 1

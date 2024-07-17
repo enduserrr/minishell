@@ -6,13 +6,13 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 16:47:19 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/16 17:28:33 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 12:30:55 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/libft.h"
 
-static char	*ft_char(char *s, unsigned int number, long int len)
+static char	*ft_char(char *s, int number, long int len)
 {
 	while (number > 0)
 	{
@@ -39,27 +39,21 @@ static long int	ft_len(int n)
 
 char	*ft_itoa(int n)
 {
-	char				*s;
-	long int			len;
-	unsigned int		number;
-	int					sign;
+	char		*res;
+	long int	len;
 
-	sign = 1;
 	len = ft_len(n);
-	s = malloc(sizeof(char) * (len + 1));
-	if (!(s))
+	res = malloc(sizeof(char) * (len + 1));
+	if (!(res))
 		return (0);
-	s[len--] = '\0';
+	res[len--] = '\0';
 	if (n == 0)
-		s[0] = '0';
+		res[0] = '0';
 	if (n < 0)
 	{
-		sign *= -1;
-		number = n * -1;
-		s[0] = '-';
+		n = -n;
+		res[0] = '-';
 	}
-	else
-		number = n;
-	s = ft_char(s, number, len);
-	return (s);
+	res = ft_char(res, n, len);
+	return (res);
 }

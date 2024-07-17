@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_insert.c                                    :+:      :+:    :+:   */
+/*   ft_strinsrt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:19:26 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/16 18:24:31 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 12:40:06 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  *          Copy the modified str back to 'ret'.
  *          Free temp.
  */
-void	*ft_str_insert(char **ret, const char *insert, size_t start, size_t len)
+void	*ft_strinsrt(char **ret, const char *insert, size_t start, size_t len)
 {
 	size_t	new_len;
 	size_t	ret_len;

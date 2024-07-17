@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/15 18:55:19 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 11:41:25 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,20 @@ static void remove_quotes(t_token *tokens)
             i--;
         }
         tokens = tokens->next;
+    }
+}
+
+void    eval_commands(t_token *tokens)
+{
+    while (tokens)
+    {
+        while (tokens && tokens->id != WORD && tokens->id != COMMAND)
+            tokens = tokens->next;
+        if (!tokens)
+            return ;
+        tokens->id = COMMAND;
+        while (tokens &&  tokens->id != PIPE)
+            tokens = tokens->next;
     }
 }
 

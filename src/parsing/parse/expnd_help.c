@@ -1,17 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   expnd_help.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:33:34 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/15 13:38:53 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 12:21:58 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incs/tokens.h"
-/*Make: string_inserter() & asprintf() functions*/
+#include "../../../libft/incs/libft.h"
+
+static char *create_user_path(const char *username)
+{
+    const char	*prefix;
+    size_t		len;
+    char		*path;
+
+	if (!username)
+		return (0);
+	prefix = "/Users/";
+	len = ft_strlen(username) + ft_strlen(prefix);
+	path = malloc((sizeof(char) * (len + 1)));
+    if (!path)
+        return (0);
+    ft_memcpy(path, prefix, ft_strlen(prefix));
+    ft_memcpy(path[ft_strlen(prefix)], username, ft_strlen(username));
+    path[len] = '\0';
+    return (path);
+}
+
 static void	tilde_expand(char **s, size_t i)
 {
 	struct stat	stats;
@@ -21,20 +41,20 @@ static void	tilde_expand(char **s, size_t i)
 	if ((*s)[i] != '~')
 		return ;
 	if (getenv("HOME") && ((*s)[i + 1] == '\0' || (*s)[i + 1] == '/'))
-		// string_inserter(s, getenv("HOME"), t, 1);
+		ft_strinsrt(s, getenv("HOME"), i, 1);
 	else if (getenv("PWD") && (*s)[i + 1] == '+'
 		&& ((*s)[i + 2] == '\0' || (*s)[i + 2] == '/'))
-		// string_inserter(s, getenv("PWD"), t, 2);
+		ft_strinsrt(s, getenv("PWD"), i, 2);
 	else if (getenv("OLDPWD") && (*s)[i + 1] == '-'
 		&& ((*s)[i + 2] == '\0' || (*s)[i + 2] == '/'))
-		// string_inserter(s, getenv("OLDPWD"), t, 2);
+		ft_strinsrt(s, getenv("OLDPWD"), i, 2);
 	else if ((*s)[i + 1])
 	{
-		end = set_char(*s + i, '\0', ft_strchr_index(*s + i, '/'));
-		asprintf(&path, "/Users/%s", *s + i + 1);/*alloc string printf*/
+		end = set_char(*s + i, '\0', ft_strichr(*s + i, '/'));
+		path = create_user_path(*s + i + 1);
 		end = set_char(*s + i, '/', end);
 		if (path && !stat(path, &stats) && S_ISDIR(stats.st_mode))
-			// string_inserter(s, path, i, end);
+			ft_strinsrt(s, path, i, end);
 		free(path);
 	}
 }

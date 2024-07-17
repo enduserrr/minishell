@@ -6,21 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:21:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/15 12:33:04 by asalo            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../../incs/tokens.h"
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 12:25:00 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/15 12:26:57 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/17 11:29:36 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +92,7 @@ t_cmd	*create_cmd_table(t_token *tokens)
 
 	cmds = alloc_cmd(tokens);
 	if (!cmds)
-		return (handle_perror(MEM_ERR, "creating command table"), NULL);
+		return (parsing_err(MEM_ERR, "creating command table"), NULL);
 	args_to_table(tokens, cmds);
 	alter_tkn(&tokens);
 	redir_to_table(tokens, cmds);

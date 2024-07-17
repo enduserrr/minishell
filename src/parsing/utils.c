@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/12 14:52:11 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/15 13:37:49 by asalo            ###   ########.fr       */
+/*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
+/*   Updated: 2024/07/17 12:45:07 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/tokens.h"
+#include "../../incs/tokens.h"
 
 /**
- * @brief	eprintf replacement
- */
-static void put_stderr(char *s, char *context)
+ * @brief   ssize_t range from -1 to SIZE_MAX
+ *          Like size_t plus range for return failure.
+*/
+ssize_t set_char(char *s, char c, ssize_t i)
+{
+    if (c == '/' && i < 0)
+		return (ft_strlen(s));
+	if (!s || i < 0 || i > (ssize_t)ft_strlen(s))
+		return (-1);
+	s[i] = c;
+	return (i);
+}
+
+static void write_err(char *s, char *context)
 {
     int	i;
     int j;
@@ -34,34 +45,34 @@ static void put_stderr(char *s, char *context)
 	write(2, "\n", 1);
 }
 
-static int	set_stderr(int err, char *context)
+static int	error_case(int err, char *context)
 {
 	if (err == ERRNO_ERR)
 		return (perror(context), errno);
 	if (err == MEM_ERR)
-		return (put_stderr("memory allocation failed while %s", context), err);
+		return (write_err("memory allocation failed while %s", context), err);
 	if (err == TKN_SYNTAX_ERR)
-		return (put_stderr("syntax error near unexpected token `%s'", context)
+		return (write_err("syntax error near unexpected token `%s'", context)
 			, err);
 	if (err == AMBIG_REDIR_ERR)
-		return (put_stderr("%s: ambiguous redirect", context), 1);
+		return (write_err("%s: ambiguous redirect", context), 1);
 	if (err == IS_DIR_ERR)
-		return (put_stderr("%s: is a directory", context), err);
+		return (write_err("%s: is a directory", context), err);
 	if (err == UNKNOWN_CMD_ERR)
-		return (put_stderr("%s: command not found", context), err);
+		return (write_err("%s: command not found", context), err);
 	if (err == NO_FILE_ERR)
-		return (put_stderr("%s: No such file or directory", context), 127);
+		return (write_err("%s: No such file or directory", context), 127);
 	if (err == UNSET_ERR)
-		return (put_stderr("%s not set", context), 1);
+		return (write_err("%s not set", context), 1);
 	return (0);
 }
 
-int	handle_perror(int err, char *context)
+int	parsing_err(int err, char *context)
 {
 	int	i;
 
 	write(2, "minishell: ", 11);
-	i = set_stderr(err, context);
+	i = error_case(err, context);
 	if (err != ERRNO_ERR)
 		write(2, "\n", 1);
 	return (i);

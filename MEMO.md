@@ -1,9 +1,6 @@
 # MEMO
 
 ## NEXT:
-* ft_str_insert to tilde_expand,  
-* Error handling funcs (perror and others)
-* Tilde handling
 
 ## APPROX EXEC ORDER:
 ### 1. Main(int ac, char **av):
