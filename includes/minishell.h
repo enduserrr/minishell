@@ -41,6 +41,7 @@ typedef struct 		s_hist
 	struct s_hist 	*next;
 } 					t_hist;
 
+
 typedef struct s_tools
 {
 	char			*rl;
@@ -57,6 +58,10 @@ typedef struct s_tools
 	
 	t_env			*env_list;
 	t_hist			*history;
+	pid_t			*pid_arr;
+
+	int				pipe_amount;
+	int 			s_fd;			//savedfd
 
 	int				exit_code;
 	int				end;
@@ -93,10 +98,13 @@ void 				free_history(t_tools *tools);
 
 // paths.c
 void 				create_paths(t_tools *tools);
-int					check_access(t_tools *tools);
 
 // execution.c
-void 				execute(t_tools *tools);
 void 				execution(t_tools *tools);
+void 				execute_one_cmd(t_tools *tools, int i);
+
+// pipes.c
+int					pipes_in_prompt(t_tools *tools);
+void 				create_pids(t_tools *tools);
 
 #endif

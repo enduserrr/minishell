@@ -36,11 +36,18 @@ void get_path(t_tools *tools, char *cmd)
     free(temp);
 }
 
-void execute_one_cmd(t_tools *tools)
+void execute_one_cmd(t_tools *tools, int i)
 {
+    char *arg[3];
+
+    arg[0] = tools->split_rl[i];
+    arg[1] = tools->split_rl[i + 1];
+    arg[2] = NULL;
+    get_path(tools, tools->split_rl[i]);
+    //printf("path: %s, cmds: %s,%s\n", tools->valid_path, arg[0], arg[1]);
     if (tools->valid_path != NULL)
     {
-        if(execve(tools->valid_path, tools->split_rl, NULL) != 0)
+        if(execve(tools->valid_path, arg, NULL) != 0)
             perror("eitoimi\n");
     }
 }
@@ -51,18 +58,22 @@ void simple_arg(t_tools *tools)
     int     status;
 
     status = 0;
-    get_path(tools, tools->split_rl[0]);
     p1 = fork();
     if(p1 == -1)
         perror("fork");
     if (p1 == 0)
-        execute_one_cmd(tools);
+        execute_one_cmd(tools, 0);
     waitpid(p1, &status, 0);
     free(tools->valid_path);
 }
 
 void execution(t_tools *tools)
 {
-    //if (tools->split_rl[2] == NULL)
-    simple_arg(tools);
+    if (pipes_in_prompt(tools) == 0)
+        simple_arg(tools);
+    if (pipes_in_prompt(tools) != 0)
+    {
+        //printf("pipe_amount: %d, toimii\n", tools->pipe_amount);
+        create_pids(tools);
+    }
 }
