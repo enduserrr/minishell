@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:33:34 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/18 10:44:29 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 12:27:02 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static char *create_user_path(const char *username)
     char		*path;
 
 	if (!username)
-		return (0);
+		return (NULL);
 	prefix = "/Users/";
 	len = ft_strlen(username) + ft_strlen(prefix);
 	path = malloc((sizeof(char) * (len + 1)));
     if (!path)
-        return (0);
+        return (NULL);
     ft_memcpy(path, prefix, ft_strlen(prefix));
     ft_memcpy(&path[ft_strlen(prefix)], username, ft_strlen(username));
     path[len] = '\0';
