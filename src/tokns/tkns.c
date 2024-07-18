@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 18:34:37 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 11:36:35 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incs/tokens.h"
+#include "../../incs/tokens.h"
 
 void	free_tokens(t_token *tokens)
 {
@@ -29,19 +29,19 @@ static char    *get_next(char *s)
 {
     static char *temp;
     char        *tkn;
-    size_t      i;
 
-    if (!s)
+    printf("3:%s\n", s);
+    if (s)
         temp = s;
     while (temp && *temp && ft_strchr(" \n\t\r\v\f", *temp))
         temp++;
     if (!temp || !*temp)
-        return (0);
+        return (NULL);
+    printf("3.1:%s\n", s);
     tkn = temp;
-    i = unquoted_char(temp, " \n\t\r\v\f", "\'\"");
-    temp = &temp[i];
-    if (temp[i])
-        temp[++i] = '\0';
+    temp = &temp[unquoted_char(temp, " \n\t\r\v\f", "\'\"")];
+    if (*temp)
+        *temp++ = '\0';
     return (tkn);
 }
 
@@ -49,6 +49,7 @@ t_token	*new_token(char *content)
 {
 	t_token	*new;
 
+    printf("4:%s\n", content);
 	if (!content)
 		return (parsing_err(MEM_ERR, "creating token content"), NULL);
 	new = malloc(sizeof(t_token));
@@ -66,12 +67,13 @@ static t_token    *get_tkns(char *s)
     t_token *last;
     char    *tkn;
 
+    printf("2:%s\n", s);
     tkn = get_next(s);
     if (!tkn)
-        return (0);
+        return (NULL);
     tokens = new_token(ft_strdup(tkn));
     if (!tokens)
-        return (0);
+        return (NULL);
     last = tokens;
     while (1)
     {
@@ -91,6 +93,7 @@ t_token *tokenizer(int *status, char *s)
     t_token *tokens;
     int     eval;
 
+    printf("1:%s\n", s);
     tokens = get_tkns(s);
     free(s);
     if (!tokens || split_at_operators(tokens) == RETURN_FAILURE)

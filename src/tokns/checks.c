@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:18:25 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 18:24:20 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 11:54:10 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incs/tokens.h"
+#include "../../incs/tokens.h"
 
 static  void    check_operators(t_token *tokens)
 {
@@ -35,7 +35,7 @@ static char *check_redirs(t_token *tokens)
     while (tokens && tokens->next)
     {
         if (tokens->id & OPERATOR && tokens->id != PIPE
-            && tokens->next->id& OPERATOR)
+            && tokens->next->id & OPERATOR)
             return (tokens->next->content);
         if (tokens->id == IN_REDIR)
             tokens->next->id = OUT_FILE;
@@ -45,12 +45,12 @@ static char *check_redirs(t_token *tokens)
 			tokens->next->id = HEREDOC_EOF;
 		tokens = tokens->next;
     }
-    return (0);
+    return (NULL);
 }
 
 static char *check_syntax(t_token *tokens)
 {
-    	size_t	i;
+    size_t	i;
 	char	quote;
 
 	if (tokens->id == PIPE)
@@ -71,7 +71,7 @@ static char *check_syntax(t_token *tokens)
 	}
 	if (quote)
 		return (tokens->content);
-    return (0);
+    return (NULL);
 }
 
 int check_tokens(t_token *tokens)

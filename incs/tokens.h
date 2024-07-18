@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:49:51 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 18:47:52 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 10:48:21 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define TOKENS_H
 
 /*# include "minishell.h"*/
-# include "../libft/incs/libft.h"
+# include "libft/incs/libft.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -50,7 +50,7 @@ typedef enum    e_errors
 /**
  * @brief	Token identifiers in binary.
 */
-enum e_tkn_id /*Re-organice*/
+typedef enum e_tkn_id /*Re-organice*/
 {
 	WORD = 0b00000001,/*1*/
 	IN_FILE = 0b00000101,/*5*/
@@ -76,7 +76,7 @@ typedef struct s_token
 /**
  * @brief   Builtin identifiers in binary.
 */
-enum e_builtins
+typedef enum e_builtins
 {
 	B_NO = 0b00000000,/*0*/
 	B_PARENT = 0b00000001,/*1*/

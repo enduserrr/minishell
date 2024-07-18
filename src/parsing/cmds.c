@@ -6,14 +6,14 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:21:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 18:30:02 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 10:44:09 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incs/tokens.h"
+#include "../../incs/tokens.h"
 
 
-static void	args_to_table(t_token *tokens, t_cmd *cmd)
+static void	args_to_table(t_token *tokens, t_cmd *commands)
 {
 	size_t	av_count;
 
@@ -21,10 +21,10 @@ static void	args_to_table(t_token *tokens, t_cmd *cmd)
 	while (tokens)
 	{
 		if (tokens->id == COMMAND || tokens->id == WORD)
-			cmd->av[av_count++] = tokens->content;
+			commands->av[av_count++] = tokens->content;
 		else if (tokens->id == PIPE)
 		{
-			cmd = cmd->next;
+			commands = commands->next;
 			av_count = 0;
 		}
 		tokens = tokens->next;
@@ -34,32 +34,32 @@ static void	args_to_table(t_token *tokens, t_cmd *cmd)
 static void	alter_tkn(t_token **tokens)
 {
 	t_token	*prev;
-	t_token	*tok;
+	t_token	*tkn;
 	t_token	*next;
 
 	prev = NULL;
-	tok = *tokens;
-	while (tok)
+	tkn = *tokens;
+	while (tkn)
 	{
-		next = tok->next;
-		if ((tok->id & OPERATOR) && tok->id != PIPE)
-			free(tok->content);
-		if (((tok->id & OPERATOR) && tok->id != PIPE)
-			|| tok->id == COMMAND || tok->id == WORD)
+		next = tkn->next;
+		if ((tkn->id & OPERATOR) && tkn->id != PIPE)
+			free(tkn->content);
+		if (((tkn->id & OPERATOR) && tkn->id != PIPE)
+			|| tkn->id == COMMAND || tkn->id == WORD)
 		{
-			free(tok);
+			free(tkn);
 			if (prev)
 				prev->next = next;
 			else
 				*tokens = next;
 		}
 		else
-			prev = tok;
-		tok = next;
+			prev = tkn;
+		tkn = next;
 	}
 }
 
-static void	redir_to_table(t_token *tokens, t_cmd *command)
+static void	redir_to_table(t_token *tokens, t_cmd *commands)
 {
 	t_token	*prev;
 	t_token	*next;
@@ -68,7 +68,7 @@ static void	redir_to_table(t_token *tokens, t_cmd *command)
 	while (tokens)
 	{
 		if (tokens->id != PIPE)
-			command->io_redir = tokens;
+			commands->io_redir = tokens;
 		while (tokens && tokens->id != PIPE)
 		{
 			prev = tokens;
@@ -76,7 +76,7 @@ static void	redir_to_table(t_token *tokens, t_cmd *command)
 		}
 		if (!tokens)
 			return ;
-		command = command->next;
+		commands = commands->next;
 		if (prev)
 			prev->next = NULL;
 		next = tokens->next;
@@ -88,13 +88,13 @@ static void	redir_to_table(t_token *tokens, t_cmd *command)
 
 t_cmd	*create_cmd_table(t_token *tokens)
 {
-	t_cmd	*cmds;
+	t_cmd	*commands;
 
-	cmds = alloc_cmd(tokens);
-	if (!cmds)
+	commands = alloc_cmd(tokens);
+	if (!commands)
 		return (parsing_err(MEM_ERR, "creating command table"), NULL);
-	args_to_table(tokens, cmds);
+	args_to_table(tokens, commands);
 	alter_tkn(&tokens);
-	redir_to_table(tokens, cmds);
-	return (cmds);
+	redir_to_table(tokens, commands);
+	return (commands);
 }

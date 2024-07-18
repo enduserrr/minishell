@@ -6,12 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:33:34 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 18:42:30 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 10:44:29 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incs/tokens.h"
-#include "../../../libft/incs/libft.h"
+#include "../../incs/tokens.h"
 
 static char *create_user_path(const char *username)
 {
@@ -100,7 +99,7 @@ static t_token	*rm_token(t_token **top, t_token *remove)
 char	expand_tkns(int status, t_token **tokens)
 {
 	t_token	*tkn;
-	char		return_val;
+	char	return_val;
 
 	tkn = *tokens;
 	while (tkn)

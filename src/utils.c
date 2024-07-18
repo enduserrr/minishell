@@ -6,17 +6,16 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 19:11:42 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 11:05:33 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/tokens.h"
+#include "../incs/tokens.h"
 
 /**
  * @brief   ssize_t range from -1 to SIZE_MAX
  *          Like size_t plus range for return failure.
 */
-
 char	*ft_strcpy(char *dst, const char *src)
 {
 	int	i;

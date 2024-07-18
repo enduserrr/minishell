@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:42:53 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 18:29:15 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 10:19:51 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incs/tokens.h"
+#include "../../incs/tokens.h"
 
 size_t  unquoted_char(char *s, const char *chars, const char *quotes)
 {

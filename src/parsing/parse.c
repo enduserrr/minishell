@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 18:48:45 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 11:54:17 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incs/tokens.h"
+#include "../../incs/tokens.h"
 
 static void remove_quotes(t_token *tokens)
 {
