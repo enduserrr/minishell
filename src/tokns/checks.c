@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:18:25 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/18 11:54:10 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 15:06:24 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ static char *check_redirs(t_token *tokens)
             && tokens->next->id & OPERATOR)
             return (tokens->next->content);
         if (tokens->id == IN_REDIR)
+            tokens->next->id = IN_FILE;
+        else if (tokens->id == OUT_REDIR)
             tokens->next->id = OUT_FILE;
-        if (tokens->id == OUT_A_REDIR)
+        else if (tokens->id == OUT_A_REDIR)
             tokens->next->id = OUT_A_FILE;
         else if (tokens->id == HEREDOC)
 			tokens->next->id = HEREDOC_EOF;

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/18 11:05:33 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 15:00:16 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,14 @@ static void write_err(char *s, char *context)
     j = 0;
 	while (s[i])
 		i++;
-    if (context[j])
+	write(2, "Error: ", 7);
+	write(2, s, i);
+	if (context[j])
 	{
         while (context[j])
             j++;
+		write(2, context, j);
 	}
-	write(2, "Error: ", 7);
-	write(2, s, i);
-    write(2, " ", 1);
-    write(2, context, j);
 	write(2, "\n", 1);
 }
 
@@ -63,9 +62,9 @@ static int	error_case(int err, char *context)
 	if (err == ERRNO_ERR)
 		return (perror(context), errno);
 	if (err == MEM_ERR)
-		return (write_err("memory allocation failed while %s", context), err);
+		return (write_err("memory allocation failed while ", context), err);
 	if (err == TKN_SYNTAX_ERR)
-		return (write_err("syntax error near unexpected token `%s'", context)
+		return (write_err("syntax error near unexpected token: ", context)
 			, err);
 	if (err == AMBIG_REDIR_ERR)
 		return (write_err("%s: ambiguous redirect", context), 1);

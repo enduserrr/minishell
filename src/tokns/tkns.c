@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/18 11:36:35 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/18 14:52:17 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char    *get_next(char *s)
         temp++;
     if (!temp || !*temp)
         return (NULL);
-    printf("3.1:%s\n", s);
+    printf("3a:%s\n", s);
     tkn = temp;
     temp = &temp[unquoted_char(temp, " \n\t\r\v\f", "\'\"")];
     if (*temp)
