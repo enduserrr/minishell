@@ -55,6 +55,7 @@ typedef struct s_tools
 
 	char			**envp;
 	char			**new_envp;
+	char			unset_path; 	//0 path ok, 1 path has been unsetted
 	
 	t_env			*env_list;
 	t_hist			*history;
@@ -98,6 +99,7 @@ void 				free_history(t_tools *tools);
 
 // paths.c
 void 				create_paths(t_tools *tools);
+void 				delete_paths(t_tools *tools);
 
 // execution.c
 void 				execution(t_tools *tools);

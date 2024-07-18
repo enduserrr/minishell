@@ -81,7 +81,11 @@ void	unset_cmd(t_tools *tools)
 	while (tools->split_rl[i] != NULL)
 	{
 		if (validate_arg(tools->split_rl[i]) == 0)
+		{
+			if (ft_strncmp(tools->split_rl[i], "PATH", 4) == 0)
+				delete_paths(tools);
 			remove_variable(tools, i);
+		}
 		i++;
 	}
 }

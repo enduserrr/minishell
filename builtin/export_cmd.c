@@ -136,7 +136,11 @@ void	export_cmd(t_tools *tools)
 			tools->exit_code = 1;
 		}
 		else
+		{
 			add_new(tools, tools->split_rl[i]);
+			if (ft_strncmp(tools->split_rl[i], "PATH", 4) == 0)
+				create_paths(tools);
+		}
 		i++;
 	}
 }

@@ -35,10 +35,13 @@ void 	process_readline(t_tools *tools)
 {
 	if (tools->split_rl[0] == NULL)
 		return ;
-	if(is_builtin(tools) != 0)
-		return ;
-	execution(tools);
-	return  ;
+	if (pipes_in_prompt(tools) == 0)
+	{
+		if (is_builtin(tools) != 0)
+			return ; 
+		else
+			execution(tools);
+	}
 }
 
 void	run(char **envp)

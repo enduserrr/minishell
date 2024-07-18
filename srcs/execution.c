@@ -50,6 +50,13 @@ void execute_one_cmd(t_tools *tools, int i)
         if(execve(tools->valid_path, arg, NULL) != 0)
             perror("eitoimi\n");
     }
+    else 
+    {
+        printf("%s: command not found\n", arg[0]);
+        tools->exit_code = 127;
+        if (tools->pipe_amount > 0)
+            exit(tools->exit_code);
+    }
 }
 
 void simple_arg(t_tools *tools)

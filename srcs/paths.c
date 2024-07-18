@@ -12,6 +12,12 @@
 
 #include "../includes/minishell.h"
 
+void delete_paths(t_tools *tools)
+{
+    free_array(tools->paths);
+    tools->paths = NULL;
+
+}
 
 void create_paths(t_tools *tools)
 {
@@ -37,11 +43,15 @@ void create_paths(t_tools *tools)
  *      - splits PATH from env_list
  *      - splitted path list is needed for executing commands
  *      - array is stored to tools struct: tools->paths
- *  
- *  - check_access():
- *      - checks if command has valid path in path_list
- *      - 
- *
+ *      usage:
+ *          - creates path array in start of run() function 
+ * 
+ *  - delete_paths():
+ *      - deletes array that stores paths
+ * 
+ *      usage: 
+ *          - if command is "unset PATH" 
+ *          - 
  *
  *
  */

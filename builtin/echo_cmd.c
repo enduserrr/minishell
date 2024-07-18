@@ -12,6 +12,14 @@
 
 #include "../includes/minishell.h"
 
+void	exit_status(t_tools *tools, int i)
+{
+	//in own function because there might be more pieces to come....
+	//$?$? = 00, pas$?ka  = pas0ka 
+	(void)i;
+	printf("%d", tools->exit_code);
+}
+
 void	echo_cmd(t_tools *tools)
 {
 	int	i;
@@ -19,15 +27,20 @@ void	echo_cmd(t_tools *tools)
 
 	i = 1;
 	flag = 0;
-	if (tools->split_rl[1] != NULL && ft_strncmp(tools->split_rl[1], "-n",
-			2) == 0)
+	if (tools->split_rl[1] != NULL && 
+		ft_strncmp(tools->split_rl[1], "-n", 2) == 0)
 	{
 		flag = 1;
 		i++;
 	}
 	while (tools->split_rl[i])
 	{
-		printf("%s", tools->split_rl[i]);
+		if (i > 1)
+			printf(" ");
+		if (ft_strncmp(tools->split_rl[i], "$?", 2) == 0)
+			exit_status(tools, i);
+		else
+			printf("%s", tools->split_rl[i]);
 		i++;
 	}
 	if (flag == 0)
