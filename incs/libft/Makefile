@@ -6,7 +6,7 @@
 #    By: asalo <asalo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 14:37:45 by asalo             #+#    #+#              #
-#    Updated: 2024/07/17 12:38:52 by asalo            ###   ########.fr        #
+#    Updated: 2024/07/19 10:20:03 by asalo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS	= $(addprefix $(SRC_DIR)/is/, ft_isalnum.c ft_isalpha.c \
 		$(addprefix $(SRC_DIR)/str/, ft_split.c ft_strchr.c ft_strdup.c \
 			ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c \
 			ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c \
-			ft_substr.c ft_strcmp.c ft_strinsrt.c ft_strichr.c) \
+			ft_substr.c ft_strcmp.c ft_strinsrt.c ft_strichr.c ft_strcpy.c) \
 		$(addprefix $(SRC_DIR)/lst/, ft_lstadd_back.c \
 			ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
 			ft_lstiter.c ft_lstlast.c ft_lstnew.c \
@@ -52,13 +52,19 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			@ar -rcs $(NAME) $(OBJS)
-
+			@echo "obj dir created"
+			@echo "*.o files created"
+			@echo "libft.a created."
 clean:
 			@$(RM) $(OBJS)
 			@$(RM) -r $(OBJ_DIR)
+			@echo "obj dir removed"
+			@echo "*.o files removed"
 
 fclean:		clean
 			@$(RM) $(NAME)
+			@echo "libft.a removed."
+			@echo "..."
 
 re:			fclean all
 
