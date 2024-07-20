@@ -6,11 +6,49 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:42:53 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/18 10:19:51 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 14:26:34 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/tokens.h"
+
+t_token *put_tkn(t_token *tokens, const char *title)
+{
+    if (title)
+        printf("\e[1;33m%s\e[0m\n", title);
+    if (!tokens)
+        printf("No tokens\n");
+    while (tokens)
+    {
+        if (tokens->id == WORD)
+            printf("[WORD] ");
+        else if (tokens->id == IN_FILE)
+            printf("[IN_FILE] ");
+        else if (tokens->id == OUT_FILE)
+            printf("[OUT_FILE] ");
+		else if (tokens->id == HEREDOC_EOF)
+			printf("[HEREDOC_EOF] ");
+		else if (tokens->id == OUT_A_FILE)
+			printf("[OUT_A_FILE] ");
+		else if (tokens->id == COMMAND)
+			printf("[COMMAND] ");
+		else if (tokens->id == OPERATOR)
+			printf("[OPERATOR] ");
+		else if (tokens->id == IN_REDIR)
+			printf("[IN_RED] ");
+		else if (tokens->id == OUT_REDIR)
+			printf("[OUT_RED] ");
+		else if (tokens->id == HEREDOC)
+			printf("[HEREDOC] ");
+		else if (tokens->id == OUT_A_REDIR)
+			printf("[OUT_A_RED] ");
+		else if (tokens->id == PIPE)
+			printf("[PIPE] ");
+		printf("[%s]\n", tokens->content);
+		tokens = tokens->next;
+	}
+	return (tokens);
+}
 
 size_t  unquoted_char(char *s, const char *chars, const char *quotes)
 {
@@ -72,42 +110,4 @@ char    split_at_operators(t_token *tokens)
         tokens = tokens->next;
     }
     return (RETURN_SUCCESS);
-}
-
-t_token *put_tkn(t_token *tokens, const char *title)
-{
-    if (title)
-        printf("\e[1;33m%s\e[0m\n", title);
-    if (!tokens)
-        printf("No tokens\n");
-    while (tokens)
-    {
-        if (tokens->id == WORD)
-            printf("[WORD] ");
-        else if (tokens->id == IN_FILE)
-            printf("[IN_FILE] ");
-        else if (tokens->id == OUT_FILE)
-            printf("[OUT_FILE] ");
-		else if (tokens->id == HEREDOC_EOF)
-			printf("[HEREDOC_EOF] ");
-		else if (tokens->id == OUT_A_FILE)
-			printf("[OUT_A_FILE] ");
-		else if (tokens->id == COMMAND)
-			printf("[COMMAND] ");
-		else if (tokens->id == OPERATOR)
-			printf("[OPERATOR] ");
-		else if (tokens->id == IN_REDIR)
-			printf("[IN_RED] ");
-		else if (tokens->id == OUT_REDIR)
-			printf("[OUT_RED] ");
-		else if (tokens->id == HEREDOC)
-			printf("[HEREDOC] ");
-		else if (tokens->id == OUT_A_REDIR)
-			printf("[OUT_A_RED] ");
-		else if (tokens->id == PIPE)
-			printf("[PIPE] ");
-		printf("[%s]\n", tokens->content);
-		tokens = tokens->next;
-	}
-	return (tokens);
 }

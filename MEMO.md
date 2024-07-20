@@ -1,7 +1,8 @@
 # MEMO
 
 ## NEXT UP:
-* Check parsing funcs and correct references
+* Review 2 other parse implementations
+* Fix memory leaks & extra frees
 * Prototype funcs needed from main to parse
 * Signal handling
 * Briefs for parsing funcs and a recap
@@ -63,7 +64,7 @@
   * Can contain commands, variable or any text
   * No worrying about special characters
 ### HEREDOC_EOF
-  * Heredocuments end of file
+  * Heredocs end of file
 ### OUT_A_RED (>>)
   * Redirects the output to append it to target file or to create it if it doesn't exist
 ### OUT_A_FILE
@@ -98,3 +99,17 @@ When working on the project start by fetching remote branches, creating them loc
 * CCP Policy (rewrite history):
   * git reset --hard <commit_hash> /reset to a specified older commit
   * git push origin <brach_name> --force /force push it to current branch NOT REVERSABLE (prolly).
+
+  		@echo "------------------"
+			@echo "obj dir removed"
+			@echo "*.o files removed"
+			@echo "------------------"
+
+      @make fclean -C incs/libft
+			@echo "------------------"
+			@echo "minishell removed"
+			@echo "------------------"
+
+      @echo "------------------"
+			@echo "minishell created"
+			@echo "------------------"

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 16:47:19 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 12:30:55 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 12:48:51 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ char	*ft_itoa(int n)
 	long int	len;
 
 	len = ft_len(n);
-	res = malloc(sizeof(char) * (len + 1));
+	// res = malloc(sizeof(char) * (len + 1));
+	res = ft_calloc(len + 1, sizeof(char));
 	if (!(res))
 		return (0);
 	res[len--] = '\0';

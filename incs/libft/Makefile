@@ -6,7 +6,7 @@
 #    By: asalo <asalo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 14:37:45 by asalo             #+#    #+#              #
-#    Updated: 2024/07/19 10:20:03 by asalo            ###   ########.fr        #
+#    Updated: 2024/07/19 13:06:58 by asalo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,19 +52,13 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			@ar -rcs $(NAME) $(OBJS)
-			@echo "obj dir created"
-			@echo "*.o files created"
-			@echo "libft.a created."
+
 clean:
 			@$(RM) $(OBJS)
 			@$(RM) -r $(OBJ_DIR)
-			@echo "obj dir removed"
-			@echo "*.o files removed"
 
 fclean:		clean
 			@$(RM) $(NAME)
-			@echo "libft.a removed."
-			@echo "..."
 
 re:			fclean all
 

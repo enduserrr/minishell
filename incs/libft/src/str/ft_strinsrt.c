@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:19:26 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/17 12:40:06 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 12:45:33 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	*ft_strinsrt(char **ret, const char *insert, size_t start, size_t len)
 	if (len > ft_strlen(insert))
 		len = ft_strlen(insert);
 	new_len = ret_len + len;
-	temp = (char *)malloc(new_len + 1);
+	// temp = (char *)malloc(new_len + 1);
+	temp = ft_calloc(new_len + 1, sizeof(char));
 	if (!temp)
 		return ((void *)1);
 	ft_memcpy(temp, *ret, start);

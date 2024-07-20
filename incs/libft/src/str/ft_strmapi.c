@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:15:26 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/16 17:28:33 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 12:47:43 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 	if (!s || !f)
 		return (0);
 	len = ft_strlen(s);
-	newstr = (char *)malloc(sizeof(char) * (len + 1));
+	// newstr = (char *)malloc(sizeof(char) * (len + 1));
+	newstr = ft_calloc(len + 1, sizeof(char));
 	if (!newstr)
 		return (0);
 	while (i < len)

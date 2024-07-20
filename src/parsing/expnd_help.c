@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:33:34 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/18 12:27:02 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 13:30:08 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static char *create_user_path(const char *username)
 		return (NULL);
 	prefix = "/Users/";
 	len = ft_strlen(username) + ft_strlen(prefix);
-	path = malloc((sizeof(char) * (len + 1)));
+	// path = malloc((sizeof(char) * (len + 1)));
+	path = ft_calloc(len + 1, sizeof(char));
     if (!path)
         return (NULL);
     ft_memcpy(path, prefix, ft_strlen(prefix));
@@ -50,7 +51,7 @@ static void	tilde_expander(char **s, size_t i)
 	else if ((*s)[i + 1])
 	{
 		end = set_char(*s + i, '\0', ft_strichr(*s + i, '/'));
-		path = create_user_path(*s + i + 1);
+		path = create_user_path(*s + i + 1);/*CHECK*/
 		end = set_char(*s + i, '/', end);
 		if (path && !stat(path, &stats) && S_ISDIR(stats.st_mode))
 			ft_strinsrt(s, path, i, end);

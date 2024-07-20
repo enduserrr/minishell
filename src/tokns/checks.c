@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:18:25 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/18 15:06:24 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 12:08:42 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ static  void    check_operators(t_token *tokens)
 {
     while (tokens)
     {
-        if (ft_strcmp(tokens->content, "<"))
+        if (!ft_strcmp(tokens->content, "<"))
             tokens->id = IN_REDIR;
-        if (ft_strcmp(tokens->content, ">"))
+        else if (!ft_strcmp(tokens->content, ">"))
             tokens->id = OUT_REDIR;
-        if (ft_strcmp(tokens->content, "<<"))
+        else if (!ft_strcmp(tokens->content, "<<"))
             tokens->id = HEREDOC;
-        if (ft_strcmp(tokens->content, ">>"))
+        else if (!ft_strcmp(tokens->content, ">>"))
             tokens->id = OUT_A_REDIR;
-        if (ft_strcmp(tokens->content, "|"))
+        else if (!ft_strcmp(tokens->content, "|"))
             tokens->id = PIPE;
         tokens = tokens->next;
     }

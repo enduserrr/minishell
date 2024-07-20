@@ -14,24 +14,35 @@ CC		=	cc
 FLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -f
 
+GREY_BG	= \033[48;5;8m
+GREY_T	= \33[90m
+BLACK_T	= \33[30m
+WHITE_T	= \033[97m
+RESET 	= \033[0m
+
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 				@mkdir -p $(dir $@)
 				@$(CC) $(FLAGS) $(INCS) -c $< -o $@
+				 @echo "$(GREY_T)Compiled $< into $@$(RESET)"
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-			@make -C incs/libft
+			@make -C incs/libft -s
 			@$(CC) $(OBJ) $(LIBFT) -o $(NAME)
+			@echo "$(GREY_BG)$(WHITE_T)$(NAME) built successfully$(RESET)"
+
 
 clean:
-			$(RM) $(OBJ)
-			$(RM) -r $(OBJ_DIR)
-			@make clean -C incs/libft
+			@$(RM) $(OBJ)
+			@$(RM) -r $(OBJ_DIR)
+			@make clean -C incs/libft -s 
+			@echo "$(GREY_BG)$(BLACK_T)*.o files & obj dir removed$(RESET)"
 
 fclean:		clean
 			@$(RM) $(NAME)
-			@make fclean -C incs/libft
+			@make fclean -C incs/libft -s
+			@echo "$(GREY_BG)$(BLACK_T)all build artifacts removed$(RESET)"
 
 re:			fclean all
 

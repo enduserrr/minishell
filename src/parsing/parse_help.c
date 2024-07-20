@@ -6,17 +6,12 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:50 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/18 10:51:28 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 13:37:54 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/tokens.h"
 
-/**
- * @brief "\e[1;33m" => escape (yellow text)
- *          Non printing escape sequence with color.
- *          ANSI escape sequences & printf escape sequenes.
-*/
 void	put_cmd(t_cmd *commands)
 {
 	size_t	i;
@@ -44,7 +39,8 @@ static t_cmd	*new_cmd(size_t av_count)
 {
 	t_cmd	*new;
 
-	new = malloc(sizeof(t_cmd));
+	// new = malloc(sizeof(t_cmd));
+	new = ft_calloc(1, sizeof(t_cmd));
 	if (!new)
 		return (NULL);
 	new->path = NULL;
@@ -84,22 +80,36 @@ void	free_cmds(t_cmd *commands)
     }
 }
 
+static size_t	count_av_tkns(t_token *tokens)
+{
+	size_t	i;
+
+	i = 0;
+	while (tokens && tokens->id != PIPE)
+	{
+		if (tokens->id == COMMAND || tokens->id == WORD)
+			i++;
+		tokens = tokens->next;
+	}
+	return (i);
+}
+
 t_cmd	*alloc_cmd(t_token *tokens)
 {
 	t_cmd	*commands;
 	t_cmd	*last;
-	t_token	*tmp;
-	size_t	count;
+	// t_token	*tmp;
+	// size_t	count;
 
-	count = 0;
-	tmp = tokens;
-	while (tmp && tmp->id != PIPE)
-	{
-		if (tmp->id == COMMAND || tmp->id == WORD)
-			count++;
-		tmp = tmp->next;
-	}
-	commands = new_cmd(count);
+	// count = count_av_tkns(tokens);
+	// tmp = tokens;
+	// while (tmp && tmp->id != PIPE)
+	// {
+	// 	if (tmp->id == COMMAND || tmp->id == WORD)
+	// 		count++;
+	// 	tmp = tmp->next;
+	// }
+	commands = new_cmd(count_av_tkns(tokens));
 	last = commands;
 	while (last)
 	{
@@ -108,7 +118,7 @@ t_cmd	*alloc_cmd(t_token *tokens)
 		if (!tokens)
 			return (commands);
 		tokens = tokens->next;
-		last->next = new_cmd(count);
+		last->next = new_cmd(count_av_tkns(tokens));
 		last = last->next;
 	}
 	return (free_cmds(commands), NULL);

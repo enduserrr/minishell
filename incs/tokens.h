@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:49:51 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/18 10:48:21 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 14:15:18 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char	ft_expand(char **s, int status, char id);
 char	expand_tkns(int status, t_token **tokens);
 
 /* Utils */
+size_t	ft_strplen(const char *s);
 int		parsing_err(int err, char *context);
 ssize_t set_char(char *s, char c, ssize_t i);
 char	*ft_strcpy(char *dst, const char *src);

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/18 15:00:16 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 14:15:03 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,15 @@
  * @brief   ssize_t range from -1 to SIZE_MAX
  *          Like size_t plus range for return failure.
 */
-char	*ft_strcpy(char *dst, const char *src)
+size_t	ft_strplen(const char *s)
 {
-	int	i;
+	size_t	i;
 
-	i = -1;
-	while (src[++i])
-		dst[i] = src[i];
-	dst[i] = '\0';
-	return (dst);
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
 }
-
 ssize_t set_char(char *s, char c, ssize_t i)
 {
     if (c == '/' && i < 0)

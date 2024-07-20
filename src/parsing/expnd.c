@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:20:32 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/18 10:20:39 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 14:15:36 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static size_t	env_len(char *s)
 	return (len);
 }
 
-static char	*validate_env(char *var, size_t len, int status)
+static char	*check_env(char *var, size_t len, int status)
 {
 	char	temp;
 	char	*env;
@@ -99,15 +99,15 @@ char	ft_expand(char **s, int status, char id)
 	while ((*s)[env])
 	{
 		len = env_len(*s + env);
-		val = validate_env(*s + env + 1, len - 1, status);
+		val = check_env(*s + env + 1, len - 1, status);
 		if (!val && env == 0 && len == ft_strlen(*s))
 		{
 			if (id == IN_FILE || id == OUT_FILE || id == OUT_A_FILE)
 				return (parsing_err(AMBIG_REDIR_ERR, *s), RETURN_FAILURE);
 			return (RMV);
 		}
-		if (ft_strinsrt(s, val, env, len) == (void *)0)/*if val inserted succesfully*/
-			env += ft_strlen(val);/*add val len to env len variable*/
+		if (ft_strinsrt(s, val, env, len))
+			env += ft_strplen(val);
 		free(val);
 		env = next_env(*s, env, id == HEREDOC);
 	}
