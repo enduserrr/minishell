@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:33:34 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 13:30:08 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/tokens.h"
+#include "../../incs/parse.h"
 
 static char *create_user_path(const char *username)
 {
@@ -22,7 +22,6 @@ static char *create_user_path(const char *username)
 		return (NULL);
 	prefix = "/Users/";
 	len = ft_strlen(username) + ft_strlen(prefix);
-	// path = malloc((sizeof(char) * (len + 1)));
 	path = ft_calloc(len + 1, sizeof(char));
     if (!path)
         return (NULL);

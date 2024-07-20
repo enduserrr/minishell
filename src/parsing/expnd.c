@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:20:32 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 14:15:36 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/tokens.h"
+#include "../../incs/parse.h"
 
 static size_t	next_env(char *str, size_t env, char is_heredoc)
 {

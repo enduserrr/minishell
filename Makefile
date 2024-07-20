@@ -3,13 +3,13 @@ NAME	=	minishell
 SRC_DIR	=	src
 OBJ_DIR	=	obj
 LIBFT	=	incs/libft/libft.a
-SRCS	=	$(addprefix $(SRC_DIR)/tokns/, checks.c tkn_helpers.c tkns.c) \
+SRCS	=	$(addprefix $(SRC_DIR)/tokenizing/, checks.c tkn_helpers.c tkns.c) \
 			$(addprefix $(SRC_DIR)/parsing/, cmds.c expnd_help.c parse_help.c \
 				expnd.c parse.c) \
 			$(addprefix $(SRC_DIR)/, utils.c main.c)
 OBJ		=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS:.c=.o))
 
-INCS	=	-I incs/tokens.h -I incs/libft/incs
+INCS	=	-I incs/parse.h -I incs/libft/incs
 CC		=	cc
 FLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -f

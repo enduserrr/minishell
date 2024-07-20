@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:42:53 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 14:26:34 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/tokens.h"
+#include "../../incs/parse.h"
 
 t_token *put_tkn(t_token *tokens, const char *title)
 {

@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:50 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 13:37:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/tokens.h"
+#include "../../incs/parse.h"
 
 void	put_cmd(t_cmd *commands)
 {
@@ -39,7 +39,6 @@ static t_cmd	*new_cmd(size_t av_count)
 {
 	t_cmd	*new;
 
-	// new = malloc(sizeof(t_cmd));
 	new = ft_calloc(1, sizeof(t_cmd));
 	if (!new)
 		return (NULL);
@@ -98,17 +97,7 @@ t_cmd	*alloc_cmd(t_token *tokens)
 {
 	t_cmd	*commands;
 	t_cmd	*last;
-	// t_token	*tmp;
-	// size_t	count;
 
-	// count = count_av_tkns(tokens);
-	// tmp = tokens;
-	// while (tmp && tmp->id != PIPE)
-	// {
-	// 	if (tmp->id == COMMAND || tmp->id == WORD)
-	// 		count++;
-	// 	tmp = tmp->next;
-	// }
 	commands = new_cmd(count_av_tkns(tokens));
 	last = commands;
 	while (last)
