@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:18:25 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/21 11:38:45 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/21 12:54:26 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ int check_tokens(t_token *tokens)
     check_operators(tokens);
     context = check_redirs(tokens);
     if (context)
-        return (parsing_err(TKN_SYNTAX_ERR, context));
+        return (set_err(TKN_SYNTAX_ERR, context));
     eval_commands(tokens);
     context = check_syntax(tokens);
     if (context)
-        return (parsing_err(TKN_SYNTAX_ERR, context));
+        return (set_err(TKN_SYNTAX_ERR, context));
     return (RETURN_SUCCESS);
 }

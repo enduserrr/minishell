@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:20:32 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/21 12:54:21 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	ft_expand(char **s, int status, char id)
 		if (!val && env == 0 && len == ft_strlen(*s))
 		{
 			if (id == IN_FILE || id == OUT_FILE || id == OUT_A_FILE)
-				return (parsing_err(AMBIG_REDIR_ERR, *s), RETURN_FAILURE);
+				return (set_err(AMBIG_REDIR_ERR, *s), RETURN_FAILURE);
 			return (RMV);
 		}
 		if (ft_strinsrt(s, val, env, len))

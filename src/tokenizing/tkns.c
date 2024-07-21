@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/21 10:48:03 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/21 12:54:33 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ t_token	*new_token(char *content)
 	t_token	*new;
 
 	if (!content)
-		return (parsing_err(MEM_ERR, "creating token content"), NULL);
+		return (set_err(MEM_ERR, "creating token content"), NULL);
     new = ft_calloc(1, sizeof(t_token));
 	if (!new)
-		return (parsing_err(MEM_ERR, "creating token"), free(content), NULL);
+		return (set_err(MEM_ERR, "creating token"), free(content), NULL);
 	new->id = WORD;
 	new->content = content;
 	new->next = NULL;

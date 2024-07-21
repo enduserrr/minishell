@@ -6,34 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/21 13:02:34 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/parse.h"
-
-/**
- * @brief   ssize_t range from -1 to SIZE_MAX
- *          Like size_t plus range for return failure.
-*/
-size_t	ft_strplen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
-}
-ssize_t set_char(char *s, char c, ssize_t i)
-{
-    if (c == '/' && i < 0)
-		return (ft_strlen(s));
-	if (!s || i < 0 || i > (ssize_t)ft_strlen(s))
-		return (-1);
-	s[i] = c;
-	return (i);
-}
 
 static void write_err(char *s, char *context)
 {
@@ -77,7 +54,7 @@ static int	error_case(int err, char *context)
 	return (0);
 }
 
-int	parsing_err(int err, char *context)
+int	set_err(int err, char *context)
 {
 	int	i;
 

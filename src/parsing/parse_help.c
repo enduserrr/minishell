@@ -6,11 +6,25 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:50 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/21 11:39:20 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/21 13:02:18 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
+
+static size_t	count_av_tkns(t_token *tokens)
+{
+	size_t	i;
+
+	i = 0;
+	while (tokens && tokens->id != PIPE)
+	{
+		if (tokens->id == COMMAND || tokens->id == WORD)
+			i++;
+		tokens = tokens->next;
+	}
+	return (i);
+}
 
 static t_cmd	*new_cmd(size_t av_count)
 {
@@ -31,6 +45,16 @@ static t_cmd	*new_cmd(size_t av_count)
 	if (av_count && !new->av)
 		return (free(new), NULL);
 	return (new);
+}
+
+ssize_t set_char(char *s, char c, ssize_t i)
+{
+    if (c == '/' && i < 0)
+		return (ft_strlen(s));
+	if (!s || i < 0 || i > (ssize_t)ft_strlen(s))
+		return (-1);
+	s[i] = c;
+	return (i);
 }
 
 void	free_cmds(t_cmd *commands)
@@ -54,20 +78,6 @@ void	free_cmds(t_cmd *commands)
         free(commands);
         commands = tmp;
     }
-}
-
-static size_t	count_av_tkns(t_token *tokens)
-{
-	size_t	i;
-
-	i = 0;
-	while (tokens && tokens->id != PIPE)
-	{
-		if (tokens->id == COMMAND || tokens->id == WORD)
-			i++;
-		tokens = tokens->next;
-	}
-	return (i);
 }
 
 t_cmd	*alloc_cmd(t_token *tokens)
