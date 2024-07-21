@@ -6,34 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:50 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/21 11:39:20 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
-
-void	put_cmd(t_cmd *commands)
-{
-	size_t	i;
-
-	printf("\e[1;33mCOMMANDS\e[0m\n");
-	if (!commands)
-		printf("No commands\n");
-	while (commands)
-	{
-		printf("PATH: %s\n", commands->path);
-		printf("ARGS%d:", !!commands->av);
-		i = 0;
-		while (commands->av && commands->av[i])
-			printf("[%s]", commands->av[i++]);
-		printf("\nREDIRECTIONS:\n");
-		put_tkn(commands->io_redir, 0);
-		printf("fd_in: %d\nfd_out: %d\n", commands->fd_in, commands->fd_out);
-		commands = commands->next;
-		if (commands)
-			printf("\e[0;33m↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓\e[0m\n");
-	}
-}
 
 static t_cmd	*new_cmd(size_t av_count)
 {

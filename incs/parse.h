@@ -22,8 +22,9 @@
 # include <readline/readline.h>
 # include <errno.h>
 # include <sys/stat.h>
+# include <signal.h>
 
-/*'remove' flag/verbose*/
+/*'remove' flag*/
 # define RMV -1
 
 typedef enum e_return_state
@@ -35,7 +36,7 @@ typedef enum e_return_state
 /**
  * @brief	Enum underlying type usually signed int.
 */
-typedef enum    e_errors
+typedef enum e_errors
 {
     ERRNO_ERR,
     UNSET_ERR = -1,
@@ -52,17 +53,17 @@ typedef enum    e_errors
 */
 typedef enum e_tkn_id /*Re-organice*/
 {
-	WORD = 0b00000001,/*1*/
-	IN_FILE = 0b00000101,/*5*/
-	OUT_FILE = 0b00001001,/*9*/
-	COMMAND = 0b01000001,/**/
-	OPERATOR = 0b00000010,/**/
+	WORD = 0b00000001,
+	IN_FILE = 0b00000101,
+	OUT_FILE = 0b00001001,
+	COMMAND = 0b01000001,
+	OPERATOR = 0b00000010,
 	IN_REDIR = 0b00000110,/* < */
 	OUT_REDIR = 0b00001010,/* > */
 	HEREDOC = 0b00010010,/* << */
 	HEREDOC_EOF = 0b00010001,/*17*/
 	OUT_A_REDIR = 0b00100010,/* >> */
-	OUT_A_FILE = 0b00100001,/**/
+	OUT_A_FILE = 0b00100001,
 	PIPE = 0b01000010/* | */
 }   t_tkn_id;
 
@@ -115,7 +116,7 @@ t_cmd	*alloc_cmd(t_token *tokens);
 t_cmd	*create_cmd_table(t_token *tokens);
 void    eval_commands(t_token *tokens);
 void 	free_cmds(t_cmd *cmds);
-void	put_cmd(t_cmd *cmds);
+void	put_cmd(t_cmd *commands);
 char	ft_expand(char **s, int status, char id);
 char	expand_tkns(int status, t_token **tokens);
 

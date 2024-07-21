@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/21 10:48:03 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ void	free_tokens(t_token *tokens)
 	}
 }
 
+t_token	*new_token(char *content)
+{
+	t_token	*new;
+
+	if (!content)
+		return (parsing_err(MEM_ERR, "creating token content"), NULL);
+    new = ft_calloc(1, sizeof(t_token));
+	if (!new)
+		return (parsing_err(MEM_ERR, "creating token"), free(content), NULL);
+	new->id = WORD;
+	new->content = content;
+	new->next = NULL;
+	return (new);
+}
+
 static char    *get_next(char *s)
 {
     static char *temp;
@@ -46,21 +61,6 @@ static char    *get_next(char *s)
     if (*temp)
         *temp++ = '\0';
     return (tkn);
-}
-
-t_token	*new_token(char *content)
-{
-	t_token	*new;
-
-	if (!content)
-		return (parsing_err(MEM_ERR, "creating token content"), NULL);
-    new = ft_calloc(1, sizeof(t_token));
-	if (!new)
-		return (parsing_err(MEM_ERR, "creating token"), free(content), NULL);
-	new->id = WORD;
-	new->content = content;
-	new->next = NULL;
-	return (new);
 }
 
 static t_token    *get_tkns(char *s)

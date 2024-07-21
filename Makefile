@@ -30,7 +30,7 @@ all:	$(NAME)
 $(NAME):	$(OBJ)
 			@make -C incs/libft -s
 			@$(CC) $(OBJ) $(LIBFT) -o $(NAME)
-			@echo "$(GREY_BG)$(WHITE_T)$(NAME) built successfully$(RESET)"
+			@echo "$(GREY_BG)$(WHITE_T)MINISHELL BUILT SUCCESFULLY$(RESET)"
 
 
 clean:

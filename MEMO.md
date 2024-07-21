@@ -99,17 +99,3 @@ When working on the project start by fetching remote branches, creating them loc
 * CCP Policy (rewrite history):
   * git reset --hard <commit_hash> /reset to a specified older commit
   * git push origin <brach_name> --force /force push it to current branch NOT REVERSABLE (prolly).
-
-  		@echo "------------------"
-			@echo "obj dir removed"
-			@echo "*.o files removed"
-			@echo "------------------"
-
-      @make fclean -C incs/libft
-			@echo "------------------"
-			@echo "minishell removed"
-			@echo "------------------"
-
-      @echo "------------------"
-			@echo "minishell created"
-			@echo "------------------"

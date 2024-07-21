@@ -6,13 +6,16 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:21:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/21 11:47:20 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
 
-
+/**
+ * @brief	Checks command count and sets command into token content.
+ *			If it's a pipe, skips ahead.
+*/
 static void	args_to_table(t_token *tokens, t_cmd *commands)
 {
 	size_t	av_count;
@@ -33,11 +36,11 @@ static void	args_to_table(t_token *tokens, t_cmd *commands)
 
 static void	alter_tkn(t_token **tokens)
 {
-	t_token	*prev;
+	t_token	*temp;
 	t_token	*tkn;
 	t_token	*next;
 
-	prev = NULL;
+	temp = NULL;
 	tkn = *tokens;
 	while (tkn)
 	{
@@ -48,37 +51,37 @@ static void	alter_tkn(t_token **tokens)
 			|| tkn->id == COMMAND || tkn->id == WORD)
 		{
 			free(tkn);
-			if (prev)
-				prev->next = next;
+			if (temp)
+				temp->next = next;
 			else
 				*tokens = next;
 		}
 		else
-			prev = tkn;
+			temp = tkn;
 		tkn = next;
 	}
 }
 
-static void	redir_to_table(t_token *tokens, t_cmd *commands)
+static void	set_redir(t_token *tokens, t_cmd *commands)
 {
-	t_token	*prev;
+	t_token	*temp;
 	t_token	*next;
 
-	prev = NULL;
+	temp = NULL;
 	while (tokens)
 	{
 		if (tokens->id != PIPE)
 			commands->io_redir = tokens;
 		while (tokens && tokens->id != PIPE)
 		{
-			prev = tokens;
+			temp = tokens;
 			tokens = tokens->next;
 		}
 		if (!tokens)
 			return ;
 		commands = commands->next;
-		if (prev)
-			prev->next = NULL;
+		if (temp)
+			temp->next = NULL;
 		next = tokens->next;
 		free(tokens->content);
 		free(tokens);
@@ -95,6 +98,6 @@ t_cmd	*create_cmd_table(t_token *tokens)
 		return (parsing_err(MEM_ERR, "creating command table"), NULL);
 	args_to_table(tokens, commands);
 	alter_tkn(&tokens);
-	redir_to_table(tokens, commands);
+	set_redir(tokens, commands);
 	return (commands);
 }
