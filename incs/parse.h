@@ -22,7 +22,6 @@
 # include <readline/readline.h>
 # include <errno.h>
 # include <sys/stat.h>
-# include <signal.h>
 
 /*'remove' flag*/
 # define RMV -1
@@ -122,7 +121,7 @@ char	expand_tkns(int status, t_token **tokens);
 
 /* Utils */
 size_t	ft_strplen(const char *s);
-int		parsing_err(int err, char *context);
+int		set_err(int err, char *context);
 ssize_t set_char(char *s, char c, ssize_t i);
 char	*ft_strcpy(char *dst, const char *src);
 
