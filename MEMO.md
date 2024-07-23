@@ -1,8 +1,7 @@
 # MEMO
 
 ## NEXT UP:
-* Briefs for parsing funcs and a recap
-* Map out which functions already exist and which are needed before readline, tkns & parsing
+* Map funcs needed before tokens (and which already exists)
 * Map out signal handling into relevant funcs
 
 ## APPROX EXEC ORDER:
@@ -41,36 +40,6 @@
 ### 7. Execute(int status, t_cmd *commands)
   * Execute with one builtin or creates redirections -> pipe handling -> executing cmd's
   * Free's cmd's and returns return value
-  * 
-
-## USEFUL FUNCTIONS
-### Asprintf 
-`int asprintf(char **strp, const char *fmt, ...);`
-* Allocates sufficient memory for a formatted string with a terminating null character in the end which is to be stored to the buffer given to it as an argument
-* Return nb of the bytes allocated or -1 if an error occured
-* Buffer must be free'd manually.
-
-### String Insert
-`char *str_insert(char *s, char *c, size_t start, size_t len);`
-* Insert string into an other string starting from specified location for the specified length.
-* Allocates space needed for the new longer string
-
-## About token id's
-(“2>&1” redirects STDERR to STDOUT. Since “2>1” means “redirect STDERR to file 1,” “&1” is added to refer to STDOUT, not a file.)
-### HEREDOC
-  * Means heredocument and is a way to include a block of text within bash script
-  * Can contain commands, variable or any text
-  * No worrying about special characters
-### HEREDOC_EOF
-  * Heredocs end of file
-### OUT_A_RED (>>)
-  * Redirects the output to append it to target file or to create it if it doesn't exist
-### OUT_A_FILE
-  * The file to append the redirected output
-
-## DEFINITIONS
-### Verbose
-  *
 
 ## Useful commands
 ### GIT BRANCH
