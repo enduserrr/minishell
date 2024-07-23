@@ -106,6 +106,9 @@ typedef enum e_builtin_id
 	B_ENV = 0b00001000,/*8*/
 }	t_builtin_id;
 
+
+char	*get_path(char *name);
+
 /*Token*/
 t_token *ft_tokens(int *status, char *s);
 t_token	*new_token(char *content);
