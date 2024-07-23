@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expnd_help.c                                       :+:      :+:    :+:   */
+/*   expand_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:33:34 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/23 11:32:27 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
 
+/**
+ * @brief	Makes a filepath for the given username.
+ */
 static char *create_user_path(const char *username)
 {
     const char	*prefix;
@@ -31,6 +34,11 @@ static char *create_user_path(const char *username)
     return (path);
 }
 
+/**
+ * @brief	Expands tilde ('~') in a str (holding corresponding dir).
+ *			Checks for commands or username followed by tilde
+ *			to add correct env var or to create user home dir path.
+ */
 static void	tilde_expander(char **s, size_t i)
 {
 	struct stat	stats;
@@ -58,6 +66,10 @@ static void	tilde_expander(char **s, size_t i)
 	}
 }
 
+/**
+ * @brief	Checks if a str has an assignment (VAR=~).
+ *			If yes, calls tilde_expander to replace it with correct path.
+ */
 static void	assignement_tilde(char **s)
 {
 	size_t	i;
@@ -70,6 +82,10 @@ static void	assignement_tilde(char **s)
 		tilde_expander(s, i + 1);
 }
 
+/**
+ * @brief	Removes specified token from t_token linked list
+ *			and removes the spaces that was allocated to it.
+ */
 static t_token	*rm_token(t_token **top, t_token *remove)
 {
 	t_token	*current;
@@ -96,7 +112,11 @@ static t_token	*rm_token(t_token **top, t_token *remove)
 	return (prev->next);
 }
 
-char	expand_tkns(int status, t_token **tokens)
+/**
+ * @brief	Iterates through the token list and
+ *			expands any tildes (~) or env var references.
+ */
+char	expand_tokens(int status, t_token **tokens)
 {
 	t_token	*tkn;
 	char	return_val;

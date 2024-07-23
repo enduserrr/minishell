@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmds.c                                             :+:      :+:    :+:   */
+/*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:21:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/21 12:54:16 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/23 12:13:53 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	args_to_table(t_token *tokens, t_cmd *commands)
 	}
 }
 
-static void	alter_tkn(t_token **tokens)
+static void	alter_token(t_token **tokens)
 {
 	t_token	*temp;
 	t_token	*tkn;
@@ -89,7 +89,7 @@ static void	set_redir(t_token *tokens, t_cmd *commands)
 	}
 }
 
-t_cmd	*create_cmd_table(t_token *tokens)
+t_cmd	*command_table(t_token *tokens)
 {
 	t_cmd	*commands;
 
@@ -97,7 +97,7 @@ t_cmd	*create_cmd_table(t_token *tokens)
 	if (!commands)
 		return (set_err(MEM_ERR, "creating command table"), NULL);
 	args_to_table(tokens, commands);
-	alter_tkn(&tokens);
+	alter_token(&tokens);
 	set_redir(tokens, commands);
 	return (commands);
 }

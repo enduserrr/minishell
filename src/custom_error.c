@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   custom_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/21 13:02:34 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/23 11:54:47 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/parse.h"
 
+/**
+ * @brief	Write error to stderr with or without context.
+ */
 static void write_err(char *s, char *context)
 {
     int	i;
@@ -32,6 +35,10 @@ static void write_err(char *s, char *context)
 	write(2, "\n", 1);
 }
 
+/**
+ * @brief	Custom error cases.
+ *			Returns an exit code.
+ */
 static int	error_case(int err, char *context)
 {
 	if (err == ERRNO_ERR)
@@ -54,6 +61,10 @@ static int	error_case(int err, char *context)
 	return (0);
 }
 
+/**
+ * @brief	Frame through which the error output funcs are called.
+ *			Returns an exit code to be used with exit().
+ */
 int	set_err(int err, char *context)
 {
 	int	i;

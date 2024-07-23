@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tkns.c                                             :+:      :+:    :+:   */
+/*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/21 12:54:33 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/23 12:04:27 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
 
+/**
+ * @brief   Free the tokens (t_token struct).
+ */
 void	free_tokens(t_token *tokens)
 {
 	t_token	*next;
@@ -30,6 +33,11 @@ void	free_tokens(t_token *tokens)
 	}
 }
 
+/**
+ * @brief   Creates a new token with the given content.
+ *          Allocs memory for the token, assigns it's id and
+ *          sets next node ptr.
+ */
 t_token	*new_token(char *content)
 {
 	t_token	*new;
@@ -45,6 +53,12 @@ t_token	*new_token(char *content)
 	return (new);
 }
 
+/**
+ * @brief   Gets the next token from rl string.
+ *          Static var to keep track of it's position on the str
+ *          between calls. Skips white spaces and deals with quoted
+ *          tokens. Returns the next token or a NULL.
+ */
 static char    *get_next(char *s)
 {
     static char *temp;
@@ -63,7 +77,13 @@ static char    *get_next(char *s)
     return (tkn);
 }
 
-static t_token    *get_tkns(char *s)
+/**
+ * @brief   Generate linked list of tokens from the given str (rl).
+ *          Repeatedly calls get_next to create as many nodes as there's
+ *          tokens to be created. Return ptr to top node or NULL if no more
+ *          tokens available.
+ */
+static t_token    *get_tokens(char *s)
 {
     t_token *tokens;
     t_token *last;
@@ -89,12 +109,12 @@ static t_token    *get_tkns(char *s)
     return (tokens);
 }
 
-t_token *tokenizer(int *status, char *s)
+t_token *ft_tokens(int *status, char *s)
 {
     t_token *tokens;
     int     eval;
 
-    tokens = get_tkns(s);
+    tokens = get_tokens(s);
     free(s);
     if (!tokens || split_at_operators(tokens) == RETURN_FAILURE)
     {

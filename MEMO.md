@@ -1,11 +1,9 @@
 # MEMO
 
 ## NEXT UP:
-* Review 2 other parse implementations
-* Fix memory leaks & extra frees
-* Prototype funcs needed from main to parse
-* Signal handling
 * Briefs for parsing funcs and a recap
+* Map out which functions already exist and which are needed before readline, tkns & parsing
+* Map out signal handling into relevant funcs
 
 ## APPROX EXEC ORDER:
 ### 1. Main(int ac, char **av):
@@ -21,18 +19,18 @@
   * Listens for kill signals
 
 ### 3. Handle_line(int status, char *line):
-  * Tokenizer(status, line) -> sets tokens ready
-  * Parse(status, tokens) -> parses token
-  * If verbose set true, put_tkns()
+  * ft_tokens(status, line) -> sets tokens ready
+  * ft_parse(status, tokens) -> parses token
+  * If verbose set true, put_tokens()
   * Unset env
   * Return (execute);
 
-### 4. Tokenizer(int status, char *s):
+### 4. ft_tokens(int status, char *s):
   * Line (from readline)
   * Gets tokens with split
   * Free line (rl)
 
-### 5. Parse(status, tokens):
+### 5. ft_parse(status, tokens):
   * Evaluates tokens (define operators, redirs, syntax & commands)
   * Removes quotes
   * If verbosed tokens prints the full ones

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/23 11:29:26 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int main(int ac, char **av)
     input = ft_calloc(i + 1, sizeof(char));
     ft_strcpy(input, av[1]);
     status = 0;
-    tokens = tokenizer(&status, input);
+    tokens = ft_tokens(&status, input);
     if (!tokens)
         return (1);
-    commands = parse(&status, tokens);
+    commands = ft_parse(&status, tokens);
     if (!commands)
         return (1);
-    free_cmds(commands);
+    free_commands(commands);
     return (0);
 }

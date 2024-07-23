@@ -3,9 +3,9 @@ NAME	=	minishell
 SRC_DIR	=	src
 OBJ_DIR	=	obj
 LIBFT	=	incs/libft/libft.a
-SRCS	=	$(addprefix $(SRC_DIR)/tokenizing/, checks.c tkn_helpers.c tkns.c) \
-			$(addprefix $(SRC_DIR)/parsing/, cmds.c expnd_help.c parse_help.c \
-				expnd.c parse.c) \
+SRCS	=	$(addprefix $(SRC_DIR)/tokens/, checks.c token_utils.c tokens.c) \
+			$(addprefix $(SRC_DIR)/parsing/, commands.c expand_utils.c parse_utils.c \
+				expand.c out_results.c parse.c) \
 			$(addprefix $(SRC_DIR)/, custom_error.c test_main.c)
 OBJ		=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS:.c=.o))
 

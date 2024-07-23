@@ -6,12 +6,15 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:18:25 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/21 12:54:26 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/23 12:53:30 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
 
+/**
+ * @brief   Assigns the correct operator id.
+ */
 static  void    check_operators(t_token *tokens)
 {
     while (tokens)
@@ -30,6 +33,10 @@ static  void    check_operators(t_token *tokens)
     }
 }
 
+/**
+ * @brief   Checks for redirections and the following
+ *          file tokens and updates their id's.
+ */
 static char *check_redirs(t_token *tokens)
 {
     while (tokens && tokens->next)
@@ -50,6 +57,10 @@ static char *check_redirs(t_token *tokens)
     return (NULL);
 }
 
+/**
+ * @brief   Ensures correct syntax
+ *          (not pipe at start, end in an operator or unmatched quotes)
+ */
 static char *check_syntax(t_token *tokens)
 {
     size_t	i;
@@ -76,7 +87,7 @@ static char *check_syntax(t_token *tokens)
     return (NULL);
 }
 
-void    eval_commands(t_token *tokens)
+void    check_commands(t_token *tokens)
 {
     while (tokens)
     {
@@ -98,7 +109,7 @@ int check_tokens(t_token *tokens)
     context = check_redirs(tokens);
     if (context)
         return (set_err(TKN_SYNTAX_ERR, context));
-    eval_commands(tokens);
+    check_commands(tokens);
     context = check_syntax(tokens);
     if (context)
         return (set_err(TKN_SYNTAX_ERR, context));

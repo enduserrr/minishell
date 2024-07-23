@@ -1,55 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tkn_helpers.c                                      :+:      :+:    :+:   */
+/*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:42:53 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 19:20:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/23 12:48:58 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
 
-t_token *put_tkn(t_token *tokens, const char *title)
-{
-    if (title)
-        printf("\e[1;33m%s\e[0m\n", title);
-    if (!tokens)
-        printf("No tokens\n");
-    while (tokens)
-    {
-        if (tokens->id == WORD)
-            printf("[WORD] ");
-        else if (tokens->id == IN_FILE)
-            printf("[IN_FILE] ");
-        else if (tokens->id == OUT_FILE)
-            printf("[OUT_FILE] ");
-		else if (tokens->id == HEREDOC_EOF)
-			printf("[HEREDOC_EOF] ");
-		else if (tokens->id == OUT_A_FILE)
-			printf("[OUT_A_FILE] ");
-		else if (tokens->id == COMMAND)
-			printf("[COMMAND] ");
-		else if (tokens->id == OPERATOR)
-			printf("[OPERATOR] ");
-		else if (tokens->id == IN_REDIR)
-			printf("[IN_RED] ");
-		else if (tokens->id == OUT_REDIR)
-			printf("[OUT_RED] ");
-		else if (tokens->id == HEREDOC)
-			printf("[HEREDOC] ");
-		else if (tokens->id == OUT_A_REDIR)
-			printf("[OUT_A_RED] ");
-		else if (tokens->id == PIPE)
-			printf("[PIPE] ");
-		printf("[%s]\n", tokens->content);
-		tokens = tokens->next;
-	}
-	return (tokens);
-}
-
+/**
+ * @brief   Finds the unquoted char from s and ignores quoted chars
+ *          specified by 'quotes'.
+ */
 size_t  unquoted_char(char *s, const char *chars, const char *quotes)
 {
     size_t  i;
@@ -70,7 +36,11 @@ size_t  unquoted_char(char *s, const char *chars, const char *quotes)
     return (i);
 }
 
-static  char    split_token(t_token *token, size_t start)
+/**
+ * @brief   Split token's content at the specified point into two.
+ *          Creates new token from the second one and adds it to list.
+ */
+static  char    split_tokens(t_token *token, size_t start)
 {
     t_token *new;
     size_t  len;
@@ -85,6 +55,10 @@ static  char    split_token(t_token *token, size_t start)
     return (RETURN_SUCCESS);
 }
 
+/**
+ * @brief   Check's if token contains unquoted character (<>|)
+ *          and splits if so. Handle's doubles (>>).
+ */
 static char split_checker(t_token *token)
 {
     size_t  i;
@@ -93,14 +67,19 @@ static char split_checker(t_token *token)
     if (!token->content[i])
         return (RETURN_SUCCESS);
     if(i)
-        return (split_token(token, i));
+        return (split_tokens(token, i));
     i += 1 + (ft_strchr("<>", token->content[i])
         && token->content[i] == token->content[i + 1]);
     if (!token->content[i])
         return (RETURN_SUCCESS);
-    return (split_token(token, i));
+    return (split_tokens(token, i));
 }
 
+/**
+ * @brief   Goes through token list with split_checker
+ *          to find any tokens with operator chars
+ *          that needs to be split.
+ */
 char    split_at_operators(t_token *tokens)
 {
     while (tokens)

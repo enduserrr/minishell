@@ -17,7 +17,7 @@
   * Static variable in get_next() in tkns.c
 * Mapping allocs:
   * 1x create_user_path() in expand_help.c
-  * 2x new_cmd() in parse_help.c
+  * 2x new_cmd() in parse_utils.c
   * 1x new_token in tkns.c
   * 1x main() in main.c
 * Solving:

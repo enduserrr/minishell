@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expnd.c                                            :+:      :+:    :+:   */
+/*   expand.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,6 +12,11 @@
 
 #include "../../incs/parse.h"
 
+/**
+ * @brief	Scans a str to find the next env var ref.
+ *			Handles quoted sections and backslashes.
+ *			Returns position of the next env ref.
+ */
 static size_t	next_env(char *str, size_t env, char is_heredoc)
 {
 	static char	quote;
@@ -39,6 +44,10 @@ static size_t	next_env(char *str, size_t env, char is_heredoc)
 	return (env + 1);
 }
 
+/**
+ * @brief	Counts the len of an env var starting with '$'.
+ *			Accounts for special chars following the '$'.
+ */
 static size_t	env_len(char *s)
 {
 	size_t	len;
@@ -53,6 +62,9 @@ static size_t	env_len(char *s)
 	return (len);
 }
 
+/**
+ * @brief	Checks if a given env var exists and gets its value.
+ */
 static char	*check_env(char *var, size_t len, int status)
 {
 	char	temp;
@@ -71,6 +83,11 @@ static char	*check_env(char *var, size_t len, int status)
 	return (NULL);
 }
 
+/**
+ * @brief	Checks a string to handle escape characters.
+ *			Removes them if needed
+ *			(whether in HEREDOC context or quoted)
+ */
 static void	backlash_escpe(char **s, char is_heredoc)
 {
 	size_t	i;
@@ -89,6 +106,11 @@ static void	backlash_escpe(char **s, char is_heredoc)
 	}
 }
 
+/**
+ * @brief	Expands env vars in the given str.
+ *			(find & replace env vars with the corresponding values)
+ *			Calls funcs for redirs, escape chars etc.
+ */
 char	ft_expand(char **s, int status, char id)
 {
 	size_t	env;

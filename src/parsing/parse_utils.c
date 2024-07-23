@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_help.c                                       :+:      :+:    :+:   */
+/*   parse_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:50 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/21 13:02:18 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/23 11:29:26 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
 
-static size_t	count_av_tkns(t_token *tokens)
+static size_t	count_tokens(t_token *tokens)
 {
 	size_t	i;
 
@@ -26,7 +26,7 @@ static size_t	count_av_tkns(t_token *tokens)
 	return (i);
 }
 
-static t_cmd	*new_cmd(size_t av_count)
+static t_cmd	*new_command(size_t av_count)
 {
 	t_cmd	*new;
 
@@ -57,7 +57,7 @@ ssize_t set_char(char *s, char c, ssize_t i)
 	return (i);
 }
 
-void	free_cmds(t_cmd *commands)
+void	free_commands(t_cmd *commands)
 {
     t_cmd   *tmp;
     size_t  i;
@@ -85,7 +85,7 @@ t_cmd	*alloc_cmd(t_token *tokens)
 	t_cmd	*commands;
 	t_cmd	*last;
 
-	commands = new_cmd(count_av_tkns(tokens));
+	commands = new_command(count_tokens(tokens));
 	last = commands;
 	while (last)
 	{
@@ -94,8 +94,8 @@ t_cmd	*alloc_cmd(t_token *tokens)
 		if (!tokens)
 			return (commands);
 		tokens = tokens->next;
-		last->next = new_cmd(count_av_tkns(tokens));
+		last->next = new_command(count_tokens(tokens));
 		last = last->next;
 	}
-	return (free_cmds(commands), NULL);
+	return (free_commands(commands), NULL);
 }
