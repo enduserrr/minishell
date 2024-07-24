@@ -1,8 +1,13 @@
 # MEMO
 
 ## NEXT UP:
-* Map funcs needed before tokens (and which already exists)
-* Map out signal handling into relevant funcs
+* Rl_history:
+  * Adding and removing previous inputs from rl
+* Redirectioning:
+  * Redirecting
+* Signal handling:
+  * For ctr + c, ctr + d and SIG_IGN ctr -/
+  * Event hook, HEREDOC handling
 
 ## APPROX EXEC ORDER:
 ### 1. Main(int ac, char **av):

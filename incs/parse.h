@@ -22,6 +22,12 @@
 # include <readline/readline.h>
 # include <errno.h>
 # include <sys/stat.h>
+# include <signal.h>
+
+/**
+ * @brief	Global variable for signals.
+*/
+// volatile int	g_var;
 
 /**
  * @brief	Removal flag

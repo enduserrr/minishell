@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_path.c                                     :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 20:06:10 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/24 12:19:21 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/24 18:51:05 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static char *set_path(char *name)
         free(path);
     }
     ft_free_path_list(path_list);
-    exit(set_err(UNKNOWN_CMD_ERR, name));
+    return (NULL);
 }
 
-static char	*get_path(char *name)
+static char *get_path(char *name)
 {
 	struct stat	stats;
 
@@ -63,7 +63,7 @@ static char	*get_path(char *name)
 	{
 		stat(name, &stats);
 		if (S_ISDIR(stats.st_mode))
-			exit(set_err(IS_DIR_ERR, name));
+            return (NULL);
 		return (ft_strdup(name));
 	}
     return (set_path(name));
