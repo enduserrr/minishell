@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/24 12:17:43 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/24 12:30:44 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_cmd   *ft_parse(int *status, t_token *tokens)
     check_commands(tokens);
     remove_quotes(tokens);
     commands = command_table(tokens);
-    command_path(commands);
+    // command_path(commands);
     // commands->path = get_path(commands->av[0]);/*testing get_path*/
     put_command(commands);
     if (!commands)
