@@ -107,11 +107,12 @@ typedef enum e_builtin_id
 }	t_builtin_id;
 
 
-char	*get_path(char *name);
+// char	*get_path(char *name);
+void    command_path(t_cmd *commands);
 
 /*Token*/
 t_token *ft_tokens(int *status, char *s);
-t_token	*new_token(char *content);
+t_token	*init_token(char *content);
 size_t  unquoted_char(char *s, const char *chars, const char *quotes);
 int		check_tokens(t_token *tokens);
 char    split_at_operators(t_token *tokens);

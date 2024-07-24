@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/23 12:04:27 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/24 10:27:39 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_tokens(t_token *tokens)
  *          Allocs memory for the token, assigns it's id and
  *          sets next node ptr.
  */
-t_token	*new_token(char *content)
+t_token	*init_token(char *content)
 {
 	t_token	*new;
 
@@ -92,7 +92,7 @@ static t_token    *get_tokens(char *s)
     tkn = get_next(s);
     if (!tkn)
         return (NULL);
-    tokens = new_token(ft_strdup(tkn));
+    tokens = init_token(ft_strdup(tkn));
     if (!tokens)
         return (NULL);
     last = tokens;
@@ -101,7 +101,7 @@ static t_token    *get_tokens(char *s)
         tkn = get_next(NULL);
         if (!tkn)
             break ;
-        last->next = new_token(ft_strdup(tkn));
+        last->next = init_token(ft_strdup(tkn));
         last = last->next;
         if (!last)
             return (free_tokens(tokens), NULL);

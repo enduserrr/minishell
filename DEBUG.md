@@ -18,7 +18,7 @@
 * Mapping allocs:
   * 1x create_user_path() in expand_help.c
   * 2x new_cmd() in parse_utils.c
-  * 1x new_token in tkns.c
+  * 1x init_token in tkns.c
   * 1x main() in main.c
 * Solving:
   * alloc_cmd(): new token count function for alloccing (in pare_help.c)

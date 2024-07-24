@@ -6,7 +6,8 @@ LIBFT	=	incs/libft/libft.a
 SRCS	=	$(addprefix $(SRC_DIR)/tokens/, checks.c token_utils.c tokens.c) \
 			$(addprefix $(SRC_DIR)/parsing/, commands.c expand_utils.c parse_utils.c \
 				expand.c put_results.c parse.c) \
-			$(addprefix $(SRC_DIR)/, custom_error.c command_path.c test_main.c)
+			$(addprefix $(SRC_DIR)/minishell/, command_path.c custom_error.c) \
+			$(addprefix $(SRC_DIR)/, test_main.c)
 OBJ		=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS:.c=.o))
 
 INCS	=	-I incs/parse.h -I incs/libft/incs

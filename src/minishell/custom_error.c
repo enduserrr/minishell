@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/23 18:20:35 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/24 12:13:11 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/parse.h"
+#include "../../incs/parse.h"
 
 /**
  * @brief	Write error to stderr with or without context.

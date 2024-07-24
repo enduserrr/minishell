@@ -26,7 +26,7 @@ static size_t	count_tokens(t_token *tokens)
 	return (i);
 }
 
-static t_cmd	*new_command(size_t av_count)
+static t_cmd	*init_command(size_t av_count)
 {
 	t_cmd	*new;
 
@@ -85,7 +85,7 @@ t_cmd	*alloc_cmd(t_token *tokens)
 	t_cmd	*commands;
 	t_cmd	*last;
 
-	commands = new_command(count_tokens(tokens));
+	commands = init_command(count_tokens(tokens));
 	last = commands;
 	while (last)
 	{
@@ -94,7 +94,7 @@ t_cmd	*alloc_cmd(t_token *tokens)
 		if (!tokens)
 			return (commands);
 		tokens = tokens->next;
-		last->next = new_command(count_tokens(tokens));
+		last->next = init_command(count_tokens(tokens));
 		last = last->next;
 	}
 	return (free_commands(commands), NULL);

@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 20:06:10 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/23 20:08:16 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/24 12:19:21 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/parse.h"
+#include "../../incs/parse.h"
 
 static void	ft_free_path_list(char **path_list)
 {
@@ -53,7 +53,7 @@ static char *set_path(char *name)
     exit(set_err(UNKNOWN_CMD_ERR, name));
 }
 
-char	*get_path(char *name)
+static char	*get_path(char *name)
 {
 	struct stat	stats;
 
@@ -67,4 +67,13 @@ char	*get_path(char *name)
 		return (ft_strdup(name));
 	}
     return (set_path(name));
+}
+
+void    command_path(t_cmd *commands)
+{
+    while (commands)
+    {
+        commands->path = get_path(commands->av[0]);
+        commands = commands->next;
+    }
 }
