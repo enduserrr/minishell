@@ -1,6 +1,8 @@
 # MEMO
 
 ## NEXT UP:
+* Prompt
+  * Prompt to display infront of input (readline(prompt))
 * Rl_history:
   * Adding and removing previous inputs from rl
 * Redirectioning:
