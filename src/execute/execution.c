@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/25 10:24:19 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/25 15:35:03 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void execution(t_data *data)
 {
     if (pipes_in_prompt(data) == 0)
     {
-        printf("pipe_amount: %d, eitoimi\n", data->pipe_amount);
+        printf("\33[90mpipes: %d\e[0m\n\n", data->pipe_amount);
         simple_arg(data);
     }
     if (pipes_in_prompt(data) != 0)
     {
-        printf("pipe_amount: %d, toimii\n", data->pipe_amount);
+        printf("\33[90mpipes: %d\e[0m\n\n", data->pipe_amount);
         create_pids(data);
     }
 }

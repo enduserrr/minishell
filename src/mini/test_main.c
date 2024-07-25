@@ -6,28 +6,31 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/25 12:06:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/25 18:15:34 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
 //eemelin main
+
+
+
 int	is_builtin(t_data *data)
 {
-	if (ft_strncmp(data->cmds->av[0], "exit", 4) == 0)
+	if (ft_strncmp(data->cmds->av[0], "exit", ft_strlen(data->cmds->av[0])) == 0)
 		return (exit_cmd(data), 1);
-    if (ft_strncmp(data->cmds->av[0], "cd", 2) == 0)
+    if (ft_strncmp(data->cmds->av[0], "cd", ft_strlen(data->cmds->av[0])) == 0)
 		return (cd_cmd(data), 1);
-	if (ft_strncmp(data->cmds->av[0], "env", 3) == 0)
+	if (ft_strncmp(data->cmds->av[0], "env", ft_strlen(data->cmds->av[0])) == 0)
 		return (env_cmd(data), 1);
 	if (ft_strncmp(data->cmds->av[0], "echo", 4) == 0)
 		return (echo_cmd(data), 1);
-	if (ft_strncmp(data->cmds->av[0], "pwd", 3) == 0)
+	if (ft_strncmp(data->cmds->av[0], "pwd", ft_strlen(data->cmds->av[0])) == 0)
 		return (pwd_cmd(data), 1);
-	if (ft_strncmp(data->cmds->av[0], "unset", 5) == 0)
+	if (ft_strncmp(data->cmds->av[0], "unset", ft_strlen(data->cmds->av[0])) == 0)
 		return (unset_cmd(data), 1);
-	if (ft_strncmp(data->cmds->av[0], "export", 6) == 0)
+	if (ft_strncmp(data->cmds->av[0], "export", ft_strlen(data->cmds->av[0])) == 0)
 		return (export_cmd(data), 1);
 	return (0);
 }
@@ -55,7 +58,6 @@ static void run(t_data *data)
         {
             tokens = ft_tokens(&status, input);
             data->cmds = ft_parse(&status, tokens);
-            printf("\n--------end of parsing-------------\n\n");
             process_cmds(data);
             free_commands(data->cmds);
         }

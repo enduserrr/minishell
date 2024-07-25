@@ -1,5 +1,12 @@
 # MEMO
 
+## COPY:
+* Parse dir
+* Token dir
+* Makefile
+* Executtio() func
+* Signals
+
 ## NEXT UP:
 * Prompt
   * Prompt to display infront of input (readline(prompt))
