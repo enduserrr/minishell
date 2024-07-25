@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:21:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/23 12:13:53 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/24 12:30:58 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ t_cmd	*command_table(t_token *tokens)
 	args_to_table(tokens, commands);
 	alter_token(&tokens);
 	set_redir(tokens, commands);
+	command_path(commands);
 	return (commands);
 }

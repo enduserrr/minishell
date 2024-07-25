@@ -6,11 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/23 11:54:47 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/24 12:13:11 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/parse.h"
+#include "../../incs/parse.h"
 
 /**
  * @brief	Write error to stderr with or without context.
@@ -30,6 +30,7 @@ static void write_err(char *s, char *context)
 	{
         while (context[j])
             j++;
+		write(2, ": ", 2);
 		write(2, context, j);
 	}
 	write(2, "\n", 1);
@@ -49,15 +50,15 @@ static int	error_case(int err, char *context)
 		return (write_err("syntax error near unexpected token: ", context)
 			, err);
 	if (err == AMBIG_REDIR_ERR)
-		return (write_err("%s: ambiguous redirect", context), 1);
+		return (write_err("ambiguous redirect", context), 1);
 	if (err == IS_DIR_ERR)
-		return (write_err("%s: is a directory", context), err);
+		return (write_err("is a directory", context), err);
 	if (err == UNKNOWN_CMD_ERR)
-		return (write_err("%s: command not found", context), err);
+		return (write_err("command not found", context), err);
 	if (err == NO_FILE_ERR)
-		return (write_err("%s: No such file or directory", context), 127);
+		return (write_err("No such file or directory", context), 127);
 	if (err == UNSET_ERR)
-		return (write_err("%s not set", context), 1);
+		return (write_err("not set", context), 1);
 	return (0);
 }
 

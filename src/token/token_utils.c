@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:42:53 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/23 12:48:58 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/24 10:27:39 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static  char    split_tokens(t_token *token, size_t start)
     size_t  len;
 
     len = ft_strlen(&token->content[start]);
-    new = new_token(ft_substr(token->content, start, len));
+    new = init_token(ft_substr(token->content, start, len));
     if (!new)
         return (RETURN_FAILURE);
     new->next = token->next;

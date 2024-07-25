@@ -13,12 +13,21 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-//# include "minishell.h"
+/*# include "minishell.h"*/
 # include "libft/incs/libft.h"
-# include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <errno.h>
 # include <sys/stat.h>
+# include <signal.h>
+
+/**
+ * @brief	Global variable for signals.
+*/
+// volatile int	g_var;
 
 /**
  * @brief	Removal flag
@@ -103,9 +112,13 @@ typedef enum e_builtin_id
 	B_ENV = 0b00001000,/*8*/
 }	t_builtin_id;
 
+
+// char	*get_path(char *name);
+void    command_path(t_cmd *commands);
+
 /*Token*/
 t_token *ft_tokens(int *status, char *s);
-t_token	*new_token(char *content);
+t_token	*init_token(char *content);
 size_t  unquoted_char(char *s, const char *chars, const char *quotes);
 int		check_tokens(t_token *tokens);
 char    split_at_operators(t_token *tokens);
