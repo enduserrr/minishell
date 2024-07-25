@@ -3,16 +3,19 @@ NAME	=	minishell
 SRC_DIR	=	src
 OBJ_DIR	=	obj
 LIBFT	=	incs/libft/libft.a
-SRCS	=	$(addprefix $(SRC_DIR)/tokens/, checks.c token_utils.c tokens.c) \
-			$(addprefix $(SRC_DIR)/parsing/, commands.c expand_utils.c parse_utils.c \
+SRCS	=	$(addprefix $(SRC_DIR)/token/, checks.c token_utils.c tokens.c) \
+			$(addprefix $(SRC_DIR)/parse/, commands.c expand_utils.c parse_utils.c \
 				expand.c output.c path.c parse.c) \
-			$(addprefix $(SRC_DIR)/minishell/, custom_error.c) \
-			$(addprefix $(SRC_DIR)/, test_main.c)
+			$(addprefix $(SRC_DIR)/mini/, custom_error.c run.c signal.c free.c test_main.c \
+			utils.c) \
+			$(addprefix $(SRC_DIR)/execute/, paths.c pipes.c execution.c) \
+			$(addprefix $(SRC_DIR)/builtins/, exit_cmd.c pwd_cmd.c cd_cmd.c env_cmd.c \
+				builtin_utils.c echo_cmd.c export_cmd.c unset_cmd.c)
 OBJ		=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS:.c=.o))
 
-INCS	=	-I incs/parse.h -I incs/libft/incs
-CC		=	cc
-FLAGS	=	-Wall -Wextra -Werror
+INCS	=	-I incs/minishell.h -I incs/parse.h -I incs/libft/incs -I incs/builtins.h
+CC		=	cc 
+FLAGS	=   -Wall -Wextra -Werror
 RM		=	rm -f
 
 GREY_T	= \33[90m
@@ -21,14 +24,14 @@ RESET 	= \033[0m
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 				@mkdir -p $(dir $@)
-				@$(CC) $(FLAGS) $(INCS) -c $< -o $@
+				@$(CC) $(RL) $(FLAGS) $(INCS) -c $< -o $@
 				 @echo "$(GREY_T)compiled: $< into $@$(RESET)"
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
 			@make -C incs/libft -s
-			@$(CC) $(OBJ) $(LIBFT) -o $(NAME)
+			@$(CC) $(OBJ) $(LIBFT) -lreadline -o $(NAME)
 			@echo "$(WHITE_F)MINISHELL BUILT SUCCESFULLY$(RESET)"
 
 

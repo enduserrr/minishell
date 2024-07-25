@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/24 12:30:44 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/25 11:35:14 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 static void remove_quotes(t_token *tokens)
 {
     size_t  i;
-    char    q;
+    char    reference;
 
     while (tokens)
     {
-        q = 0;
+        reference = 0;
         i = -1;
         while (tokens->content[++i])
         {
-            if (!q && ft_strchr("\'\"", tokens->content[i]))
-                q = tokens->content[i];
-            else if (tokens->content[i] == q)
-                q = 0;
+            if (!reference && ft_strchr("\'\"", tokens->content[i]))
+                reference = tokens->content[i];
+            else if (tokens->content[i] == reference)
+                reference = 0;
             else
                 continue ;
             ft_strcpy(&tokens->content[i], &tokens->content[i + 1]);
@@ -48,8 +48,6 @@ t_cmd   *ft_parse(int *status, t_token *tokens)
     check_commands(tokens);
     remove_quotes(tokens);
     commands = command_table(tokens);
-    // command_path(commands);
-    // commands->path = get_path(commands->av[0]);/*testing get_path*/
     put_command(commands);
     if (!commands)
     {
