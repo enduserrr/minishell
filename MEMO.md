@@ -18,43 +18,6 @@
   * For ctr + c, ctr + d and SIG_IGN ctr -/
   * Event hook, HEREDOC handling
 
-## APPROX EXEC ORDER:
-### 1. Main(int ac, char **av):
-  * Check for verbose
-  * Init shell & configure terminal
-  * Welcome message
-  * Return (run_shell());
-
-### 2. Run_shell(int status, char *execute):
-  * Runs and loops input/tokenize/parse/validate/execute/free loop until a told otherwise
-  * Gets prompt
-  * Calls readline
-  * Listens for kill signals
-
-### 3. Handle_line(int status, char *line):
-  * ft_tokens(status, line) -> sets tokens ready
-  * ft_parse(status, tokens) -> parses token
-  * If verbose set true, put_tokens()
-  * Unset env
-  * Return (execute);
-
-### 4. ft_tokens(int status, char *s):
-  * Line (from readline)
-  * Gets tokens with split
-  * Free line (rl)
-
-### 5. ft_parse(status, tokens):
-  * Evaluates tokens (define operators, redirs, syntax & commands)
-  * Removes quotes
-  * If verbosed tokens prints the full ones
-  * Create_commands(tokens, cmd_table) -> allocs cmd_table and creates cmds
-
-### 6. Unset_env():
-
-### 7. Execute(int status, t_cmd *commands)
-  * Execute with one builtin or creates redirections -> pipe handling -> executing cmd's
-  * Free's cmd's and returns return value
-
 ## Useful commands
 ### GIT BRANCH
   * git fetch origin / fetch the remote branches

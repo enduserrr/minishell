@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:43:35 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/21 12:57:20 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/25 18:30:02 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_putstr_fd(char *s, int fd);
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 ssize_t	ft_strichr(const char *s, int c);
-void	*ft_strinsrt(char **ret, const char *insert, size_t start, size_t len);
+void	ft_strinsrt(char **ret, const char *insert, size_t start, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
 size_t	ft_strplen(const char *s);
