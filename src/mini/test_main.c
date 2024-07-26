@@ -16,8 +16,13 @@
 
 void 	process_cmds(t_data *data)
 {
-	if (data->cmds->av[0] == NULL)
-		return ;
+	if (data->cmds == NULL) 
+        return ;
+    if (data->cmds->av[0] == NULL)
+    {    
+        execution(data);
+        return ;
+    }
     if (is_builtin(data) != 0)
 			return ; 
 	else

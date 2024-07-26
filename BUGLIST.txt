@@ -1,7 +1,99 @@
 BUGS: 
 
 segfaults: 
-            input:              output:                                                                                 
+            input:                  output:                                                                                 
 
-minshell:   <                   segmentation fault (core dumbed) 
-bash:       <                   bash: syntax error near unexpected token `newline'
+minshell:   <                       segmentation fault (core dumbed) 
+bash:       <                       bash: syntax error near unexpected token `newline'
+
+FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
+
+
+minishell:  <<                      segmentation fault (core dumbed) 
+bash:       <<                      bash: syntax error near unexpected token `newline'
+
+FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
+
+
+minishell:  |                       segmentation fault (core dumbed) 
+bash:       |                       bash: syntax error near unexpected token `|'
+
+FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
+
+
+minishell:  ||                      segmentation fault (core dumbed) 
+bash:       ||                      bash: syntax error near unexpected token `||'
+
+FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
+
+
+minishell:  |||                     segmentation fault (core dumbed) 
+bash:       |||                     bash: syntax error near unexpected token `||'
+
+FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
+
+
+minishell:  >                       segmentation fault (core dumbed) 
+bash:       >                       bash: syntax error near unexpected token `newline'
+
+FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
+
+
+minishell:  >>                      segmentation fault (core dumbed) 
+bash:       >>                      bash: syntax error near unexpected token `newline'
+
+FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
+
+
+minishell:  << >>                   segmentation fault (core dumped)
+bash:       << >>                   bash: syntax error near unexpected token `>>'
+
+FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
+
+
+minishell:  <>                      segmentation fault (core dumped)
+bash:       <>                      bash: syntax error near unexpected token `newline'
+
+FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
+
+
+minishell:
+bash:
+
+minishell:
+bash:
+
+minishell:
+bash:
+
+minishell:
+bash:
+
+minishell:
+bash:
+
+minishell:
+bash:
+
+
+
+u_behavior: 
+
+minishell:  $?                      --> does nothing.. just runs empty..
+bash:       $?                      0: command not found
+
+minishell:  ""                      exit: : numeric argument required  
+bash:       ""                      Command '' not found, but can be installed with: ....
+
+minishell:  "  "                    exit: : numeric argument required  
+bash:       "  "                     : command not found
+
+
+
+
+export: 
+            input:                  output:                             
+minishell:  export xxx====xxxx      xxx="xxxx"              
+bash:       export xxx====xxxx      xxx="===xxxx"
+
+
