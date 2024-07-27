@@ -53,7 +53,7 @@ void execute_cmd(t_data *data, int i)
         i --;
     }
     get_path(data, temp);
-    printf("\npath-->%s\n", temp->path);
+    //printf("\npath-->%s\n", temp->path);
     //printf("path: [%s], cmds: [%s] [%s]\n", temp->path, temp->av[0], temp->av[1]);
     if (temp->path != NULL)
     {
@@ -79,17 +79,21 @@ void simple_arg(t_data *data)
     if(p1 == -1)
         perror("fork");
     if (p1 == 0)
+    {
+        check_redir(data, 0);
         execute_cmd(data, 0);
+    }
     waitpid(p1, &status, 0);
 }
 
 void execution(t_data *data)
 {
+    //redir(data);
     if (pipes_in_prompt(data) == 0)
     {
         if (is_builtin(data) == 0)
         {
-            printf("nobuiltin\n");
+            //printf("nobuiltin\n");
             simple_arg(data);
         }
     }

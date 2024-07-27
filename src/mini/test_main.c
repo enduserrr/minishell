@@ -40,6 +40,7 @@ static void run(t_data *data)
         input = readline("$> ");
         if (input[0])
         {
+            add_history(input);
             tokens = ft_tokens(&status, input);
             data->cmds = ft_parse(&status, tokens);
             printf("\n--------end of parsing-------------\n\n");

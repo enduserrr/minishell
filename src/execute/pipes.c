@@ -17,6 +17,7 @@ void child(t_data *data, int i, int *prev_fd, int *fd)
     if (i == 0)
     {
         close(fd[0]);
+        check_redir(data, i);
         if (dup2(fd[1], STDOUT_FILENO) == -1)
             perror("dup1\n");
         close(fd[1]);
@@ -25,20 +26,29 @@ void child(t_data *data, int i, int *prev_fd, int *fd)
     else if (i == data->pipe_amount)
     {
         close(prev_fd[1]);
-        if (dup2(prev_fd[0], STDIN_FILENO) == -1)
-            perror("dup2");
+        if (check_redir(data, i) != 1)
+        {
+            if (dup2(prev_fd[0], STDIN_FILENO) == -1)
+                perror("dup2");
+        }
         close(prev_fd[0]);
         execute_cmd(data, i);
     }
     else
     {
         close(prev_fd[1]);
-        if (dup2(prev_fd[0], STDIN_FILENO) == -1)
+        if (check_redir(data, i) != 1)
+        {
+            if (dup2(prev_fd[0], STDIN_FILENO) == -1)
             perror("dup 3");
+        }
         close(prev_fd[0]);
         close(fd[0]);
-        if(dup2(fd[1], STDOUT_FILENO) == -1)
-            perror("dup");
+        if (check_redir(data, i) != 2)
+        {
+            if(dup2(fd[1], STDOUT_FILENO) == -1)
+                perror("dup");
+        }
         execute_cmd(data, i);
     }
 }
@@ -66,7 +76,9 @@ void create_pids(t_data *data)
         if (pid < 0)
             perror("fork");
         else if (pid == 0)
+        {
             child(data, i, prev_fd, fd);
+        }
         else
         {
             data->pid_arr[i] = pid;

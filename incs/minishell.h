@@ -19,6 +19,7 @@
 # include <sys/wait.h>				//for waitpid
 # include <readline/history.h>		//readline
 # include <readline/readline.h>		//readline
+# include <fcntl.h>					//open
 
 // 
 # include "libft/incs/libft.h"		//libft
@@ -99,5 +100,9 @@ void 				execute_cmd(t_data *tools, int i);
 // pipes.c
 int					pipes_in_prompt(t_data *tools);
 void 				create_pids(t_data *tools);
+
+
+//redir
+int 				check_redir(t_data *data, int i);
 
 #endif

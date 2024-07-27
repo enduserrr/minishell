@@ -14,7 +14,7 @@
 
 static t_token *put_token(t_token *tokens, const char *title)
 {
-    if (title)
+	if (title)
         printf("\e[1;33m%s\e[0m\n", title);
     if (!tokens)
         printf("No tokens\n");
