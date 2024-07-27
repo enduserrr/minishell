@@ -9,11 +9,11 @@ bash:       < hello                 bash: hello: No such file or directory
 minishell:  < hello < hello         segmentation fault (core dumped)
 bash:       < hello < hello         bash: hello: No such file or directory
 
-minishell: < /home/eleppala/Documentstest.txt | grep testi
+minishell:  < /home/eleppala/Documentstest.txt | grep testi
 bash:
 
-minishell:
-bash:
+minishell:  < infile  >> out        segmentation fault (core dumped)
+bash:       < infile  >> out        display new prompt --> should do nothing 
 
 minishell:
 bash:

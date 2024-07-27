@@ -100,6 +100,7 @@ void 				execute_cmd(t_data *tools, int i);
 // pipes.c
 int					pipes_in_prompt(t_data *tools);
 void 				create_pids(t_data *tools);
+void 				next_pipe(t_data *data, int *prev_fd, int *fd, int i);
 
 
 //redir
