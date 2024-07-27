@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:42:53 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/25 11:34:47 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/27 16:41:11 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ size_t  unquoted_char(char *s, const char *chars, const char *quotes)
         if (!reference && ft_strchr(chars, s[i]))
             break ;
         if (!reference && ft_strchr(quotes, s[i]))
-            reference = s[i];/*fixed mistake of previoisly breking here*/
+            reference = s[i];
         else if (s[i] == reference)
             reference = 0;
-        i++; 
+        i++;
     }
     return (i);
 }

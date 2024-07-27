@@ -99,6 +99,6 @@ t_cmd	*command_table(t_token *tokens)
 	args_to_table(tokens, commands);
 	alter_token(&tokens);
 	set_redir(tokens, commands);
-	command_path(commands);
+	//command_path(commands);
 	return (commands);
 }

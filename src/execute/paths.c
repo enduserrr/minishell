@@ -16,7 +16,7 @@ void delete_paths(t_data *data)
 {
     free_array(data->paths);
     data->paths = NULL;
-
+    //printf("[data->paths: deleted]\n");
 }
 
 void create_paths(t_data *data)
@@ -24,7 +24,7 @@ void create_paths(t_data *data)
     t_env   *temp;
     
     temp = data->env_list;
-    while(temp->next != NULL)
+    while(temp != NULL)
     {
         if (ft_strncmp(temp->key, "PATH", 4) == 0)
         {
@@ -33,6 +33,7 @@ void create_paths(t_data *data)
         }
         temp = temp->next;
     }
+    //printf("[data->paths: deleted]\n");
 }
 
 

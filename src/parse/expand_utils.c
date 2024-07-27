@@ -58,7 +58,7 @@ static void	tilde_expander(char **s, size_t i)
 	else if ((*s)[i + 1])
 	{
 		end = set_char(*s + i, '\0', ft_strichr(*s + i, '/'));
-		path = create_user_path(*s + i + 1);/*CHECK*/
+		path = create_user_path(*s + i + 1);
 		end = set_char(*s + i, '/', end);
 		if (path && !stat(path, &stats) && S_ISDIR(stats.st_mode))
 			ft_strinsrt(s, path, i, end);

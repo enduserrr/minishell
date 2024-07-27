@@ -19,7 +19,7 @@ int	key_exists(char **arr, t_data *data)
 	temp = data->env_list;
 	while (temp != NULL)
 	{
-		if (ft_strncmp(temp->key, arr[0], ft_strlen(arr[0])) == 0)
+		if (ft_strncmp(temp->key, arr[0], ft_strlen(temp->key)) == 0)
 		{
 			if (arr[1] == NULL)
 				return (0);
@@ -91,11 +91,15 @@ void	add_new(t_data *data, char *str)
 	if (key_exists(temp_arr, data) == 0)
 		return ;
 	new = malloc(sizeof(t_env));
+	if (!new)
+		perror("malloc: ");
 	new->key = ft_strdup(temp_arr[0]);
+	printf("new key %s\n\n", new->key);
 	if (temp_arr[1])
 		new->value = ft_strdup(temp_arr[1]);
 	else
 		new->value = NULL;
+	printf("new value %s\n\n", new->value);
 	new->next = NULL;
 	free_array(temp_arr);
 	temp = data->env_list;
@@ -138,8 +142,10 @@ void	export_cmd(t_data *data)
 		else
 		{
 			add_new(data, data->cmds->av[i]);
-			if (ft_strncmp(data->cmds->av[i], "PATH", 4) == 0)
+			if (ft_strncmp("PATH=", data->cmds->av[i], 5) == 0)
+			{
 				create_paths(data);
+			}
 		}
 		i++;
 	}
@@ -161,4 +167,12 @@ void	export_cmd(t_data *data)
  *  -  if arg is existing key and has '=' but no value after it makes value ""
  *  -  if arg has multiple '=' it will be splitted from first '='
  * 		- first word will be key, and rest of the string will be value
+ * 	-  if args 5 first letters are PATH= creates data->paths -array
+ * 
+ * 
+ *  BUGLIST:
+ *  - if arg is export kakka=====ripuli:
+ *  	- result: kakka="ripuli"
+ * 		- bash: kakka="===ripuli"
+ * 
  */

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/25 11:35:14 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/25 10:56:57 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 static void remove_quotes(t_token *tokens)
 {
     size_t  i;
-    char    reference;
+    char    q;
 
     while (tokens)
     {
-        reference = 0;
+        q = 0;
         i = -1;
         while (tokens->content[++i])
         {
-            if (!reference && ft_strchr("\'\"", tokens->content[i]))
-                reference = tokens->content[i];
-            else if (tokens->content[i] == reference)
-                reference = 0;
+            if (!q && ft_strchr("\'\"", tokens->content[i]))
+                q = tokens->content[i];
+            else if (tokens->content[i] == q)
+                q = 0;
             else
                 continue ;
             ft_strcpy(&tokens->content[i], &tokens->content[i + 1]);
