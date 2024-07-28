@@ -62,7 +62,7 @@ static size_t	env_len(char *s)
         len++;
     return (len);
 }
-
+/*CHANGE STATUS TO SYSTEM RETURN STATE!*/
 static char	*check_env(char *var, size_t len, int status)
 {
     char	temp;
