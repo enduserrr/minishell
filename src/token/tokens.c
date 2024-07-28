@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/24 10:27:39 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/28 11:20:47 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ void	free_tokens(t_token *tokens)
 }
 
 /**
- * @brief   Creates a new token with the given content.
- *          Allocs memory for the token, assigns it's id and
- *          sets next node ptr.
+ * @brief   Inits a new token (allocs mem, assigns id and next ptr.
  */
-t_token	*init_token(char *content)
+t_token	*new_token(char *content)
 {
 	t_token	*new;
 
@@ -54,10 +52,8 @@ t_token	*init_token(char *content)
 }
 
 /**
- * @brief   Gets the next token from rl string.
- *          Static var to keep track of it's position on the str
- *          between calls. Skips white spaces and deals with quoted
- *          tokens. Returns the next token or a NULL.
+ * @brief   Next token from str (readline). Skips white spaces and
+ *          deals with quoted tokens. Returns the next token or a NULL.
  */
 static char    *get_next(char *s)
 {
@@ -78,10 +74,8 @@ static char    *get_next(char *s)
 }
 
 /**
- * @brief   Generate linked list of tokens from the given str (rl).
- *          Repeatedly calls get_next to create as many nodes as there's
- *          tokens to be created. Return ptr to top node or NULL if no more
- *          tokens available.
+ * @brief   Init linked list for tokens. Calls get_next() to init the nbr of
+ *          nodes required. Returns ptr to top node
  */
 static t_token    *get_tokens(char *s)
 {
@@ -92,16 +86,16 @@ static t_token    *get_tokens(char *s)
     tkn = get_next(s);
     if (!tkn)
         return (NULL);
-    tokens = init_token(ft_strdup(tkn));
+    tokens = new_token(ft_strdup(tkn));
     if (!tokens)
         return (NULL);
     last = tokens;
-    while (1)
-    {
+    while (1)/*Changing to while (last)*/
+    {/*Without freeing in the end to have the tkn list available*/
         tkn = get_next(NULL);
         if (!tkn)
             break ;
-        last->next = init_token(ft_strdup(tkn));
+        last->next = new_token(ft_strdup(tkn));
         last = last->next;
         if (!last)
             return (free_tokens(tokens), NULL);
@@ -109,7 +103,7 @@ static t_token    *get_tokens(char *s)
     return (tokens);
 }
 
-t_token *ft_tokens(int *status, char *s)
+t_token *ft_token(int *status, char *s)
 {
     t_token *tokens;
     int     eval;

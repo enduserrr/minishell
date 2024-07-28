@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/27 16:44:59 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/28 11:12:15 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void run(t_data *data)
         if (input[0])
         {
             add_history(input);
-            tokens = ft_tokens(&status, input);
+            tokens = ft_token(&status, input);
             data->cmds = ft_parse(&status, tokens);
             process_cmds(data);
             free_commands(data->cmds);

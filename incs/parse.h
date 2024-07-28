@@ -117,8 +117,9 @@ typedef enum e_builtin_id
 void    command_path(t_cmd *commands);
 
 /*Token*/
-t_token *ft_tokens(int *status, char *s);
-t_token	*init_token(char *content);
+t_token *ft_token(int *status, char *s);
+t_token	*new_token(char *content);
+t_token	*rm_token(t_token **top, t_token *remove);
 size_t  unquoted_char(char *s, const char *chars, const char *quotes);
 int		check_tokens(t_token *tokens);
 char    split_at_operators(t_token *tokens);
@@ -131,11 +132,11 @@ t_cmd	*command_table(t_token *tokens);
 void    check_commands(t_token *tokens);
 void 	free_commands(t_cmd *cmds);
 void	put_command(t_cmd *commands);
-char	ft_expand(char **s, int status, char id);
-char	expand_tokens(int status, t_token **tokens);
+char	expand_env(char **s, int status, char id);
+char	ft_expand(int status, t_token **tokens);
+
 
 /*Custom error*/
 int		set_err(int err, char *context);
-ssize_t set_char(char *s, char c, ssize_t i);
 
 #endif

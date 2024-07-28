@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:56:36 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/25 18:40:08 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/28 11:11:28 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char *working_dir(char esc)
     return (val);
 }
 
-static char *complex_val(char esc) 
+static char *complex_val(char esc)
 {
 	char	*user;
 	char	*hostname;
@@ -64,7 +64,7 @@ static char *complex_val(char esc)
         if (hostname)
 		{
             if (esc == 'h')
-                return (ft_substr(hostname, 0, ft_strchr_index(hostname, '.'))); 
+                return (ft_substr(hostname, 0, ft_strchr_index(hostname, '.')));
 			else
                 return (ft_strdup(hostname));
         }
@@ -72,7 +72,7 @@ static char *complex_val(char esc)
     return (NULL);
 }
 
-static char	*escape_val(char esc) 
+static char	*escape_val(char esc)
 {
     if (esc == '[')
 		return ft_strdup("\001");
@@ -95,7 +95,7 @@ static char	*escape_val(char esc)
     return complex_val(esc);
 }
 
-char	*ft_expand_prompt(const char *prompt)
+char	*expand_prompt(const char *prompt)
 {
     size_t	backslash;
     char	*expanded_prompt;
@@ -115,11 +115,11 @@ char	*ft_expand_prompt(const char *prompt)
     return expanded_prompt;
 }
 
-char	*ft_get_prompt(void)
+char	*ft_prompt(void)
 {
     char *prompt;
-	
-	prompt = ft_expand_prompt(getenv("PS1"));
+
+	prompt = expand_prompt(getenv("PS1"));
     if (!prompt)
         prompt = ft_strdup("");
     return prompt;
