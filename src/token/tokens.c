@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/28 11:20:47 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/29 13:17:41 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_token *ft_token(int *status, char *s)
     int     eval;
 
     tokens = get_tokens(s);
-    free(s);
+    // free(s);
     if (!tokens || split_at_operators(tokens) == RETURN_FAILURE)
     {
         *status = MEM_ERR;

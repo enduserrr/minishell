@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/29 10:02:21 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/29 13:54:51 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,26 @@
 # include "libft/incs/libft.h"
 # include "builtins.h"
 # include "parse.h"
-// # include ""
 
-// # include <errno.h>
+
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-// # include <signal.h>
 # include <stdio.h>
-// # include <stdlib.h>
-// # include <sys/stat.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <signal.h>
+// # include <stdlib.h>
+// # include <sys/stat.h>
+// # include <errno.h>
 
 # define MALLOC_ERROR "Error: malloc fails"
 # define WLCM "\n\nThis (s)hell emulator was created by two shitty students.\
 					\nUse it  at your own risk.\n\n"
 
+/**
+ * @brief	Global variable for signals.
+*/
 
 typedef struct s_hist /*might be useless?*/
 {
@@ -63,6 +66,11 @@ typedef struct s_data
 	int		exit_code;
 }			t_data;
 
+/* SIG */
+void		handle_sigint(int sig);
+void		handle_sigquit(int sig);
+void		handle_sigterm(int sig);
+
 /* BUILTIN */
 void		exit_cmd(t_data *data);
 void		cd_cmd(t_data *data);
@@ -73,6 +81,7 @@ void		unset_cmd(t_data *tools);
 void		export_cmd(t_data *data);
 void		update_pwds(t_data *tools, char *old_pwd);
 
+void		run(t_data *data);
 /* FREE */
 void		free_env(t_data *data);
 void		free_array(char **arr);
