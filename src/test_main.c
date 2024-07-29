@@ -6,12 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/28 11:12:15 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/29 10:03:50 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
-
 //eemelin main
 
 void 	process_cmds(t_data *data)
@@ -65,9 +64,7 @@ int main(int ac, char **av, char **envp)
 		printf("No args accepted");
 		return (0);
 	}
-
-	printf("\33[1;91m%s\e[0m", WELCOME);
+	printf("\33[1;91m%s\e[0m", WLCM);
 	run(&data);
 	return (0);
 }
-

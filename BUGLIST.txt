@@ -1,7 +1,7 @@
-BUGS: 
+BUGS:
 
-segfaults: 
-            input:                  output:                                                                                 
+segfaults:
+            input:                  output:
 
 minishell:  < hello                 segmentation fault (core dumped)
 bash:       < hello                 bash: hello: No such file or directory
@@ -13,7 +13,7 @@ minishell:  < /home/eleppala/Documentstest.txt | grep testi
 bash:
 
 minishell:  < infile  >> out        segmentation fault (core dumped)
-bash:       < infile  >> out        display new prompt --> should do nothing 
+bash:       < infile  >> out        display new prompt --> should do nothing
 
 minishell:
 bash:
@@ -24,57 +24,47 @@ bash:
 
 ----------------------------------------------------------------------------------------------------------------------
 
-minshell:   <                       segmentation fault (core dumbed) 
+minshell:   <                       segmentation fault (core dumbed)
 bash:       <                       bash: syntax error near unexpected token `newline'
-
 FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
 
-
-minishell:  <<                      segmentation fault (core dumbed) 
+minishell:  <<                      segmentation fault (core dumbed)
 bash:       <<                      bash: syntax error near unexpected token `newline'
-
 FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
 
 
-minishell:  |                       segmentation fault (core dumbed) 
+minishell:  |                       segmentation fault (core dumbed)
 bash:       |                       bash: syntax error near unexpected token `|'
-
 FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
 
 
-minishell:  ||                      segmentation fault (core dumbed) 
+minishell:  ||                      segmentation fault (core dumbed)
 bash:       ||                      bash: syntax error near unexpected token `||'
-
 FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
 
 
-minishell:  |||                     segmentation fault (core dumbed) 
+minishell:  |||                     segmentation fault (core dumbed)
 bash:       |||                     bash: syntax error near unexpected token `||'
-
 FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
 
 
-minishell:  >                       segmentation fault (core dumbed) 
+minishell:  >                       segmentation fault (core dumbed)
 bash:       >                       bash: syntax error near unexpected token `newline'
-
 FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
 
 
-minishell:  >>                      segmentation fault (core dumbed) 
+minishell:  >>                      segmentation fault (core dumbed)
 bash:       >>                      bash: syntax error near unexpected token `newline'
-
 FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
 
 
 minishell:  << >>                   segmentation fault (core dumped)
 bash:       << >>                   bash: syntax error near unexpected token `>>'
-
 FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
 
 
 minishell:  <>                      segmentation fault (core dumped)
 bash:       <>                      bash: syntax error near unexpected token `newline'
-
 FIXED:      OK!                     changed from process_cmd(): (data->cmds->av[0] == NULL) ---> (data->cmds == NULL)
 
 
@@ -98,23 +88,31 @@ bash:
 
 
 
-u_behavior: 
+u_behavior:
 
 minishell:  $?                      --> does nothing.. just runs empty..
 bash:       $?                      0: command not found
+FIXED:      OK!
 
-minishell:  ""                      exit: : numeric argument required  
+minishell:  ""                      exit: : numeric argument required
 bash:       ""                      Command '' not found, but can be installed with: ....
 
-minishell:  "  "                    exit: : numeric argument required  
+minishell:  "  "                    exit: : numeric argument required
 bash:       "  "                     : command not found
 
 
 
 
-export: 
-            input:                  output:                             
-minishell:  export xxx====xxxx      xxx="xxxx"              
+export:
+            input:                  output:
+minishell:  export xxx====xxxx      xxx="xxxx"
 bash:       export xxx====xxxx      xxx="===xxxx"
 
+handling "" and '':
+            in:                                 out:
+minishell: ls -laS | grep "drwxr" | wc -l       (nothin)
+minishell: echo drwxrdfe | grep "drwxr"         (nothin)
+minishell: echo "drwxrdfe" | grep "drwxr"       drwxr (correct)
 
+minishell: ls -laS | grep drwxr | wc -l         (nothing)
+minishell: ls -laS | grep "drwxr" | wc -l       6 (correct)

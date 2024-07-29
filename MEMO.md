@@ -15,6 +15,14 @@
 * Prompt? (prolly not needed)
   * Prompt to display infront of input (readline(prompt))
 
+### Bugs:
+* Segfault with ">/</>>/<</|" as the first argument
+  * Invalid mem alloc in get_tokens() anddt_strdup()
+  * Leads to invalid read in expand_env()
+* ''/""/" "/' ' as the argument results in incorrect behaviour
+*
+
+
 ## TEST
 ### Command & syntax
 * Tilde (~(/), ~+(/), ~/, ~-(/), )

@@ -13,7 +13,8 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-/*# include "minishell.h"*/
+// # include "minishell.h"
+// # include ""
 # include "libft/incs/libft.h"
 # include <stdio.h>
 # include <unistd.h>
@@ -62,22 +63,6 @@ typedef struct s_cmd
 }   t_cmd;
 
 /**
- * @brief	Error types in binary.
- *			Enum underlying data type signed int.
-*/
-typedef enum e_error_id
-{
-    ERRNO_ERR,
-    UNSET_ERR = -1,
-    MEM_ERR = 12,
-    TKN_SYNTAX_ERR = 258,
-    AMBIG_REDIR_ERR = -2,
-    IS_DIR_ERR = 126,
-    UNKNOWN_CMD_ERR = 127,
-    NO_FILE_ERR = -3,
-}   t_error_id;
-
-/**
  * @brief	Token identifiers in binary.
 */
 typedef enum e_token_id
@@ -97,7 +82,23 @@ typedef enum e_token_id
 }   t_token_id;
 
 /**
- * @brief   Builtin identifiers in binary.
+ * @brief	Error exit values
+ */
+typedef enum e_error_id
+{
+	ERRNO_ERR,
+	UNSET_ERR = -1,
+	MEM_ERR = 12,
+	TKN_SYNTAX_ERR = 258,
+	AMBIG_REDIR_ERR = -2,
+	IS_DIR_ERR = 126,
+	UNKNOWN_CMD_ERR = 127,
+	NO_FILE_ERR = -3,
+}			t_error_id;
+
+/**
+ * @brief   Builtin identifiers.
+ *			Remove as not needed.
 */
 typedef enum e_builtin_id
 {
