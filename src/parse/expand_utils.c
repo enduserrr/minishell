@@ -27,7 +27,7 @@ static ssize_t	next_env(char *str, size_t env, char is_heredoc)
         if (str[env] == '$' && !backslash && (is_heredoc || quote != '\''))
         {
             if (str[env + 1] == '?')
-                return env;
+                return (env);
             if (ft_isalnum(str[env + 1]) || ft_strchr("!#$&*-?@_", str[env + 1]) ||
                 (str[env + 1] == '\\' && str[env + 2] != '\\') ||
                 (!is_heredoc && !quote && ft_strchr("\'\"", str[env + 1])))
@@ -77,7 +77,7 @@ static char	*check_env(char *var, size_t len, int status)
     env = getenv(var);
     var[len] = temp;
     if (env)
-        return ft_strdup(env);
+        return (ft_strdup(env));
     return (NULL);
 }
 
@@ -109,13 +109,14 @@ char	expand_env(char **s, int status, char id)
     while ((*s)[env]) {
         len = env_len(*s + env);
         val = check_env(*s + env + 1, len - 1, status);
-        if (!val && env == 0 && len == ft_strlen(*s)) {
+        if (!val && env == 0 && len == ft_strlen(*s))
+        {
             if (id == IN_FILE || id == OUT_FILE || id == OUT_A_FILE)
                 return (set_err(AMBIG_REDIR_ERR, *s), RETURN_FAILURE);
             return (RMV);
         }
         if (ft_strinsrt(s, val, env, len) != NULL)
-            return RETURN_FAILURE;
+            return (RETURN_FAILURE);
         if (val != NULL)
             env += ft_strlen(val);
         else
