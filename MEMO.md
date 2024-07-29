@@ -1,27 +1,20 @@
 # MEMO
 ## DEV
 ### To do:
-* Handle "$?" input anywhere in the input str
-  * Possible frame func for next_env() ('if ("$?") else()')
+* Signals
+  * Separate func and call for child process SIGINT too avoid double prompt from Ctr+C
 * Change token->id into int corresponding to i's operator
   * Ability to strcmpr content and call funcs with content
-* Signals
-  * For ctr + c, ctr + d and SIG_IGN ctr -/
-  * Event hook, HEREDOC handling
 * Unified errors and output
   * Error handling frame
   * Writing funcs (errors mainly)
   * Colors for printf's and writes
-* Prompt? (prolly not needed)
-  * Prompt to display infront of input (readline(prompt))
 
 ### Bugs:
 * Segfault with ">/</>>/<</|" as the first argument
   * Invalid mem alloc in get_tokens() anddt_strdup()
   * Leads to invalid read in expand_env()
 * ''/""/" "/' ' as the argument results in incorrect behaviour
-*
-
 
 ## TEST
 ### Command & syntax

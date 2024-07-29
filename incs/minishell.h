@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/29 13:54:51 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/29 15:53:42 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		unset_cmd(t_data *tools);
 void		export_cmd(t_data *data);
 void		update_pwds(t_data *tools, char *old_pwd);
 
-void		run(t_data *data);
+// void		run(t_data *data);
 /* FREE */
 void		free_env(t_data *data);
 void		free_array(char **arr);
