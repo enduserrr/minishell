@@ -20,6 +20,11 @@ void get_path(t_data *data, t_cmd *cmd)
 
     i = 0;
     temp = ft_strjoin("/", cmd->av[0]);
+    if (data->paths == NULL)
+    {
+        cmd->path = NULL;
+        return ;
+    }
     while (data->paths[i] != NULL)
     {
         path = ft_strjoin(data->paths[i], temp);
@@ -36,7 +41,7 @@ void get_path(t_data *data, t_cmd *cmd)
     free(temp);
 }
 
-void execute_one_cmd(t_data *data, int i)
+void execute_cmd(t_data *data, int i)
 {
     t_cmd   *temp;
 
@@ -48,6 +53,7 @@ void execute_one_cmd(t_data *data, int i)
         i --;
     }
     get_path(data, temp);
+    //printf("\npath-->%s\n", temp->path);
     //printf("path: [%s], cmds: [%s] [%s]\n", temp->path, temp->av[0], temp->av[1]);
     if (temp->path != NULL)
     {
@@ -58,8 +64,8 @@ void execute_one_cmd(t_data *data, int i)
     {
         printf("%s: command not found\n", data->cmds->av[0]);
         data->exit_code = 127;
-        if (data->pipe_amount > 0)
-            exit(data->exit_code);
+        //if (data->pipe_amount > 0)
+        exit(data->exit_code);
     }
 }
 
@@ -73,20 +79,27 @@ void simple_arg(t_data *data)
     if(p1 == -1)
         perror("fork");
     if (p1 == 0)
-        execute_one_cmd(data, 0);
+    {
+        check_redir(data, 0);
+        execute_cmd(data, 0);
+    }
     waitpid(p1, &status, 0);
 }
 
 void execution(t_data *data)
 {
+    //redir(data);
     if (pipes_in_prompt(data) == 0)
     {
-        printf("pipe_amount: %d, eitoimi\n", data->pipe_amount);
-        simple_arg(data);
+        if (is_builtin(data) == 0)
+        {
+            //printf("nobuiltin\n");
+            simple_arg(data);
+        }
     }
     if (pipes_in_prompt(data) != 0)
     {
-        printf("pipe_amount: %d, toimii\n", data->pipe_amount);
+        //printf("pipe_amount: %d, toimii\n", data->pipe_amount);
         create_pids(data);
     }
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_results.c                                      :+:      :+:    :+:   */
+/*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 12:34:46 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/23 12:40:55 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/27 16:38:22 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,36 @@
 static t_token *put_token(t_token *tokens, const char *title)
 {
     if (title)
-        printf("\e[1;33m%s\e[0m\n", title);
+        printf("\e[1;90m%s\e[0m\n", title);
     if (!tokens)
-        printf("No tokens\n");
+        printf("\33[90mNo tokens\e[0m\n");
     while (tokens)
     {
         if (tokens->id == WORD)
-            printf("[WORD] ");
+            printf("\33[90m[WORD]\e[0m ");
         else if (tokens->id == IN_FILE)
-            printf("[IN_FILE] ");
+            printf("\33[90m[IN_FILE]\e[0m ");
         else if (tokens->id == OUT_FILE)
-            printf("[OUT_FILE] ");
+            printf("\33[90m[OUT_FILE]\e[0m ");
 		else if (tokens->id == HEREDOC_EOF)
-			printf("[HEREDOC_EOF] ");
+			printf("\33[90m[HEREDOC_EOF]\e[0m ");
 		else if (tokens->id == OUT_A_FILE)
-			printf("[OUT_A_FILE] ");
+			printf("\33[90m[OUT_A_FILE]\e[0m ");
 		else if (tokens->id == COMMAND)
-			printf("[COMMAND] ");
+			printf("\33[90m[COMMAND]\e[0m ");
 		else if (tokens->id == OPERATOR)
-			printf("[OPERATOR] ");
+			printf("\33[90m[OPERATOR]\e[0m ");
 		else if (tokens->id == IN_REDIR)
-			printf("[IN_RED] ");
+			printf("\33[90m[IN_RED]\e[0m ");
 		else if (tokens->id == OUT_REDIR)
-			printf("[OUT_RED] ");
+			printf("\33[90m[OUT_RED]\e[0m ");
 		else if (tokens->id == HEREDOC)
-			printf("[HEREDOC] ");
+			printf("\33[90m[HEREDOC]\e[0m ");
 		else if (tokens->id == OUT_A_REDIR)
-			printf("[OUT_A_RED] ");
+			printf("\33[90m[OUT_A_RED]\e[0m ");
 		else if (tokens->id == PIPE)
-			printf("[PIPE] ");
-		printf("[%s]\n", tokens->content);
+			printf("\33[90m[PIPE]\e[0m ");
+		printf("\33[90m[%s]\e[0m\n", tokens->content);
 		tokens = tokens->next;
 	}
 	return (tokens);
@@ -54,21 +54,21 @@ void	put_command(t_cmd *commands)
 {
 	size_t	i;
 
-	printf("\e[7;37mCOMMANDS\e[0m\n");
+	printf("\e[7;90mCOMMANDS\e[0m\n");
 	if (!commands)
-		printf("no commands\n");
+		printf("\33[90mno commands\e[0m\n");
 	while (commands)
 	{
-		printf("path:\t%s\n", commands->path);
-		printf("args:\t");
+		printf("\33[90mpath:\t%s\e[0m\n", commands->path);
+		printf("\33[90margs:\t");
 		i = 0;
 		while (commands->av && commands->av[i])
-			printf("[%s]", commands->av[i++]);
-		printf("\nredir:\t");
+			printf("\33[90m[%s]\e[0m", commands->av[i++]);
+		printf("\33[90m\nredir:\e[0m\t");
 		put_token(commands->io_redir, 0);
-		printf("fd_in:\t%d\nfd_out:\t%d\n", commands->fd_in, commands->fd_out);
+		printf("\33[90mfd_in:\t%d\nfd_out:\t%d\e[0m\n", commands->fd_in, commands->fd_out);
 		commands = commands->next;
 		if (commands)
-            printf("=========================>\n");
+            printf("\33[90m=========================>\e[0m\n");
 	}
 }

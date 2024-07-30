@@ -23,6 +23,4 @@ typedef struct 		s_env
 
 }					t_env;
 
-
-
 #endif

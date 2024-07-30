@@ -45,7 +45,7 @@ void	remove_variable(t_data *data, int i)
 
 	temp = data->env_list;
 	temp2 = data->env_list->next;
-	if (ft_strncmp(data->cmds->av[i], temp->key, ft_strlen(temp->key)) == 0)
+	if (ft_strncmp(data->cmds->av[i], temp->key, ft_strlen(data->cmds->av[i])) == 0)
 	{
 		temp = free_node(temp);
 		data->env_list = temp2;
@@ -54,7 +54,7 @@ void	remove_variable(t_data *data, int i)
 	while (temp->next != NULL)
 	{
 		if (ft_strncmp(data->cmds->av[i], temp2->key,
-				ft_strlen(temp2->key)) == 0)
+				ft_strlen(data->cmds->av[i])) == 0)
 		{
 			if (temp2->next == NULL)
 			{
@@ -73,16 +73,19 @@ void	remove_variable(t_data *data, int i)
 void	unset_cmd(t_data *data)
 {
 	int	i;
+	int len;
 
 	i = 1;
+	len = 0;
 	data->exit_code = 0;
 	if (!data->cmds->av[1])
 		return ;
 	while (data->cmds->av[i] != NULL)
 	{
+		len = ft_strlen(data->cmds->av[i]);
 		if (validate_arg(data->cmds->av[i]) == 0)
 		{
-			if (ft_strncmp(data->cmds->av[i], "PATH", 4) == 0)
+			if (data->paths && ft_strncmp("PATH", data->cmds->av[i], len) == 0)
 				delete_paths(data);
 			remove_variable(data, i);
 		}
@@ -97,8 +100,9 @@ void	unset_cmd(t_data *data)
  *
  * unset without argument does nothing
  * argument needs to start with alphabet
- *  - if not outputs error, if not outputs error
+ *  - if not outputs error
  * 	- with multiple args deletes all matching key/value pairs from env_list
- *  - if multiple args includes one unvalid arg it shows error,
-	but still does the job.
+ *  - if multiple args includes one unvalid arg it shows error
+ *  - if PATH deletes data->path -array
+ * 
  */

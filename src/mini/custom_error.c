@@ -6,11 +6,27 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/24 12:13:11 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/29 10:02:35 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
+
+/**
+ * @brief	Write error to stderr with or without context.
+ */
+#define RESET       "\033[0m"
+#define BOLD_RED    "\033[1;91m"
+#define BOLD_GREEN  "\033[1;92m"
+#define BOLD_YELLOW "\033[1;93m"
+
+
+static void write_fd(int fd, const char *color, const char *text)
+{
+    write(fd, color, ft_strlen(color));
+    write(fd, text, ft_strlen(text));
+    write(fd, RESET, ft_strlen(RESET));
+}
 
 /**
  * @brief	Write error to stderr with or without context.
@@ -24,16 +40,18 @@ static void write_err(char *s, char *context)
     j = 0;
 	while (s[i])
 		i++;
-	write(2, "Error: ", 7);
+	write_fd(2, BOLD_RED, "\nError: ");
+	// write(2, "Error:\n", 7);
 	write(2, s, i);
 	if (context[j])
 	{
         while (context[j])
             j++;
-		write(2, ": ", 2);
+		write(2, " ('", 3);
 		write(2, context, j);
+		write(2, "')", 2);
 	}
-	write(2, "\n", 1);
+	// write(2, "\n", 1);
 }
 
 /**
