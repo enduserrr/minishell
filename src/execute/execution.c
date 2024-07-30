@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/25 10:24:19 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 09:43:29 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void get_path(t_data *data, t_cmd *cmd)
     {
         path = ft_strjoin(data->paths[i], temp);
         if (access(path, F_OK) == 0)
-        { 
+        {
             free(temp);
             cmd->path = path;
             return ;
@@ -60,7 +60,7 @@ void execute_cmd(t_data *data, int i)
         if(execve(temp->path, temp->av, NULL) != 0)
             perror("eitoimi\n");
     }
-    else 
+    else
     {
         printf("%s: command not found\n", data->cmds->av[0]);
         data->exit_code = 127;
@@ -92,14 +92,8 @@ void execution(t_data *data)
     if (pipes_in_prompt(data) == 0)
     {
         if (is_builtin(data) == 0)
-        {
-            //printf("nobuiltin\n");
             simple_arg(data);
-        }
     }
     if (pipes_in_prompt(data) != 0)
-    {
-        //printf("pipe_amount: %d, toimii\n", data->pipe_amount);
         create_pids(data);
-    }
 }

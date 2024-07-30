@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/29 15:53:42 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 10:02:30 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,14 @@
 // # include <sys/stat.h>
 // # include <errno.h>
 
-# define MALLOC_ERROR "Error: malloc fails"
-# define WLCM "\n\nThis (s)hell emulator was created by two shitty students.\
-					\nUse it  at your own risk.\n\n"
+#define RESET			"\033[0m"
+#define BOLD_RED		"\033[1;91m"
+#define BOLD_GREEN		"\033[1;92m"
+#define BOLD_YELLOW		"\033[1;93m"
+#define BOLD_WHITE		"\033[1;97m"
+# define MALLOC_ERROR	"Error: malloc fails"
+# define WLCM 			"\n\nThis (s)hell emulator was created by two shitty students.\
+							\nUse it  at your own risk.\n\n"
 
 /**
  * @brief	Global variable for signals.
@@ -65,6 +70,12 @@ typedef struct s_data
 
 	int		exit_code;
 }			t_data;
+
+/* WRITE */
+void    	bold_red(int fd, const char *text);
+void    	bold_green(int fd, const char *text);
+void	    bold_white(int fd, const char *text);
+void	    std_write(int fd, const char *text);
 
 /* SIG */
 void		handle_sigint(int sig);
@@ -111,6 +122,8 @@ void		next_pipe(t_data *data, int *prev_fd, int *fd, int i);
 
 /* REDIRECTIONS */
 int			check_redir(t_data *data, int i);
+int 		check_out(t_cmd *temp, int fd);
+int    		heredoc_handler(t_cmd *temp, char *delimiter, int fd_out);
 
 /* HISTORY */
 // void 				create_history(t_data *tools);

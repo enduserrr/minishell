@@ -44,6 +44,7 @@ int check_out(t_cmd *temp, int fd)
 int check_in(t_cmd *temp, int fd, int fd_out)
 {
     //printf("[redir in TRUE]: id: %d\n", temp->io_redir->id);
+
     fd = open(temp->io_redir->content, O_RDONLY);
     if (fd == -1)
         return (close_perror("open: ", fd));
@@ -68,16 +69,18 @@ int check_redir(t_data *data, int i)
     fd_in = 0;
     fd_out = 0;
     temp = data->cmds;
-    //printf("[redir in TRUE]: id: %d\n", temp->io_redir->id);
+    printf("[redir in TRUE]: id: %d\n", temp->io_redir->id);
     while(i > 0 && temp != NULL)
     {
         temp = temp->next;
         i --;
     }
-    if (temp->io_redir && temp->io_redir->id == 5)
+    if (temp->io_redir && temp->io_redir->id == 5) // <
         return (check_in(temp, fd_in, fd_out));
-    else if (temp->io_redir && (temp->io_redir->id == 9 || temp->io_redir->id == 33))
+    else if (temp->io_redir && (temp->io_redir->id == 9 || temp->io_redir->id == 33)) // > // >>
         return (check_out(temp, fd_out));
+    else if (temp->io_redir && (temp->io_redir->id == 17)) // <<
+        return (heredoc_handler(temp, temp->io_redir->content, fd_out));
     //printf("[redir FALSE]\n[check_redir end]\n");
     return (0);
 }

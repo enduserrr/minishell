@@ -106,7 +106,8 @@ char	expand_env(char **s, int status, char id)
     char	*val;
 
     env = next_env(*s, 0, id == HEREDOC);
-    while ((*s)[env]) {
+    while (env < ft_strlen(*s) && (*s)[env])
+    {
         len = env_len(*s + env);
         val = check_env(*s + env + 1, len - 1, status);
         if (!val && env == 0 && len == ft_strlen(*s))

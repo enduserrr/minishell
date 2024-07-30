@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/29 13:17:41 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 10:24:32 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ t_token	*new_token(char *content)
 
 	if (!content)
 		return (set_err(MEM_ERR, "creating token content"), NULL);
-    new = ft_calloc(1, sizeof(t_token));
+    // new = ft_calloc(1, sizeof(t_token));
+    new = malloc(sizeof(t_token));
 	if (!new)
 		return (set_err(MEM_ERR, "creating token"), free(content), NULL);
 	new->id = WORD;
@@ -90,15 +91,13 @@ static t_token    *get_tokens(char *s)
     if (!tokens)
         return (NULL);
     last = tokens;
-    while (1)/*Changing to while (last)*/
-    {/*Without freeing in the end to have the tkn list available*/
+    while (1)
+    {
         tkn = get_next(NULL);
         if (!tkn)
             break ;
         last->next = new_token(ft_strdup(tkn));
         last = last->next;
-        if (!last)
-            return (free_tokens(tokens), NULL);
     }
     return (tokens);
 }
@@ -109,7 +108,7 @@ t_token *ft_token(int *status, char *s)
     int     eval;
 
     tokens = get_tokens(s);
-    // free(s);
+    free(s);
     if (!tokens || split_at_operators(tokens) == RETURN_FAILURE)
     {
         *status = MEM_ERR;
