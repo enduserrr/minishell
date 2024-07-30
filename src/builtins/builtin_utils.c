@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 22:30:17 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/23 22:30:20 by eleppala         ###   ########.fr       */
+/*   Updated: 2024/07/30 12:34:57 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ int	is_builtin(t_data *data)
 {
 	size_t len;
 
+	if (!data->cmds->av)
+		return (0);
 	len = ft_strlen(data->cmds->av[0]);
 	if (ft_strncmp(data->cmds->av[0], "exit", len) == 0)
 		return (exit_cmd(data), 1);
-    if (ft_strncmp(data->cmds->av[0], "cd", len) == 0)
+	if (ft_strncmp(data->cmds->av[0], "cd", len) == 0)
 		return (cd_cmd(data), 1);
 	if (ft_strncmp(data->cmds->av[0], "env", len) == 0)
 		return (env_cmd(data), 1);

@@ -5,15 +5,19 @@ segfaults:
 
 minishell:  < hello                 segmentation fault (core dumped)
 bash:       < hello                 bash: hello: No such file or directory
+FIXED:      OK!
 
 minishell:  < hello < hello         segmentation fault (core dumped)
 bash:       < hello < hello         bash: hello: No such file or directory
+FIXED:      OK!
 
 minishell:  < /home/eleppala/Documentstest.txt | grep testi
 bash:
+FIXED:      OK!
 
 minishell:  < infile  >> out        segmentation fault (core dumped)
 bash:       < infile  >> out        display new prompt --> should do nothing
+FIXED:      OK!
 
 minishell:
 bash:
@@ -99,6 +103,7 @@ bash:       ""                      Command '' not found, but can be installed w
 
 minishell:  "  "                    exit: : numeric argument required
 bash:       "  "                     : command not found
+FIXED:      OK!
 
 
 

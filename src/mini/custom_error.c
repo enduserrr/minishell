@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/29 10:02:35 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 11:15:37 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void write_err(char *s, char *context)
 	while (s[i])
 		i++;
 	write_fd(2, BOLD_RED, "\nError: ");
-	// write(2, "Error:\n", 7);
 	write(2, s, i);
 	if (context[j])
 	{
@@ -51,7 +50,6 @@ static void write_err(char *s, char *context)
 		write(2, context, j);
 		write(2, "')", 2);
 	}
-	// write(2, "\n", 1);
 }
 
 /**
@@ -63,9 +61,9 @@ static int	error_case(int err, char *context)
 	if (err == ERRNO_ERR)
 		return (perror(context), errno);
 	if (err == MEM_ERR)
-		return (write_err("memory allocation failed while ", context), err);
+		return (write_err("memory allocation fail while", context), err);
 	if (err == TKN_SYNTAX_ERR)
-		return (write_err("syntax error near unexpected token: ", context)
+		return (write_err("syntax error near", context)
 			, err);
 	if (err == AMBIG_REDIR_ERR)
 		return (write_err("ambiguous redirect", context), 1);
@@ -74,7 +72,7 @@ static int	error_case(int err, char *context)
 	if (err == UNKNOWN_CMD_ERR)
 		return (write_err("command not found", context), err);
 	if (err == NO_FILE_ERR)
-		return (write_err("No such file or directory", context), 127);
+		return (write_err("no such file or directory", context), 127);
 	if (err == UNSET_ERR)
 		return (write_err("not set", context), 1);
 	return (0);

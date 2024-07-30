@@ -38,7 +38,6 @@ static t_cmd	*init_command(size_t av_count)
 	new->io_redir = NULL;
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;
-	new->builtin = B_NO;
 	new->next = NULL;
 	if (av_count)
 		new->av = ft_calloc(av_count + 1, sizeof(char *));

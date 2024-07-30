@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/30 09:43:29 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 13:56:25 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void get_path(t_data *data, t_cmd *cmd)
     char *temp;
 
     i = 0;
+    if (!cmd->av)
+        return ;
     temp = ft_strjoin("/", cmd->av[0]);
     if (data->paths == NULL)
     {
@@ -48,21 +50,21 @@ void execute_cmd(t_data *data, int i)
     temp = data->cmds;
     while(i > 0)
     {
-        //printf("i %d, temp: %s\n", i, temp->av[0]);
         temp = temp->next;
         i --;
     }
     get_path(data, temp);
-    //printf("\npath-->%s\n", temp->path);
-    //printf("path: [%s], cmds: [%s] [%s]\n", temp->path, temp->av[0], temp->av[1]);
-    if (temp->path != NULL)
+    if (temp->path != NULL && temp->av)
     {
         if(execve(temp->path, temp->av, NULL) != 0)
             perror("eitoimi\n");
     }
     else
     {
-        printf("%s: command not found\n", data->cmds->av[0]);
+        if (!temp->av)
+            printf("no command\n");
+        else
+            printf("%s: command not found\n", temp->av[0]);
         data->exit_code = 127;
         //if (data->pipe_amount > 0)
         exit(data->exit_code);

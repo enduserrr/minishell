@@ -6,17 +6,14 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/30 10:06:00 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 13:57:37 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
 //eemelin main
-
 volatile sig_atomic_t g_signal_status = 0;
-
-
 
 // void    child_sigint(int sig)
 // {
@@ -58,7 +55,7 @@ void handle_sigint(int sig)
  * @brief   Handle SIGTERM (Ctrl+D).
  *          Clear the line and move to new, redisplay the prompt.
 */
-void handle_sigterm(int sig)
+void    handle_sigterm(int sig)
 {
     (void)sig;
     g_signal_status = SIGTERM;
@@ -72,11 +69,6 @@ void 	process_cmds(t_data *data)
 {
 	if (data->cmds == NULL)
         return ;
-    if (data->cmds->av[0] == NULL)
-    {
-        execution(data);
-        return ;
-    }
     if (is_builtin(data) != 0)
 			return ;
 	else
@@ -106,6 +98,8 @@ void run(t_data *data)
             process_cmds(data);
             free_commands(data->cmds);
         }
+        else
+            bold_white(1, "command not found\n");
     }
     free_all(data);
 }
@@ -114,7 +108,9 @@ int main(int ac, char **av, char **envp)
 {
     (void)av;
 	t_data  data;
+    static int  flag;
 
+    flag = 0;
     if (ac != 1)
         return (bold_red(1, "No args accepted\n"), 0);
     signal(SIGINT, handle_sigint);

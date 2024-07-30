@@ -5,7 +5,7 @@ OBJ_DIR	=	.obj
 LIBFT	=	incs/libft/libft.a
 SRCS	=	$(addprefix $(SRC_DIR)/token/, checks.c token_utils.c tokens.c) \
 			$(addprefix $(SRC_DIR)/parse/, commands.c expand_utils.c parse_utils.c \
-				expand.c output.c path.c parse.c) \
+				expand.c output.c parse.c) \
 			$(addprefix $(SRC_DIR)/mini/, custom_error.c run.c free.c \
 			utils.c) \
 			$(addprefix $(SRC_DIR)/redirection/, redirect.c) \

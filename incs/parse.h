@@ -13,8 +13,6 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-// # include "minishell.h"
-// # include ""
 # include "libft/incs/libft.h"
 # include <stdio.h>
 # include <unistd.h>
@@ -29,6 +27,8 @@
  * @brief	Removal flag
  */
 # define RMV -1
+# define SUCCESS 0
+# define FAIL 1
 
 /**
  * @brief	Function return state
@@ -53,12 +53,13 @@ typedef struct s_cmd
     t_token     *io_redir;
     int         fd_in;
     int         fd_out;
-    char        builtin;
 	void		*next;
 }   t_cmd;
 
 /**
  * @brief	Token identifiers in binary.
+ *			Turha vaihtaa kun >> vaatii kaks inttia.
+ *			Helpoi numeroida 0-11?
 */
 typedef enum e_token_id
 {
@@ -77,7 +78,7 @@ typedef enum e_token_id
 }   t_token_id;
 
 /**
- * @brief	Error exit values
+ * @brief	Error exit values. Change to exit 0/1. (static int in main to follow)
  */
 typedef enum e_error_id
 {
@@ -90,23 +91,6 @@ typedef enum e_error_id
 	UNKNOWN_CMD_ERR = 127,
 	NO_FILE_ERR = -3,
 }			t_error_id;
-
-/**
- * @brief   Builtin identifiers.
- *			Remove as not needed.
-*/
-typedef enum e_builtin_id
-{
-	B_NO = 0b00000000,/*0*/
-	B_PARENT = 0b00000001,/*1*/
-	B_EXIT = 0b00000011,/*3*/
-	B_CD = 0b00000101,/*5*/
-	B_EXPORT = 0b00001001,/*9*/
-	B_UNSET = 0b00010001,/*17*/
-	B_PWD = 0b00000010,/*2*/
-	B_ECHO = 0b00000100,/*4*/
-	B_ENV = 0b00001000,/*8*/
-}	t_builtin_id;
 
 
 // char	*get_path(char *name);

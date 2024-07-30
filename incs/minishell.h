@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/30 10:02:30 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 13:47:54 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,6 @@
  * @brief	Global variable for signals.
 */
 
-typedef struct s_hist /*might be useless?*/
-{
-	char			*cmd;
-	struct s_hist	*next;
-}			t_hist;
-
 /**
  * @brief	List description:
  */
@@ -63,7 +57,6 @@ typedef struct s_data
 	char	**new_envp;
 	char	unset_path;
 	t_env	*env_list;
-	t_hist	*history;
 	pid_t	*pid_arr;
 
 	int		pipe_amount;
@@ -79,7 +72,7 @@ void	    std_write(int fd, const char *text);
 
 /* SIG */
 void		handle_sigint(int sig);
-void		handle_sigquit(int sig);
+// void		handle_sigquit(int sig);
 void		handle_sigterm(int sig);
 
 /* BUILTIN */
