@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:56:00 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/25 10:24:27 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 16:15:26 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,9 @@ void last_child(t_data *data, int i, int *prev_fd)
 void childs(t_data *data, int i, int *prev_fd, int *fd)
 {
     if (i == 0)
-    {
         first_child(data, i, fd);
-    }
     else if (i == data->pipe_amount)
-    {
         last_child(data, i, prev_fd);
-    }
     else
     {
         close(prev_fd[1]);

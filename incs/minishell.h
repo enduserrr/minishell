@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/30 13:47:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 16:12:46 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,11 @@ void	    std_write(int fd, const char *text);
 
 /* SIG */
 void		handle_sigint(int sig);
-// void		handle_sigquit(int sig);
+void		handle_sigquit(int sig);
 void		handle_sigterm(int sig);
+// void		sig_handler_child(int sig);
+// void		sigint_handler_heredoc(int sig);
+// void		setup_signal_handlers(void (*int_)(int));
 
 /* BUILTIN */
 void		exit_cmd(t_data *data);
@@ -84,7 +87,8 @@ void		pwd_cmd(t_data *data);
 void		unset_cmd(t_data *tools);
 void		export_cmd(t_data *data);
 void		update_pwds(t_data *tools, char *old_pwd);
-
+int			check_out(t_cmd *temp, int fd);
+int    		heredoc_handler(t_cmd *temp, char *delimiter, int fd_out);
 // void		run(t_data *data);
 /* FREE */
 void		free_env(t_data *data);

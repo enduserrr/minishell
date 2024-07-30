@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/30 13:57:37 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 16:14:49 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,10 @@
 //eemelin main
 volatile sig_atomic_t g_signal_status = 0;
 
-// void    child_sigint(int sig)
-// {
-//     if (sig == SIGINT)
-//     {
-//         g_signal_status = 1;
-//         rl_replace_line("", 0);
-//         rl_on_new_line();
-//         rl_redisplay();
-//         write(1, "  \n", 3);
-//         exit(1);
-//     }
-// }
-
 /**
  * @brief   Handle SIGNINT (Ctrl-C).
  *          Clear the line and move to new, redisplay the prompt.
 */
-
 void handle_sigint(int sig)
 {
     (void)sig;
@@ -46,10 +32,10 @@ void handle_sigint(int sig)
 /**
  * @brief   Ignore SIGQUIT (Ctrl-\)
 */
-// void handle_sigquit(int sig)
-// {
-//     (void)sig;
-// }
+/*void handle_sigquit(int sig)
+{
+     (void)sig;
+}*/
 
 /**
  * @brief   Handle SIGTERM (Ctrl+D).

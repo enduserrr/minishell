@@ -8,7 +8,7 @@ SRCS	=	$(addprefix $(SRC_DIR)/token/, checks.c token_utils.c tokens.c) \
 				expand.c output.c parse.c) \
 			$(addprefix $(SRC_DIR)/mini/, custom_error.c run.c free.c \
 			utils.c) \
-			$(addprefix $(SRC_DIR)/redirection/, redirect.c) \
+			$(addprefix $(SRC_DIR)/redirection/, redirect.c heredoc.c) \
 			$(addprefix $(SRC_DIR)/execute/, paths.c pipes.c pipe_utils.c execution.c) \
 			$(addprefix $(SRC_DIR)/builtins/, exit_cmd.c pwd_cmd.c cd_cmd.c env_cmd.c \
 				builtin_utils.c echo_cmd.c export_cmd.c unset_cmd.c) \

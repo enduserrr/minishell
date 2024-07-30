@@ -3,6 +3,7 @@
 ### To do:
 * Signals
   * Separate func and call for child process SIGINT too avoid double prompt from Ctr+C
+  * Individually call signal() funcs in heredoc, pipes and simple_arg functions
 * Change token->id into int corresponding to i's operator
   * Ability to strcmpr content and call funcs with content
 * Unified errors and output
