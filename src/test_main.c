@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/29 16:21:47 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 10:06:00 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,9 @@ void run(t_data *data)
     int     status;
     t_token *tokens;
 
-    input = NULL;
+    status = 0;
     while(1)
     {
-        status = 0;
         input = readline("$> ");
         if (!input)
         {
@@ -107,7 +106,6 @@ void run(t_data *data)
             process_cmds(data);
             free_commands(data->cmds);
         }
-        free(input);
     }
     free_all(data);
 }
@@ -117,6 +115,8 @@ int main(int ac, char **av, char **envp)
     (void)av;
 	t_data  data;
 
+    if (ac != 1)
+        return (bold_red(1, "No args accepted\n"), 0);
     signal(SIGINT, handle_sigint);
     signal(SIGQUIT, SIG_IGN);/*If not allowed make separate func*/
     signal(SIGTERM, handle_sigterm);
@@ -124,12 +124,7 @@ int main(int ac, char **av, char **envp)
     data.envp = envp;
     create_env_list(&data);
     create_paths(&data);
-    if (ac != 1)
-	{
-		printf("No args accepted");
-		return (0);
-	}
-	printf("\33[1;91m%s\e[0m", WLCM);
+    bold_green(1, WLCM);
 	run(&data);
 	return (0);
 }

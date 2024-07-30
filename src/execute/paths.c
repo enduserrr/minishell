@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 10:52:09 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/25 10:24:14 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 10:32:40 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void delete_paths(t_data *data)
 void create_paths(t_data *data)
 {
     t_env   *temp;
-    
+
     temp = data->env_list;
     while(temp != NULL)
     {
@@ -40,19 +40,19 @@ void create_paths(t_data *data)
 /*
  *  DELETE THIS:
  *
- *  - create_paths(): 
+ *  - create_paths():
  *      - splits PATH from env_list
  *      - splitted path list is needed for executing commands
  *      - array is stored to tools struct: tools->paths
  *      usage:
- *          - creates path array in start of run() function 
- * 
+ *          - creates path array in start of run() function
+ *
  *  - delete_paths():
  *      - deletes array that stores paths
- * 
- *      usage: 
- *          - if command is "unset PATH" 
- *          - 
+ *
+ *      usage:
+ *          - if command is "unset PATH"
+ *          -
  *
  *
  */

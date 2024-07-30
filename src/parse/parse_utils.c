@@ -118,4 +118,5 @@ t_cmd	*alloc_cmd(t_token *tokens)
 		last = last->next;
 	}
 	return (free_commands(commands), NULL);
+
 }

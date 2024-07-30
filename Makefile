@@ -12,7 +12,7 @@ SRCS	=	$(addprefix $(SRC_DIR)/token/, checks.c token_utils.c tokens.c) \
 			$(addprefix $(SRC_DIR)/execute/, paths.c pipes.c pipe_utils.c execution.c) \
 			$(addprefix $(SRC_DIR)/builtins/, exit_cmd.c pwd_cmd.c cd_cmd.c env_cmd.c \
 				builtin_utils.c echo_cmd.c export_cmd.c unset_cmd.c) \
-			$(addprefix $(SRC_DIR)/, test_main.c)
+			$(addprefix $(SRC_DIR)/, writer.c test_main.c)
 OBJ		=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS:.c=.o))
 
 INCS	=	-I incs/minishell.h -I incs/parse.h -I incs/libft/incs -I incs/builtins.h
