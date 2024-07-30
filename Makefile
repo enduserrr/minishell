@@ -1,40 +1,53 @@
+NAME	=	minishell
 
-NAME = minishell
+SRC_DIR	=	src
+OBJ_DIR	=	.obj
+LIBFT	=	incs/libft/libft.a
+SRCS	=	$(addprefix $(SRC_DIR)/token/, checks.c token_utils.c tokens.c) \
+			$(addprefix $(SRC_DIR)/parse/, commands.c expand_utils.c parse_utils.c \
+				expand.c output.c parse.c) \
+			$(addprefix $(SRC_DIR)/mini/, custom_error.c run.c free.c \
+			utils.c) \
+			$(addprefix $(SRC_DIR)/redirection/, redirect.c heredoc.c) \
+			$(addprefix $(SRC_DIR)/execute/, paths.c pipes.c pipe_utils.c execution.c) \
+			$(addprefix $(SRC_DIR)/builtins/, exit_cmd.c pwd_cmd.c cd_cmd.c env_cmd.c \
+				builtin_utils.c echo_cmd.c export_cmd.c unset_cmd.c) \
+			$(addprefix $(SRC_DIR)/, writer.c test_main.c)
+OBJ		=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS:.c=.o))
 
-CC = cc
-FLAGS = -Wall -Wextra -Werror -lreadline
+INCS	=	-I incs/minishell.h -I incs/parse.h -I incs/libft/incs -I incs/builtins.h
+CC		=	cc
+FLAGS	=   -Wall -Wextra -Werror
+RM		=	rm -f
 
-SRCS = 	main.c \
-		srcs/minishell.c \
-		srcs/utils.c \
-		srcs/env_list.c \
-		srcs/update_pwds.c \
-		srcs/history.c \
-		srcs/paths.c \
-		srcs/execution.c \
-		srcs/pipes.c \
-		builtin/cd_cmd.c \
-		builtin/env_cmd.c \
-		builtin/exit_cmd.c \
-		builtin/echo_cmd.c \
-		builtin/pwd_cmd.c \
-		builtin/unset_cmd.c \
-		builtin/export_cmd.c \
+GREY_T	= \33[90m
+WHITE_F = \e[7;37m
+RESET 	= \033[0m
 
-OBJ = $(SRCS:.c=.o)
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
+				@mkdir -p $(dir $@)
+				@$(CC) $(RL) $(FLAGS) $(INCS) -c $< -o $@
+				 @echo "$(GREY_T)compiled: $< into $@$(RESET)"
 
-LIBFT = libft/libft.a
+all:	$(NAME)
 
-$(NAME): $(OBJ)
-	@cd libft && make
-	$(CC) $(FLAGS) $(SRCS) $(LIBFT) -o $(NAME)
+$(NAME):	$(OBJ)
+			@make -C incs/libft -s
+			@$(CC) $(OBJ) $(LIBFT) -lreadline -o $(NAME)
+			@echo "$(WHITE_F)MINISHELL BUILT SUCCESFULLY$(RESET)"
 
-clean : 
-	@rm -f $(OBJ)
-	@cd libft && make clean
 
-fclean : clean
-	@rm -f $(NAME)
-	@cd libft && make fclean
+clean:
+			@$(RM) $(OBJ)
+			@$(RM) -r $(OBJ_DIR)
+			@make clean -C incs/libft -s
+			@echo "$(GREY_T)*.o files & obj dir removed$(RESET)"
 
-all: $(NAME)
+fclean:		clean
+			@$(RM) $(NAME)
+			@make fclean -C incs/libft -s
+			@echo "$(GREY_T)all build artifacts removed$(RESET)"
+
+re:			fclean all
+
+.PHONY:	all clean fclean re
