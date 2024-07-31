@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/31 12:23:31 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/31 17:32:25 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@
 # include <signal.h>
 # include <termios.h>
 #include <bits/sigaction.h>
+#include <curses.h>
+#include <term.h>
 
-#define SA_RESTART		0x10000000
-#define ECHOCTL			0001000  // Example value; ensure it matches your environment
+// #define SA_RESTART		0x10000000
+# define ECHOCTL			0001000
+# define SA_RESTART			0x10000000
 
 #define RESET			"\033[0m"
 #define BOLD_RED		"\033[1;91m"

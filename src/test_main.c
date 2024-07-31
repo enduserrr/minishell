@@ -6,28 +6,56 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/31 12:27:25 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/31 18:58:04 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
+#include <stdbool.h>
 
 //eemelin main
 volatile sig_atomic_t g_signal_status = 0;
 
-void	rl_handler(int sig)
+// static int	only_space(char *line)
+// {
+// 	size_t	i;
+
+// 	if (!line)
+// 		return (1);
+// 	i = -1;
+// 	while (line[++i])
+// 		if (!ft_isspace(line[i]))
+// 			return (0);
+// 	return (1);
+// }
+
+bool	white_space(char *input)
 {
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	(void)sig;
+	int		i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (!ft_isspace(input[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
-void	sig_handler(int sig)
+void rl_handler(int sig)
 {
-	g_signal_status = 1;
-	(void)sig;
+    write(1, "\n", 1);
+    rl_on_new_line();
+    rl_replace_line("", 0);
+    rl_redisplay();
+    (void)sig;
+}
+
+void sig_handler(int sig)
+{
+    g_signal_status = 1;
+    (void)sig;
 }
 
 void 	process_cmds(t_data *data)
@@ -40,6 +68,17 @@ void 	process_cmds(t_data *data)
         execution(data);
 }
 
+int	ftt_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+
+/*sigaction for more control*/
 void run(t_data *data, int *status)
 {
     char    *input;
@@ -47,16 +86,20 @@ void run(t_data *data, int *status)
 
     while(1)
     {
-        g_signal_status = 0;
-        signal(SIGINT, rl_handler);
-        input = readline("$> ");
-        signal(SIGINT, sig_handler);
+        g_signal_status = 0;  /*Handle SIGINT (Ctrl-C)*/
+        input = readline("prompt$ ");
+        signal(SIGINT, sig_handler); /*Restore default handler*/
+        if (!*input)/*!isatty(STDIN_FILENO)*/
+        {
+            printf("what\n");
+            continue ;
+        }
         if (!input)
         {
             write(1, "exit\n", 5);
             break ;
         }
-        if (input[0])
+        else
         {
             add_history(input);
             tokens = ft_token(status, input);
@@ -78,7 +121,6 @@ static void	config_term(void)
         perror("tcgetattr");
         return ;
     }
-	new_term.c_lflag &= ~(ECHOCTL);
     new_term.c_lflag &= ~(ICANON);
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &new_term) == -1)
     {
@@ -103,5 +145,6 @@ int main(int ac, char **av, char **envp)
     bold_green(1, WLCM);
     config_term();
 	run(&data, &status);
-	return (0);
+    status = data.exit_code;
+	return (status);
 }
