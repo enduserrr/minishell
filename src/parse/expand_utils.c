@@ -114,7 +114,7 @@ char	expand_env(char **s, int status, char id)
         {
             if (id == IN_FILE || id == OUT_FILE || id == OUT_A_FILE)
                 return (set_err(AMBIG_REDIR_ERR, *s), RETURN_FAILURE);
-            return (RMV);
+            return (REMOVE);
         }
         if (ft_strinsrt(s, val, env, len) != NULL)
             return (RETURN_FAILURE);

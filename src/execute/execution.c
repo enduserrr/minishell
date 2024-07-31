@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/30 16:13:25 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/31 09:53:08 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ void get_path(t_data *data, t_cmd *cmd)
     free(temp);
 }
 
+int check_access(t_cmd *temp)
+{
+    if (access(temp->av[0], X_OK) == 0)
+        return 1;
+    return (0);
+}
+
 void execute_cmd(t_data *data, int i)
 {
     t_cmd   *temp;
@@ -56,17 +63,21 @@ void execute_cmd(t_data *data, int i)
     get_path(data, temp);
     if (temp->path != NULL && temp->av)
     {
-        if(execve(temp->path, temp->av, NULL) != 0)
+        if(execve(temp->path, temp->av, data->envp) != 0)
             perror("eitoimi\n");
     }
     else
     {
         if (!temp->av)
             printf("no command\n");
+        if(check_access(temp) != 0)
+        {
+            if (execve(temp->av[0], temp->av, data->envp) == -1)
+                perror("exe: ");
+        }
         else
             printf("%s: command not found\n", temp->av[0]);
         data->exit_code = 127;
-        //if (data->pipe_amount > 0)
         exit(data->exit_code);
     }
 }

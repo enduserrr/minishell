@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/30 16:12:46 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/31 12:23:31 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "builtins.h"
 # include "parse.h"
 
-
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -26,9 +25,11 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <signal.h>
-// # include <stdlib.h>
-// # include <sys/stat.h>
-// # include <errno.h>
+# include <termios.h>
+#include <bits/sigaction.h>
+
+#define SA_RESTART		0x10000000
+#define ECHOCTL			0001000  // Example value; ensure it matches your environment
 
 #define RESET			"\033[0m"
 #define BOLD_RED		"\033[1;91m"
@@ -39,9 +40,7 @@
 # define WLCM 			"\n\nThis (s)hell emulator was created by two shitty students.\
 							\nUse it  at your own risk.\n\n"
 
-/**
- * @brief	Global variable for signals.
-*/
+
 
 /**
  * @brief	List description:
@@ -74,6 +73,7 @@ void	    std_write(int fd, const char *text);
 void		handle_sigint(int sig);
 void		handle_sigquit(int sig);
 void		handle_sigterm(int sig);
+void		setup_signal_handling(void);
 // void		sig_handler_child(int sig);
 // void		sigint_handler_heredoc(int sig);
 // void		setup_signal_handlers(void (*int_)(int));
@@ -90,6 +90,7 @@ void		update_pwds(t_data *tools, char *old_pwd);
 int			check_out(t_cmd *temp, int fd);
 int    		heredoc_handler(t_cmd *temp, char *delimiter, int fd_out);
 // void		run(t_data *data);
+
 /* FREE */
 void		free_env(t_data *data);
 void		free_array(char **arr);
@@ -120,9 +121,5 @@ void		next_pipe(t_data *data, int *prev_fd, int *fd, int i);
 /* REDIRECTIONS */
 int			check_redir(t_data *data, int i);
 
-/* HISTORY */
-// void 				create_history(t_data *tools);
-// void 				add_to_history(t_data *tools);
-// void 				free_history(t_data *tools);
 
 #endif

@@ -111,7 +111,7 @@ char	ft_expand(int status, t_token **tokens)
 			return_val = expand_env(&tkn->content, status, tkn->id);
 			if (return_val == RETURN_FAILURE)
 				return (RETURN_FAILURE);
-			else if (return_val == RMV)
+			else if (return_val == REMOVE)
 				tkn = rm_token(tokens, tkn);
 		}
 		if (return_val == RETURN_SUCCESS)

@@ -23,21 +23,17 @@
 # include <sys/stat.h>
 # include <signal.h>
 
-/**
- * @brief	Removal flag
- */
-# define RMV -1
-# define SUCCESS 0
-# define FAIL 1
-
-/**
- * @brief	Function return state
- */
-typedef enum e_return_state
-{
-    RETURN_FAILURE,
-    RETURN_SUCCESS
-}   t_return_state;
+# define 	REMOVE -4
+# define	RETURN_FAILURE 0
+# define 	RETURN_SUCCESS 1
+# define	ERRNO_ERR 0
+# define	UNSET_ERR -1
+# define	MEM_ERR 12
+# define	TKN_SYNTAX_ERR 258
+# define	AMBIG_REDIR_ERR -2
+# define	IS_DIR_ERR 126
+# define	UNKNOWN_CMD_ERR 127
+# define	NO_FILE_ERR -3
 
 typedef struct s_token
 {
@@ -77,21 +73,24 @@ typedef enum e_token_id
 	PIPE = 0b01000010/* | */
 }   t_token_id;
 
-/**
- * @brief	Error exit values. Change to exit 0/1. (static int in main to follow)
- */
-typedef enum e_error_id
-{
-	ERRNO_ERR,
-	UNSET_ERR = -1,
-	MEM_ERR = 12,
-	TKN_SYNTAX_ERR = 258,
-	AMBIG_REDIR_ERR = -2,
-	IS_DIR_ERR = 126,
-	UNKNOWN_CMD_ERR = 127,
-	NO_FILE_ERR = -3,
-}			t_error_id;
 
+// typedef enum e_return_state
+// {
+//     RETURN_FAILURE,
+//     RETURN_SUCCESS
+// }   t_return_state;
+
+// typedef enum e_error_id
+// {
+// 	ERRNO_ERR,
+// 	UNSET_ERR = -1,
+// 	MEM_ERR = 12,
+// 	TKN_SYNTAX_ERR = 258,
+// 	AMBIG_REDIR_ERR = -2,
+// 	IS_DIR_ERR = 126,
+// 	UNKNOWN_CMD_ERR = 127,
+// 	NO_FILE_ERR = -3,
+// }			t_error_id;
 
 // char	*get_path(char *name);
 void    command_path(t_cmd *commands);
