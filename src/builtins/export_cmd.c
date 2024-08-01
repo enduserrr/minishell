@@ -19,7 +19,7 @@ int	key_exists(char **arr, t_data *data)
 	temp = data->env_list;
 	while (temp != NULL)
 	{
-		if (ft_strncmp(temp->key, arr[0], ft_strlen(temp->key)) == 0)
+		if (ft_strncmp(arr[0], temp->key, ft_strlen(arr[0])) == 0)
 		{
 			if (arr[1] == NULL)
 				return (0);
