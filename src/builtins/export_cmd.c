@@ -12,97 +12,64 @@
 
 #include "../../incs/minishell.h"
 
-int	key_exists(char **arr, t_data *data)
+int	key_exists(t_env *new, t_data *data)
 {
 	t_env	*temp;
 
 	temp = data->env_list;
 	while (temp != NULL)
 	{
-		if (ft_strncmp(arr[0], temp->key, ft_strlen(arr[0])) == 0)
+		if (ft_strncmp(new->key, temp->key, ft_strlen(new->key)) == 0)
 		{
-			if (arr[1] == NULL)
+			if (new->value == NULL)
 				return (0);
 			free(temp->value);
-			temp->value = NULL;
-			temp->value = arr[1];
+			temp->value = new->value;
+			free(new->key);
+			free(new);
 			return (0);
 		}
 		temp = temp->next;
 	}
-	return (-1);
+	return (1);
 }
 
-char	*get_value(char **arr, int flag)
+void 	key_and_value(t_env *new, char *str, char c)
 {
-	int		i;
-	char	*temp;
-
-	i = 2;
-	while (arr[i] != NULL)
+	new->key = ft_strdup_till_c(str, c);
+	if (!new->key)
 	{
-		temp = ft_strjoin(arr[1], "=");
-		free(arr[1]);
-		arr[1] = ft_strjoin(temp, arr[i]);
-		free(arr[i]);
-		arr[i] = NULL;
-		free(temp);
-		i++;
+		perror("malloc: ");
+		return ;
 	}
-	if (flag == -1)
+	if ((ft_strlen(new->key) + 1) < ft_strlen(str))
 	{
-		temp = ft_strjoin(arr[1], "=");
-		free(arr[1]);
-		arr[1] = ft_strdup(temp);
-		free(temp);
+		new->value = dup_rest(str, ft_strlen(new->key));
+		if (!new->value)
+		{
+			perror("malloc :");
+			return;
+		}
 	}
-	return (arr[1]);
-}
-
-char	**key_value(char *str)
-{
-	char	**arr;
-	int		len;
-	int		flag;
-
-	len = 0;
-	flag = 0;
-	if (str[ft_strlen(str) - 1] == '=')
-		flag = -1;
-	arr = ft_split(str, '=');
-	while (arr[len] != NULL)
-		len++;
-	if (len < 3)
-		return (arr);
-	arr[1] = get_value(arr, flag);
-	return (arr);
+	else
+		new->value = NULL;
+	new->next = NULL;
 }
 
 void	add_new(t_data *data, char *str)
 {
 	t_env	*temp;
 	t_env	*new;
-	char	**temp_arr;
 
+	temp = data->env_list;
 	new = NULL;
-	temp_arr = key_value(str);
-	if (!temp_arr)
-		perror("malloc");
-	if (key_exists(temp_arr, data) == 0)
-		return ;
 	new = malloc(sizeof(t_env));
 	if (!new)
 		perror("malloc: ");
-	new->key = ft_strdup(temp_arr[0]);
-	printf("new key %s\n\n", new->key);
-	if (temp_arr[1])
-		new->value = ft_strdup(temp_arr[1]);
-	else
-		new->value = NULL;
-	printf("new value %s\n\n", new->value);
-	new->next = NULL;
-	free_array(temp_arr);
-	temp = data->env_list;
+	key_and_value(new, str, '=');
+	printf("%s, %s\n", new->key, new->value);
+	if (key_exists(new, data) == 0)
+		return ;
 	while (temp->next != NULL)
 		temp = temp->next;
 	temp->next = new;
@@ -165,14 +132,14 @@ void	export_cmd(t_data *data)
  *  -  if arg is existing key it has to modify existing variable
  *  -  if arg is existing key but arg has no '=' it does nothing
  *  -  if arg is existing key and has '=' but no value after it makes value ""
- *  -  if arg has multiple '=' it will be splitted from first '='
- * 		- first word will be key, and rest of the string will be value
  * 	-  if args 5 first letters are PATH= creates data->paths -array
  * 
  * 
  *  BUGLIST:
+ * 		- FIXED!!
  *  - if arg is export kakka=====ripuli:
  *  	- result: kakka="ripuli"
- * 		- bash: kakka="===ripuli"
+ * 		- bash: kakka="===ripuli" 
+ * 		- FIXED!!
  * 
  */

@@ -2,3 +2,7 @@ bugfix: builtins/export.c: key_exists():
 - changed strncmp arguments from: (temp->key, arr[0], ft_strlen(temp->key))
 -                                 (arr[0], temp->key, ft_strlen(arr[0]))
 
+bugfix: 
+- kaytannossa koko export.c kirjotettu uudestaan koska ft_split oli perseesta.. 
+- bugi jonka korjasin oli export MAIL====eemeli@hive.fi 
+

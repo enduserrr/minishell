@@ -31,7 +31,8 @@ void	free_env(t_data *data)
 	{
 		temp = current->next;
 		free(current->key);
-		free(current->value);
+		if (current->value)
+			free(current->value);
 		free(current);
 		current = temp;
 	}

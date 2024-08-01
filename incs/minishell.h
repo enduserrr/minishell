@@ -39,7 +39,11 @@
 #define BOLD_GREEN		"\033[1;92m"
 #define BOLD_YELLOW		"\033[1;93m"
 #define BOLD_WHITE		"\033[1;97m"
-# define MALLOC_ERROR	"Error: malloc fails"
+
+# define MALLOC_ERROR	"Error: malloc fails\n"
+# define SPLIT_ERROR	"Error: ft_split fails\n"
+# define JOIN_ERROR		"Error: ft_strjoin fails\n"
+
 # define WLCM 			"\n\nThis (s)hell emulator was created by two shitty students.\
 							\nUse it  at your own risk.\n\n"
 

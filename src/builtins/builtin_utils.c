@@ -12,6 +12,64 @@
 
 #include "../../incs/minishell.h"
 
+char	*ft_strdup_till_c(const char *s1, char c)
+{
+	char	*dup;
+	size_t	i;
+	size_t 	len;
+
+	i = 0;
+	len = 0;
+	while (s1[len] != '\0')
+	{
+		if (s1[len] == c)
+			break ;
+		len ++;
+	}
+	if (len == 0)
+		i++;
+	dup = malloc((len + 1) * sizeof(char));
+	if (!dup)
+		return (NULL);
+	while(i < len)
+	{
+		dup[i] = s1[i];
+		i ++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}
+
+char *dup_rest(char *s, int start)
+{
+	int 	i;
+	int		start1;
+	char 	*temp;
+	
+	i = 0;
+	start1 = start;
+	while(s[start1] != '\0')
+	{
+		i ++;
+		start1 ++; 
+	}
+	printf("i: %d", i);
+	temp = malloc((i + 1) *sizeof(char));
+	if (!temp)
+		return NULL;
+	i = 0;
+	start ++;
+	while(s[start] != '\0')
+	{
+		temp[i] = s[start];
+		printf("temp[i]: %c\n", temp[i]);
+		start ++;
+		i ++;
+	}
+	temp[i] = '\0';
+	return temp;
+}
+
 int	is_builtin(t_data *data)
 {
 	size_t len;
