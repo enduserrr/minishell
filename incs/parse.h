@@ -13,7 +13,6 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-/*# include "minishell.h"*/
 # include "libft/incs/libft.h"
 # include <stdio.h>
 # include <unistd.h>
@@ -24,24 +23,17 @@
 # include <sys/stat.h>
 # include <signal.h>
 
-/**
- * @brief	Global variable for signals.
-*/
-// volatile int	g_var;
-
-/**
- * @brief	Removal flag
- */
-# define RMV -1
-
-/**
- * @brief	Function return state
- */
-typedef enum e_return_state
-{
-    RETURN_FAILURE,
-    RETURN_SUCCESS
-}   t_return_state;
+# define 	REMOVE -4
+# define	RETURN_FAILURE 0
+# define 	RETURN_SUCCESS 1
+# define	ERRNO_ERR 0
+# define	UNSET_ERR -1
+# define	MEM_ERR 12
+# define	TKN_SYNTAX_ERR 258
+# define	AMBIG_REDIR_ERR -2
+# define	IS_DIR_ERR 126
+# define	UNKNOWN_CMD_ERR 127
+# define	NO_FILE_ERR -3
 
 typedef struct s_token
 {
@@ -57,28 +49,13 @@ typedef struct s_cmd
     t_token     *io_redir;
     int         fd_in;
     int         fd_out;
-    char        builtin;
 	void		*next;
 }   t_cmd;
 
 /**
- * @brief	Error types in binary.
- *			Enum underlying data type signed int.
-*/
-typedef enum e_error_id
-{
-    ERRNO_ERR,
-    UNSET_ERR = -1,
-    MEM_ERR = 12,
-    TKN_SYNTAX_ERR = 258,
-    AMBIG_REDIR_ERR = -2,
-    IS_DIR_ERR = 126,
-    UNKNOWN_CMD_ERR = 127,
-    NO_FILE_ERR = -3,
-}   t_error_id;
-
-/**
  * @brief	Token identifiers in binary.
+ *			Turha vaihtaa kun >> vaatii kaks inttia.
+ *			Helpoi numeroida 0-11?
 */
 typedef enum e_token_id
 {
@@ -96,29 +73,32 @@ typedef enum e_token_id
 	PIPE = 0b01000010/* | */
 }   t_token_id;
 
-/**
- * @brief   Builtin identifiers in binary.
-*/
-typedef enum e_builtin_id
-{
-	B_NO = 0b00000000,/*0*/
-	B_PARENT = 0b00000001,/*1*/
-	B_EXIT = 0b00000011,/*3*/
-	B_CD = 0b00000101,/*5*/
-	B_EXPORT = 0b00001001,/*9*/
-	B_UNSET = 0b00010001,/*17*/
-	B_PWD = 0b00000010,/*2*/
-	B_ECHO = 0b00000100,/*4*/
-	B_ENV = 0b00001000,/*8*/
-}	t_builtin_id;
 
+// typedef enum e_return_state
+// {
+//     RETURN_FAILURE,
+//     RETURN_SUCCESS
+// }   t_return_state;
+
+// typedef enum e_error_id
+// {
+// 	ERRNO_ERR,
+// 	UNSET_ERR = -1,
+// 	MEM_ERR = 12,
+// 	TKN_SYNTAX_ERR = 258,
+// 	AMBIG_REDIR_ERR = -2,
+// 	IS_DIR_ERR = 126,
+// 	UNKNOWN_CMD_ERR = 127,
+// 	NO_FILE_ERR = -3,
+// }			t_error_id;
 
 // char	*get_path(char *name);
 void    command_path(t_cmd *commands);
 
 /*Token*/
-t_token *ft_tokens(int *status, char *s);
-t_token	*init_token(char *content);
+t_token *ft_token(int *status, char *s);
+t_token	*new_token(char *content);
+t_token	*rm_token(t_token **top, t_token *remove);
 size_t  unquoted_char(char *s, const char *chars, const char *quotes);
 int		check_tokens(t_token *tokens);
 char    split_at_operators(t_token *tokens);
@@ -131,11 +111,11 @@ t_cmd	*command_table(t_token *tokens);
 void    check_commands(t_token *tokens);
 void 	free_commands(t_cmd *cmds);
 void	put_command(t_cmd *commands);
-char	ft_expand(char **s, int status, char id);
-char	expand_tokens(int status, t_token **tokens);
+char	expand_env(char **s, int status, char id);
+char	ft_expand(int status, t_token **tokens);
+
 
 /*Custom error*/
 int		set_err(int err, char *context);
-ssize_t set_char(char *s, char c, ssize_t i);
 
 #endif

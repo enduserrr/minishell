@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 21:22:35 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/25 10:23:41 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 10:50:11 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	free_all(t_data *data)
 {
-	if (data->path != 0)
+	if (data->paths != 0)
+		delete_paths(data);
+	if (data->path)
 		free(data->path);
 	free_env(data);
-	free_commands(data->cmds);
-	//free_history(data);
 }
 
 void	free_env(t_data *data)

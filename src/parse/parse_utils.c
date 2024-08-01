@@ -38,7 +38,6 @@ static t_cmd	*init_command(size_t av_count)
 	new->io_redir = NULL;
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;
-	new->builtin = B_NO;
 	new->next = NULL;
 	if (av_count)
 		new->av = ft_calloc(av_count + 1, sizeof(char *));
@@ -47,14 +46,34 @@ static t_cmd	*init_command(size_t av_count)
 	return (new);
 }
 
-ssize_t set_char(char *s, char c, ssize_t i)
+/**
+ * @brief	Removes specified token from t_token linked list
+ *			and removes the spaces that was allocated to it.
+ */
+t_token	*rm_token(t_token **top, t_token *remove)
 {
-    if (c == '/' && i < 0)
-		return (ft_strlen(s));
-	if (!s || i < 0 || i > (ssize_t)ft_strlen(s))
-		return (-1);
-	s[i] = c;
-	return (i);
+	t_token	*current;
+	t_token	*prev;
+
+	current = *top;
+	if (current == remove)
+	{
+		*top = current->next;
+		free(current->content);
+		free(current);
+		return (*top);
+	}
+	while (current && current != remove)
+	{
+		prev = current;
+		current = current->next;
+	}
+	if (!current)
+		return (NULL);
+	prev->next = current->next;
+	free(current->content);
+	free(current);
+	return (prev->next);
 }
 
 void	free_commands(t_cmd *commands)
@@ -98,4 +117,5 @@ t_cmd	*alloc_cmd(t_token *tokens)
 		last = last->next;
 	}
 	return (free_commands(commands), NULL);
+
 }

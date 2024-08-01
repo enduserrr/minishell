@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:42:53 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/24 10:27:39 by asalo            ###   ########.fr       */
+/*   Updated: 2024/07/30 15:09:34 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@
 size_t  unquoted_char(char *s, const char *chars, const char *quotes)
 {
     size_t  i;
-    char    quote;
+    char    reference;
 
     i = 0;
-    quote = 0;
+    reference = 0;
     while (s[i])
     {
-        if (!quote && ft_strchr(chars, s[i]))
+        if (!reference && ft_strchr(chars, s[i]))
             break ;
-        if (!quote && ft_strchr(quotes, s[i]))
-            break ;
-        else if (s[i] == quote)
-            quote = 0;
-        i++; 
+        if (!reference && ft_strchr(quotes, s[i]))
+            reference = s[i];
+        else if (s[i] == reference)
+            reference = 0;
+        i++;
     }
     return (i);
 }
@@ -46,7 +46,7 @@ static  char    split_tokens(t_token *token, size_t start)
     size_t  len;
 
     len = ft_strlen(&token->content[start]);
-    new = init_token(ft_substr(token->content, start, len));
+    new = new_token(ft_substr(token->content, start, len));
     if (!new)
         return (RETURN_FAILURE);
     new->next = token->next;
@@ -76,9 +76,8 @@ static char split_checker(t_token *token)
 }
 
 /**
- * @brief   Goes through token list with split_checker
- *          to find any tokens with operator chars
- *          that needs to be split.
+ * @brief   Goes through token list with split_checker()
+ *          to find tokens with operator chars needing to be split.
  */
 char    split_at_operators(t_token *tokens)
 {
