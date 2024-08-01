@@ -1,55 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_main.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/01 06:37:24 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/01 11:38:27 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
-
-//eemelin main
-int g_signal_status = 0;
-
-/**
- * @brief   Handle SIGNINT (Ctrl-C).
- *          Clear the line and move to new, redisplay the prompt.
-*/
-void handle_sigint(int sig)
-{
-    (void)sig;
-    g_signal_status = SIGINT;
-    write(1, "\n", 1);
-    rl_on_new_line();
-    rl_replace_line("", 0);
-    rl_redisplay();
-}
-
-/**
- * @brief   Ignore SIGQUIT (Ctrl-\)
-*/
-/*void handle_sigquit(int sig)
-{
-     (void)sig;
-}*/
-
-/**
- * @brief   Handle SIGTERM (Ctrl+D).
- *          Clear the line and move to new, redisplay the prompt.
-*/
-void    handle_sigterm(int sig)
-{
-    (void)sig;
-    g_signal_status = SIGTERM;
-    write(1, "\n", 1);
-    rl_on_new_line();
-    rl_replace_line("", 0);
-    rl_redisplay();
-}
 
 void 	process_cmds(t_data *data)
 {
@@ -66,10 +27,13 @@ void run(t_data *data)
     char    *input;
     int     status;
     t_token *tokens;
+    extern int  g_sig_status;
 
     status = 0;
     while(1)
     {
+        g_sig_status = 0;
+        signal(SIGINT, signal_handler);
         input = readline("$> ");
         if (!input)
         {
@@ -99,9 +63,7 @@ int main(int ac, char **av, char **envp)
     flag = 0;
     if (ac != 1)
         return (bold_red(1, "No args accepted\n"), 0);
-    signal(SIGINT, handle_sigint);
-    signal(SIGQUIT, SIG_IGN);/*If not allowed make separate func*/
-    signal(SIGTERM, handle_sigterm);
+    signal(SIGQUIT, SIG_IGN);
     data = (t_data){0};
     data.envp = envp;
     create_env_list(&data);

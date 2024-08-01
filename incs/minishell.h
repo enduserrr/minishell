@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/31 17:32:25 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/01 11:44:47 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,11 @@ void		setup_signal_handling(void);
 // void		sig_handler_child(int sig);
 // void		sigint_handler_heredoc(int sig);
 // void		setup_signal_handlers(void (*int_)(int));
+void		sig_handle_heredoc(int sig);
+void		signal_handler(int sig);
+void		sig_handle_child(int sig);
+int			*signal_trigger(void);
+void		sig_handle_nl(int sig);
 
 /* BUILTIN */
 void		exit_cmd(t_data *data);

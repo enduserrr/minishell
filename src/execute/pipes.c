@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:56:00 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/30 16:15:26 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/01 11:02:23 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void    wait_childs(t_data *data)
             data->exit_code = WEXITSTATUS(status);
             //printf("exit_code: %d\n", data->exit_code);
         }
-
         i ++;
     }
     free(data->pid_arr);
@@ -94,6 +93,7 @@ void create_pids(t_data *data)
         perror("malloc");
     while(i <= data->pipe_amount)
     {
+        signal(SIGINT, sig_handle_nl);
         if (i < data->pipe_amount)
             pipe(fd);
         data->pid_arr[i] = fork();
@@ -103,7 +103,7 @@ void create_pids(t_data *data)
             childs(data, i, prev_fd, fd);
         else
             next_pipe(data, prev_fd, fd, i);
-        i ++;
+        i++;
     }
     wait_childs(data);
 }

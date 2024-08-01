@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/31 09:53:08 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/01 10:56:27 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void simple_arg(t_data *data)
 
     status = 0;
     p1 = fork();
+    signal(SIGINT, sig_handle_child);
     if(p1 == -1)
         perror("fork");
     if (p1 == 0)
@@ -97,6 +98,8 @@ void simple_arg(t_data *data)
         execute_cmd(data, 0);
     }
     waitpid(p1, &status, 0);
+    // waitpid(p1, &status, WUNTRACED);
+    // if (WIFEXITED(status) || WIFSIGNALED(status))
     if (WIFEXITED(status))
     {
         data->exit_code = WEXITSTATUS(status);
