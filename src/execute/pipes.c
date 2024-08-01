@@ -69,6 +69,12 @@ void    wait_childs(t_data *data)
     while(i <= data->pipe_amount)
     {
         waitpid(data->pid_arr[i], &status, 0);
+        if (WIFEXITED(status))
+        {
+            data->exit_code = WEXITSTATUS(status);
+            //printf("exit_code: %d\n", data->exit_code);
+        }
+
         i ++;
     }
     free(data->pid_arr);

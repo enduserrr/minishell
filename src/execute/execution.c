@@ -97,6 +97,12 @@ void simple_arg(t_data *data)
         execute_cmd(data, 0);
     }
     waitpid(p1, &status, 0);
+    if (WIFEXITED(status))
+    {
+        data->exit_code = WEXITSTATUS(status);
+        //printf("exit_code: %d\n", data->exit_code);
+    }
+
 }
 
 void execution(t_data *data)
