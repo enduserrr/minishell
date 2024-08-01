@@ -6,14 +6,14 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/31 19:20:32 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/01 06:37:24 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
 //eemelin main
-volatile sig_atomic_t g_signal_status = 0;
+int g_signal_status = 0;
 
 /**
  * @brief   Handle SIGNINT (Ctrl-C).
