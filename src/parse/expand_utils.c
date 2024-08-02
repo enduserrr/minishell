@@ -63,14 +63,13 @@ static size_t	env_len(char *s)
     return (len);
 }
 /*CHANGE STATUS TO SYSTEM RETURN STATE!*/
-static char	*check_env(char *var, size_t len, int status)
+static char	*check_env(char *var, size_t len, t_exit *state)
 {
     char	temp;
     char	*env;
 
     if (var[0] == '?')
-        // return (ft_strdup(ft_itoa(1)));
-        return (ft_itoa(status));
+        return (ft_itoa(state->state));
     if (ft_isdigit(var[0]) || ft_strchr("!#$&*-@_\\\'\"", var[0]))
         return (NULL);
     temp = var[len];
@@ -100,7 +99,7 @@ static void	backlash_escpe(char **s, char is_heredoc)
 	}
 }
 
-char	expand_env(char **s, int status, char id)
+char	expand_env(char **s, t_exit *state, char id)
 {
     size_t	env;
     size_t	len;
@@ -110,15 +109,15 @@ char	expand_env(char **s, int status, char id)
     while (env < ft_strlen(*s) && (*s)[env])
     {
         len = env_len(*s + env);
-        val = check_env(*s + env + 1, len - 1, status);
+        val = check_env(*s + env + 1, len - 1, state);
         if (!val && env == 0 && len == ft_strlen(*s))
         {
             if (id == IN_FILE || id == OUT_FILE || id == OUT_A_FILE)
-                return (set_err(AMBIG_REDIR_ERR, *s), RETURN_FAILURE);
+                return (set_err(AMBIG_REDIR_ERR, *s, state), 1);
             return (REMOVE);
         }
         if (ft_strinsrt(s, val, env, len) != NULL)
-            return (RETURN_FAILURE);
+            return (1);
         if (val != NULL)
             env += ft_strlen(val);
         else
@@ -126,5 +125,5 @@ char	expand_env(char **s, int status, char id)
         free(val);
         env = next_env(*s, env, id == HEREDOC);
     }
-    return (backlash_escpe(s, id == HEREDOC), RETURN_SUCCESS);
+    return (backlash_escpe(s, id == HEREDOC), 0);
 }

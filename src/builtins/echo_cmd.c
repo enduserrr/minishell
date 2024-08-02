@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:37:44 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/20 22:37:47 by eleppala         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:01:24 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	exit_status(t_data *data, int i)
 {
 	//in own function because there might be more pieces to come....
-	//$?$? = 00, pas$?ka  = pas0ka 
+	//$?$? = 00, pas$?ka  = pas0ka
 	(void)i;
-	printf("%d", data->exit_code);
+	printf("%d", data->exit_code->state);
 }
 
 void	echo_cmd(t_data *data)
@@ -27,7 +27,7 @@ void	echo_cmd(t_data *data)
 
 	i = 1;
 	flag = 0;
-	if (data->cmds->av[1] != NULL && 
+	if (data->cmds->av[1] != NULL &&
 		ft_strncmp(data->cmds->av[1], "-n", 2) == 0)
 	{
 		flag = 1;
@@ -45,7 +45,7 @@ void	echo_cmd(t_data *data)
 	}
 	if (flag == 0)
 		printf("\n");
-	data->exit_code = 0;
+	data->exit_code->state = 0;
 }
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:45:34 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/20 22:46:57 by eleppala         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:02:27 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	pwd_cmd(t_data *data)
 {
 	char	*pwd;
 
-	data->exit_code = 0;
+	data->exit_code->state = 0;
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		perror("pwd: ");
@@ -33,7 +33,7 @@ void	pwd_cmd(t_data *data)
  * - outputs current pwd
  * - should work with | or other args
  * - "pwd" "randomshit" --> should output pwd
- * - "pwd" | wc -l --> lines of pwd 
+ * - "pwd" | wc -l --> lines of pwd
  * - "pwd"
  *
  */

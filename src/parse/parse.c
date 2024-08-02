@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/28 11:10:40 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 11:28:54 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@ static void remove_quotes(t_token *tokens)
     }
 }
 
-t_cmd   *ft_parse(int *status, t_token *tokens)
+t_cmd   *ft_parse(t_exit *state, t_token *tokens)
 {
     t_cmd   *commands;
 
-    if (ft_expand(*status, &tokens) == RETURN_FAILURE || !tokens)
+    if (ft_expand(state, &tokens) == 1 || !tokens)
     {
-        *status = EXIT_FAILURE;
+        state->state = EXIT_FAILURE;
         return (free_tokens(tokens), NULL);
     }
     check_commands(tokens);
     remove_quotes(tokens);
-    commands = command_table(tokens);
+    commands = command_table(tokens, state);
     put_command(commands);
     if (!commands)
     {
-        *status = MEM_ERR;
+        state->state = MEM_ERR;
         return (free_tokens(tokens), NULL);
     }
     return (commands);

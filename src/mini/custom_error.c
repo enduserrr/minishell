@@ -6,27 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/30 11:15:37 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 12:07:49 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
-
-/**
- * @brief	Write error to stderr with or without context.
- */
-#define RESET       "\033[0m"
-#define BOLD_RED    "\033[1;91m"
-#define BOLD_GREEN  "\033[1;92m"
-#define BOLD_YELLOW "\033[1;93m"
-
-
-static void write_fd(int fd, const char *color, const char *text)
-{
-    write(fd, color, ft_strlen(color));
-    write(fd, text, ft_strlen(text));
-    write(fd, RESET, ft_strlen(RESET));
-}
 
 /**
  * @brief	Write error to stderr with or without context.
@@ -40,7 +24,7 @@ static void write_err(char *s, char *context)
     j = 0;
 	while (s[i])
 		i++;
-	write_fd(2, BOLD_RED, "\nError: ");
+	write_fd(2, RED, "\nError: ");
 	write(2, s, i);
 	if (context[j])
 	{
@@ -82,10 +66,11 @@ static int	error_case(int err, char *context)
  * @brief	Frame through which the error output funcs are called.
  *			Returns an exit code to be used with exit().
  */
-int	set_err(int err, char *context)
+int	set_err(int err, char *context, t_exit *state)
 {
 	int	i;
 
+	state->state = err;
 	write(2, "minishell: ", 11);
 	i = error_case(err, context);
 	if (err != ERRNO_ERR)

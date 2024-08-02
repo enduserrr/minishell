@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:56:00 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/02 09:25:00 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 11:03:06 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void    wait_childs(t_data *data)
         waitpid(data->pid_arr[i], &status, 0);
         if (WIFEXITED(status))
         {
-            data->exit_code = WEXITSTATUS(status);
-            //printf("exit_code: %d\n", data->exit_code);
+            data->exit_code->state = WEXITSTATUS(status);
+            //printf("exit_code: %d\n", data->exit_code->state);
         }
 
         i ++;

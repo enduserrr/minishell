@@ -95,7 +95,7 @@ static void	assignement_tilde(char **s)
  * @brief	Iterates through the token list and
  *			expands tildes (~) or env vars.
  */
-char	ft_expand(int status, t_token **tokens)
+char	ft_expand(t_exit *state, t_token **tokens)
 {
 	t_token	*tkn;
 	char	return_val;
@@ -103,19 +103,19 @@ char	ft_expand(int status, t_token **tokens)
 	tkn = *tokens;
 	while (tkn)
 	{
-		return_val = RETURN_SUCCESS;
+		return_val = 0;
 		if (tkn->id & WORD && tkn->id != HEREDOC_EOF)
 		{
 			tilde_expander(&tkn->content, 0);
 			assignement_tilde(&tkn->content);
-			return_val = expand_env(&tkn->content, status, tkn->id);
-			if (return_val == RETURN_FAILURE)
-				return (RETURN_FAILURE);
+			return_val = expand_env(&tkn->content, state, tkn->id);
+			if (return_val == 1)
+				return (1);
 			else if (return_val == REMOVE)
 				tkn = rm_token(tokens, tkn);
 		}
-		if (return_val == RETURN_SUCCESS)
+		if (return_val == 0)
 			tkn = tkn->next;
 	}
-	return (RETURN_SUCCESS);
+	return (0);
 }

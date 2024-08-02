@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/02 09:14:28 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 11:51:14 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,9 @@
 # define MINISHELL_H
 
 /* LIBS */
-# include "libft/incs/libft.h"
+# include "general.h"
 # include "builtins.h"
 # include "parse.h"
-
-# include <fcntl.h>
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdio.h>
-# include <sys/wait.h>
-# include <unistd.h>
-# include <signal.h>
-# include <termios.h>
-#include <bits/sigaction.h>
-#include <curses.h>
-#include <term.h>
-
-// #define SA_RESTART		0x10000000
-# define ECHOCTL			0001000
-# define SA_RESTART			0x10000000
-
-#define RESET			"\033[0m"
-#define BOLD_RED		"\033[1;91m"
-#define BOLD_GREEN		"\033[1;92m"
-#define BOLD_YELLOW		"\033[1;93m"
-#define BOLD_WHITE		"\033[1;97m"
-
-# define MALLOC_ERROR	"Error: malloc fails\n"
-# define SPLIT_ERROR	"Error: ft_split fails\n"
-# define JOIN_ERROR		"Error: ft_strjoin fails\n"
-
-# define WLCM 			"\n\nThis (s)hell emulator was created by two shitty students.\
-							\nUse it  at your own risk.\n\n"
 
 /**
  * @brief	List description:
@@ -65,21 +36,10 @@ typedef struct s_data
 
 	int		pipe_amount;
 
-	int		exit_code;
+	t_exit	*exit_code;
 }			t_data;
 
-/* WRITE */
-void    	bold_red(int fd, const char *text);
-void    	bold_green(int fd, const char *text);
-void	    bold_white(int fd, const char *text);
-void	    std_write(int fd, const char *text);
 
-/* SIGNAL */
-void		sig_handle_heredoc(int sig);
-void		signal_handler(int sig);
-void		sig_handle_child(int sig);
-int			*signal_trigger(void);
-void		sig_handle_nl(int sig);
 
 /* BUILTIN */
 void		exit_cmd(t_data *data);
@@ -92,9 +52,9 @@ void		export_cmd(t_data *data);
 void		update_pwds(t_data *tools, char *old_pwd);
 int			check_out(t_cmd *temp, int fd);
 int    		heredoc_handler(t_cmd *temp, char *delimiter, int fd_out);
-// void		run(t_data *data);
 
 /* FREE */
+void		free_all(t_data *tools);
 void		free_env(t_data *data);
 void		free_array(char **arr);
 
@@ -102,8 +62,6 @@ void		free_array(char **arr);
 void		create_env_list(t_data *data);
 
 /* UTILS */
-void		free_array(char **arr);
-void		free_all(t_data *tools);
 int			ft_arraylen(char **arr);
 
 /* PATHS */
@@ -114,7 +72,6 @@ void		delete_paths(t_data *data);
 int			is_builtin(t_data *data);
 void		execution(t_data *tools);
 void		execute_cmd(t_data *tools, int i);
-// void				run(char **envp);
 
 /* PIPES */
 int			pipes_in_prompt(t_data *tools);

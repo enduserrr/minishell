@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:21:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/30 10:51:36 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 10:45:51 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,13 @@ static void	set_redir(t_token *tokens, t_cmd *commands)
 	}
 }
 
-t_cmd	*command_table(t_token *tokens)
+t_cmd	*command_table(t_token *tokens, t_exit *state)
 {
 	t_cmd	*commands;
 
 	commands = alloc_cmd(tokens);
 	if (!commands)
-		return (set_err(MEM_ERR, "creating command table"), NULL);
+		return (set_err(MEM_ERR, "creating command table", state), NULL);
 	args_to_table(tokens, commands);
 	alter_token(&tokens);
 	set_redir(tokens, commands);

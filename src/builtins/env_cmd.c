@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:37:59 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/20 22:38:02 by eleppala         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:01:34 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,5 @@ void	print_env(t_env *env)
 void	env_cmd(t_data *data)
 {
 	print_env(data->env_list);
-	data->exit_code = 0;
+	data->exit_code->state = 0;
 }
-
-/*
- * DELETE THIS
- *
- * outputs env variables
- * outputs only variables that has key and value.
- * 
- */ 

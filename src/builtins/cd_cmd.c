@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:37:04 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/20 22:37:15 by eleppala         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:01:05 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	cd_error(t_data *data)
 {
 	perror("cd");
-	data->exit_code = 1;
+	data->exit_code->state = 1;
 }
 
 static void	trim_last(t_data *data, char *pwd)
@@ -69,12 +69,12 @@ void	cd_cmd(t_data *data)
 	char	*old_pwd;
 
 	old_pwd = NULL;
-	data->exit_code = 0;
+	data->exit_code->state = 0;
 	old_pwd = getcwd(NULL, 0);
 	if(!old_pwd)
 		perror("cwd");
 	if (data->cmds->av[1] == NULL)
-		data->exit_code = cd_home(data);
+		data->exit_code->state = cd_home(data);
 	else if (ft_strncmp(data->cmds->av[1], "..", 2) == 0)
 	{
 		trim_last(data, old_pwd);
@@ -110,7 +110,7 @@ void	cd_cmd(t_data *data)
  *  cd/path/paths/pathsss/ 			moves to: end of path 				0
  *
  *  Things to consider:
- *  - what happens if you delete current file from another terminal window 
+ *  - what happens if you delete current file from another terminal window
  *  - do you need to handle ../path
  *
  */

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/30 12:18:14 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 11:29:07 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	free_tokens(t_token *tokens)
 /**
  * @brief   Inits a new token (allocs mem, assigns id and next ptr.
  */
-t_token	*new_token(char *content)
+t_token	*new_token(char *content, t_exit *state)
 {
 	t_token	*new;
 
 	if (!content)
-		return (set_err(MEM_ERR, "creating token content"), NULL);
+		return (set_err(MEM_ERR, "creating token content", state), NULL);
     // new = ft_calloc(1, sizeof(t_token));
     new = malloc(sizeof(t_token));
 	if (!new)
-		return (set_err(MEM_ERR, "creating token"), free(content), NULL);
+		return (set_err(MEM_ERR, "creating token", state), free(content), NULL);
 	new->id = WORD;
 	new->content = content;
 	new->next = NULL;
@@ -78,7 +78,7 @@ static char    *get_next(char *s)
  * @brief   Init linked list for tokens. Calls get_next() to init the nbr of
  *          nodes required. Returns ptr to top node
  */
-static t_token    *get_tokens(char *s)
+static t_token    *get_tokens(char *s, t_exit *state)
 {
     t_token *tokens;
     t_token *last;
@@ -87,7 +87,7 @@ static t_token    *get_tokens(char *s)
     tkn = get_next(s);
     if (!tkn)
         return (NULL);
-    tokens = new_token(ft_strdup(tkn));
+    tokens = new_token(ft_strdup(tkn), state);
     if (!tokens)
         return (NULL);
     last = tokens;
@@ -96,28 +96,28 @@ static t_token    *get_tokens(char *s)
         tkn = get_next(NULL);
         if (!tkn)
             break ;
-        last->next = new_token(ft_strdup(tkn));
+        last->next = new_token(ft_strdup(tkn), state);
         last = last->next;
     }
     return (tokens);
 }
 
-t_token *ft_token(int *status, char *s)
+t_token *ft_token(t_exit *state, char *s)
 {
     t_token *tokens;
     int     eval;
 
-    tokens = get_tokens(s);
+    tokens = get_tokens(s, state);
     free(s);
-    if (!tokens || split_at_operators(tokens) == RETURN_FAILURE)
+    if (!tokens || split_at_operators(tokens, state) == 1)
     {
-        *status = MEM_ERR;
+        state->state = MEM_ERR;
         return (free_tokens(tokens), NULL);
     }
-    eval = check_tokens(tokens);
-    if (eval != RETURN_SUCCESS)
+    eval = check_tokens(tokens, state);
+    if (eval != 0)
     {
-        *status = eval;
+        state->state = eval;
         return (free_tokens(tokens), NULL);
     }
     return (tokens);

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/02 09:20:37 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 11:03:33 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void execute_cmd(t_data *data, int i)
         }
         else
             printf("%s: command not found\n", temp->av[0]);
-        data->exit_code = 127;
-        exit(data->exit_code);
+        data->exit_code->state = 127;
+        exit(data->exit_code->state);
     }
 }
 
@@ -102,8 +102,8 @@ void simple_arg(t_data *data)
     // if (WIFEXITED(status) || WIFSIGNALED(status))
     if (WIFEXITED(status))
     {
-        data->exit_code = WEXITSTATUS(status);
-        //printf("exit_code: %d\n", data->exit_code);
+        data->exit_code->state = WEXITSTATUS(status);
+        //printf("exit_code: %d\n", data->exit_code->state);
     }
 }
 

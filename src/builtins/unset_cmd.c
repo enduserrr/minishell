@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:31:39 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/21 15:31:45 by eleppala         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:02:43 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	unset_cmd(t_data *data)
 
 	i = 1;
 	len = 0;
-	data->exit_code = 0;
+	data->exit_code->state = 0;
 	if (!data->cmds->av[1])
 		return ;
 	while (data->cmds->av[i] != NULL)
@@ -104,5 +104,5 @@ void	unset_cmd(t_data *data)
  * 	- with multiple args deletes all matching key/value pairs from env_list
  *  - if multiple args includes one unvalid arg it shows error
  *  - if PATH deletes data->path -array
- * 
+ *
  */

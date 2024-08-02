@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:31:04 by eleppala          #+#    #+#             */
-/*   Updated: 2024/05/21 15:31:07 by eleppala         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:02:18 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	export_cmd(t_data *data)
 	int	i;
 
 	i = 1;
-	data->exit_code = 0;
+	data->exit_code->state = 0;
 	if (!data->cmds->av[1])
 		output_export(data->env_list);
 	while (data->cmds->av[i] != NULL)
@@ -104,7 +104,7 @@ void	export_cmd(t_data *data)
 		{
 			printf("export: `%s': is not a valid identifier\n",
 				data->cmds->av[i]);
-			data->exit_code = 1;
+			data->exit_code->state = 1;
 		}
 		else
 		{
@@ -133,13 +133,13 @@ void	export_cmd(t_data *data)
  *  -  if arg is existing key but arg has no '=' it does nothing
  *  -  if arg is existing key and has '=' but no value after it makes value ""
  * 	-  if args 5 first letters are PATH= creates data->paths -array
- * 
- * 
+ *
+ *
  *  BUGLIST:
  * 		- FIXED!!
  *  - if arg is export kakka=====ripuli:
  *  	- result: kakka="ripuli"
- * 		- bash: kakka="===ripuli" 
+ * 		- bash: kakka="===ripuli"
  * 		- FIXED!!
- * 
+ *
  */

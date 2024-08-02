@@ -13,6 +13,7 @@
 ### Issues
 * $? leaks memory
 * Heredoc SIGINT
+* Make error handling consistant
 
 ### To do:
 * Signals
