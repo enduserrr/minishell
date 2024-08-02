@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/31 09:53:08 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 09:20:37 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void execute_cmd(t_data *data, int i)
     {
         if (!temp->av)
             printf("no command\n");
-        if(check_access(temp) != 0)
+        if(check_access(temp) != 0)/*access(X_OK) here instead of separate function*/
         {
             if (execve(temp->av[0], temp->av, data->envp) == -1)
                 perror("exe: ");
@@ -89,6 +89,7 @@ void simple_arg(t_data *data)
 
     status = 0;
     p1 = fork();
+    signal(SIGINT, sig_handle_child);
     if(p1 == -1)
         perror("fork");
     if (p1 == 0)
@@ -97,12 +98,13 @@ void simple_arg(t_data *data)
         execute_cmd(data, 0);
     }
     waitpid(p1, &status, 0);
+    // waitpid(p1, &status, WUNTRACED);
+    // if (WIFEXITED(status) || WIFSIGNALED(status))
     if (WIFEXITED(status))
     {
         data->exit_code = WEXITSTATUS(status);
         //printf("exit_code: %d\n", data->exit_code);
     }
-
 }
 
 void execution(t_data *data)

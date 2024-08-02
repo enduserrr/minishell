@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/31 17:32:25 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 09:14:28 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@
 # define WLCM 			"\n\nThis (s)hell emulator was created by two shitty students.\
 							\nUse it  at your own risk.\n\n"
 
-
-
 /**
  * @brief	List description:
  */
@@ -76,14 +74,12 @@ void    	bold_green(int fd, const char *text);
 void	    bold_white(int fd, const char *text);
 void	    std_write(int fd, const char *text);
 
-/* SIG */
-void		handle_sigint(int sig);
-void		handle_sigquit(int sig);
-void		handle_sigterm(int sig);
-void		setup_signal_handling(void);
-// void		sig_handler_child(int sig);
-// void		sigint_handler_heredoc(int sig);
-// void		setup_signal_handlers(void (*int_)(int));
+/* SIGNAL */
+void		sig_handle_heredoc(int sig);
+void		signal_handler(int sig);
+void		sig_handle_child(int sig);
+int			*signal_trigger(void);
+void		sig_handle_nl(int sig);
 
 /* BUILTIN */
 void		exit_cmd(t_data *data);

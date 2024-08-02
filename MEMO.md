@@ -1,5 +1,19 @@
 # MEMO
 ## DEV
+### Copy:
+* main.c X
+* signal.c X
+* execution.c X
+* pipe_utils.c X
+* pipes.c X
+* heredoc.c X
+* parse.c
+* minishell.h X
+
+### Issues
+* $? leaks memory
+* Heredoc SIGINT
+
 ### To do:
 * Signals
   * Separate func and call for child process SIGINT too avoid double prompt from Ctr+C
