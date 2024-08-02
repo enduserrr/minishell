@@ -69,7 +69,8 @@ static char	*check_env(char *var, size_t len, int status)
     char	*env;
 
     if (var[0] == '?')
-        return (ft_strdup(ft_itoa(status)));
+        // return (ft_strdup(ft_itoa(1)));
+        return (ft_itoa(status));
     if (ft_isdigit(var[0]) || ft_strchr("!#$&*-@_\\\'\"", var[0]))
         return (NULL);
     temp = var[len];

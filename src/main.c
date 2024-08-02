@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/02 09:15:50 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 09:37:25 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,10 @@ void run(t_data *data)
     char    *input;
     int     status;
     t_token *tokens;
-    extern int  g_sig_status;
 
     status = 0;
     while(1)
     {
-        g_sig_status = 0;
         signal(SIGINT, signal_handler);
         input = readline("$> ");
         if (!input)
@@ -58,9 +56,7 @@ int main(int ac, char **av, char **envp)
 {
     (void)av;
 	t_data  data;
-    static int  flag;
 
-    flag = 0;
     if (ac != 1)
         return (bold_red(1, "No args accepted\n"), 0);
     signal(SIGQUIT, SIG_IGN);

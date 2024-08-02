@@ -6,13 +6,13 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:59:04 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/02 09:16:30 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 09:37:50 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-int	g_sig_status = 0;
+// int	g_sig_status = 0;
 
 void	sig_handle_nl(int sig)
 {
