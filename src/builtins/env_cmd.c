@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:37:59 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/02 11:01:34 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 14:10:48 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	add_to_env(t_env *env, t_data *data, int i)
 	temp2 = env;
 	temp = malloc(sizeof(t_env));
 	if (!temp)
+	{
+		data->exit_code->state = 1;
 		perror("malloc");
+	}
 	temp_arr = ft_split(data->envp[i], '=');
 	temp->key = ft_strdup(temp_arr[0]);
 	temp->value = ft_strdup(temp_arr[1]);
@@ -41,7 +44,10 @@ void	create_env_list(t_data *data)
 	i = 1;
 	env = malloc(sizeof(t_env));
 	if(!env)
+	{
+		data->exit_code->state = 1;
 		perror("malloc");
+	}
 	temp_arr = ft_split(data->envp[0], '=');
 	env->key = ft_strdup(temp_arr[0]);
 	env->value = ft_strdup(temp_arr[1]);

@@ -113,7 +113,7 @@ char	expand_env(char **s, t_exit *state, char id)
         if (!val && env == 0 && len == ft_strlen(*s))
         {
             if (id == IN_FILE || id == OUT_FILE || id == OUT_A_FILE)
-                return (set_err(AMBIG_REDIR_ERR, *s, state), 1);
+                return (set_err(1, "ambiguous redirect", state));
             return (REMOVE);
         }
         if (ft_strinsrt(s, val, env, len) != NULL)

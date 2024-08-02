@@ -59,11 +59,7 @@ void	sig_handle_child(int sig);
 int		*signal_trigger(void);
 void	sig_handle_nl(int sig);
 
-/* WRITE WITH COLORS */
-// void	write_red(int fd, const char *text);
-// void	write_green(int fd, const char *text);
-// void	write_white(int fd, const char *text);
-// void	std_write(int fd, const char *text);
+/* WRITE */
 void write_fd(int fd, const char *color, const char *text);
 
 #endif

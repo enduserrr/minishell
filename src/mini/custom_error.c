@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/02 12:07:49 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/02 14:08:21 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void write_err(char *s, char *context)
     j = 0;
 	while (s[i])
 		i++;
-	write_fd(2, RED, "\nError: ");
+	write_fd(2, RED, "Error: ");
 	write(2, s, i);
 	if (context[j])
 	{
