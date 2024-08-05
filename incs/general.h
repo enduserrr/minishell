@@ -25,6 +25,7 @@
 # include <readline/readline.h>		/*readline*/
 # include <fcntl.h>					/*open*/
 # include <term.h>					/*tgetent etc*/
+#include <termios.h>
 
 # define RED		"\033[1;91m"
 # define GREEN		"\033[1;92m"

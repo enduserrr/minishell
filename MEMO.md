@@ -15,6 +15,8 @@
 * Heredoc SIGINT
 * Make error handling consistant
 
+* env | grep PWD | wc -l doesn't work
+
 ### To do:
 * Signals
   * Separate func and call for child process SIGINT too avoid double prompt from Ctr+C

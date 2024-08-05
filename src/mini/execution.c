@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/05 13:42:56 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/05 15:37:57 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void get_path(t_data *data, t_cmd *cmd)
     free(temp);
 }
 
-int check_access(t_cmd *temp)
-{
-    if (access(temp->av[0], X_OK) == 0)
-        return 1;
-    return (0);
-}
+// int check_access(t_cmd *temp)
+// {
+//     if (access(temp->av[0], X_OK) == 0)
+//         return 1;
+//     return (0);
+// }
 
 void execute_cmd(t_data *data, int i)
 {
@@ -61,7 +61,7 @@ void execute_cmd(t_data *data, int i)
         i --;
     }
     get_path(data, temp);
-    if (temp->path != NULL && temp->av)
+    if (temp->path != NULL && temp->av && ft_strlen(temp->av[0]) >= 1)/*command longer than 0 chars. Cathces "" & '' commands*/
     {
         if(execve(temp->path, temp->av, data->envp) != 0)
             perror("eitoimi\n");
@@ -70,7 +70,8 @@ void execute_cmd(t_data *data, int i)
     {
         if (!temp->av)
             printf("no command\n");
-        if(check_access(temp) != 0)/*access(X_OK) here instead of separate function*/
+        if(access(temp->av[0], X_OK) == 0)
+        // if(check_access(temp) != 0)
         {
             if (execve(temp->av[0], temp->av, data->envp) == -1)
                 perror("exe: ");
@@ -97,10 +98,10 @@ void simple_arg(t_data *data)
         check_redir(data, 0);
         execute_cmd(data, 0);
     }
-    waitpid(p1, &status, 0);
-    // waitpid(p1, &status, WUNTRACED);
-    // if (WIFEXITED(status) || WIFSIGNALED(status))
-    if (WIFEXITED(status))
+    // waitpid(p1, &status, 0);
+    waitpid(p1, &status, WUNTRACED);
+    if (WIFEXITED(status) || WIFSIGNALED(status))
+    // if (WIFEXITED(status))
     {
         data->exit_code->state = WEXITSTATUS(status);
         //printf("exit_code: %d\n", data->exit_code->state);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eleppala <eleppala@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 15:29:44 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/27 15:29:47 by eleppala         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:32:24 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ int pipes_in_prompt(t_data *data)
 
     temp = data->cmds;
     flag = 0;
-    while(temp->next != NULL)
+    while(temp->next)
     {
+        flag++;
         temp = temp->next;
-        flag ++;
+        // flag ++;
     }
     data->pipe_amount = flag;
     return (flag);
