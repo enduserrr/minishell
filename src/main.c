@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/02 16:22:33 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/05 10:11:36 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void run(t_data *data, t_exit *state)
 
     while(1)
     {
-        read_input();
+        // read_input();
         signal(SIGINT, signal_handler);
         input = readline("$> ");
         if (!input)
@@ -122,7 +122,7 @@ static void	config_terminal(void)
 
 	tcgetattr(STDIN_FILENO, &new_term);
 	new_term.c_lflag &= ~(ICANON);
-    new_term.c_cc[VMIN] = 1;
+    new_term.c_cc[VMIN] = 2;
     new_term.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
 }
