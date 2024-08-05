@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 22:30:17 by eleppala          #+#    #+#             */
-/*   Updated: 2024/07/30 12:34:57 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/05 11:59:45 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ char *dup_rest(char *s, int start)
 	int 	i;
 	int		start1;
 	char 	*temp;
-	
+
 	i = 0;
 	start1 = start;
 	while(s[start1] != '\0')
 	{
 		i ++;
-		start1 ++; 
+		start1 ++;
 	}
 	printf("i: %d", i);
 	temp = malloc((i + 1) *sizeof(char));
