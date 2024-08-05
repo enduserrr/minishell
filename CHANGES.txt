@@ -6,3 +6,20 @@ bugfix:
 - kaytannossa koko export.c kirjotettu uudestaan koska ft_split oli perseesta.. 
 - bugi jonka korjasin oli export MAIL====eemeli@hive.fi 
 
+
+
+bugfix: 5.8 18:30
+- env | grep PWD ei toimi, koska jos linessa on | childit ei mene is_buildin kautta.
+- export | grep PWD ei toimi, koska jos linessa on | childit ei mene is_buildin kautta.
+- echo hello hello | wc -l ei toimi
+- pwd grep | / ei toimi 
+
+--->    tein buildin_from_child() funktion builtin_utils.c 
+--->    addasin execute_cmd() else haaraan iffin, buildin_from_child(), joka tsekkaa etta onko 
+        kyseessa export, env, pwd tai echo. 
+--->    lisaksi env on tuplana (buildin ja pathissa), joten taytyy ohjata env komento else haaraan, 
+        etta se tulee suoritettua buildinin kautta. Muuten env list ei paivity oikein, vaan kayttaa koneen
+        alkuperaista env listia.  
+--->    lisasin get_path() jalkeiseen iffiin stringcomparen jos komento on "env"
+--->    poistin (is_buildin) if checkin process_cmd() funktiossa. ei enaa tarvitse tassa kohtaa. 
+

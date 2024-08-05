@@ -61,7 +61,8 @@ void execute_cmd(t_data *data, int i)
         i --;
     }
     get_path(data, temp);
-    if (temp->path != NULL && temp->av && ft_strlen(temp->av[0]) >= 1)/*command longer than 0 chars. Cathces "" & '' commands*/
+    if (temp->path != NULL && temp->av && ft_strlen(temp->av[0]) >= 1 
+    && ft_strncmp(temp->av[0], "env", ft_strlen(temp->av[0]) != 0))/*command longer than 0 chars. Cathces "" & '' commands*/
     {
         if(execve(temp->path, temp->av, data->envp) != 0)
             perror("eitoimi\n");
@@ -77,7 +78,10 @@ void execute_cmd(t_data *data, int i)
                 perror("exe: ");
         }
         else
-            printf("%s: command not found\n", temp->av[0]);
+        {    
+            if (builtin_from_child(data, temp) == 0)
+                printf("%s: command not found\n", temp->av[0]);
+        }
         data->exit_code->state = 127;
         exit(data->exit_code->state);
     }

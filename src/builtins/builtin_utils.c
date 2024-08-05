@@ -70,6 +70,24 @@ char *dup_rest(char *s, int start)
 	return temp;
 }
 
+int builtin_from_child(t_data *data, t_cmd *cmds)
+{
+	size_t len;
+
+	if (!data->cmds->av)
+		return (0);
+	len = ft_strlen(cmds->av[0]);
+	if (ft_strncmp(cmds->av[0], "env", len) == 0)
+		return (env_cmd(data), 1);
+	if (ft_strncmp(cmds->av[0], "echo", len) == 0)
+		return (echo_cmd(data), 1);
+	if (ft_strncmp(cmds->av[0], "pwd", len) == 0)
+		return (pwd_cmd(data), 1);
+	if (ft_strncmp(cmds->av[0], "export", len) == 0)
+		return (export_cmd(data), 1);
+	return (0);
+}
+
 int	is_builtin(t_data *data)
 {
 	size_t len;

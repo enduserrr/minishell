@@ -69,6 +69,7 @@ void		create_paths(t_data *data);
 void		delete_paths(t_data *data);
 
 /* EXECUTION */
+int 		builtin_from_child(t_data *data, t_cmd *cmds);
 int			is_builtin(t_data *data);
 void		execution(t_data *tools);
 void		execute_cmd(t_data *tools, int i);
