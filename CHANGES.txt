@@ -23,3 +23,15 @@ bugfix: 5.8 18:30
 --->    lisasin get_path() jalkeiseen iffiin stringcomparen jos komento on "env"
 --->    poistin (is_buildin) if checkin process_cmd() funktiossa. ei enaa tarvitse tassa kohtaa. 
 
+
+bugfix: 6.8 11:00
+- pwd poistetusta kansiosta ei toimi
+- cd .. poistetusta kansiosta --> segfault
+
+--->    isoja muutoksia cd_cmd 
+        - old_pwd riville lisacheckeja
+        - jos ".." siirretty omaan funktioon (cd_prev) rivien saastamisen takia
+        - cd erroriin lisatty free(old_pwd)
+        - uptade_pwd siirretty kaikissa kohdissa toteutumaan vain jos chdir ei feilaa.
+--->    getcwd taytyy checkata parissa kohdassa tuplana, koska feilaa jos cwd = poistettu file
+        - oma funktio ft_get_cwd() pwd_cmd.c tiedostoon 

@@ -12,9 +12,10 @@
 
 #include "../../incs/minishell.h"
 
-static void	cd_error(t_data *data)
+static void	cd_error(t_data *data, char *old_pwd)
 {
 	perror("cd");
+	free(old_pwd);
 	data->exit_code->state = 1;
 }
 
@@ -42,7 +43,7 @@ static void	trim_last(t_data *data, char *pwd)
 	data->prev_path[i] = '\0';
 }
 
-static int	cd_home(t_data *data)
+static void	cd_home(t_data *data, char *old_pwd)
 {
 	t_env	*temp;
 
@@ -53,15 +54,31 @@ static int	cd_home(t_data *data)
 		{
 			if (chdir(temp->value) == -1)
 			{
-				perror("cd");
-				return (1);
+				cd_error(data, old_pwd);
+				return ; 
 			}
-			return (0);
+			update_pwds(data, old_pwd);
+			data->exit_code->state = 1;
+			return ;
 		}
 		temp = temp->next;
 	}
 	printf("cd: HOME not set\n");
-	return (1);
+	data->exit_code->state = 1;
+}
+
+static void cd_prev(t_data *data, char *old_pwd)
+{
+	trim_last(data, old_pwd);
+	if (chdir(data->prev_path) == -1)
+		cd_error(data, old_pwd);
+	else
+	{
+		update_pwds(data, old_pwd);
+		data->exit_code->state = 0;
+	}
+	free(data->prev_path);
+	data->prev_path = NULL;
 }
 
 void	cd_cmd(t_data *data)
@@ -72,23 +89,22 @@ void	cd_cmd(t_data *data)
 	data->exit_code->state = 0;
 	old_pwd = getcwd(NULL, 0);
 	if(!old_pwd)
-		perror("cwd");
-	if (data->cmds->av[1] == NULL)
-		data->exit_code->state = cd_home(data);
-	else if (ft_strncmp(data->cmds->av[1], "..", 2) == 0)
 	{
-		trim_last(data, old_pwd);
-		if (chdir(data->prev_path) == -1)
-			cd_error(data);
-		free(data->prev_path);
-		data->prev_path = NULL;
+		old_pwd = ft_get_cwd(data->env_list);
+		if (!old_pwd)
+			return ;
 	}
+	if (data->cmds->av[1] == NULL)
+		cd_home(data, old_pwd);
+	else if (ft_strncmp(data->cmds->av[1], "..", ft_strlen(data->cmds->av[1])) == 0)
+		cd_prev(data, old_pwd);
 	else
 	{
 		if (chdir(data->cmds->av[1]) == -1)
-			cd_error(data);
+			cd_error(data, old_pwd);
+		else 
+			update_pwds(data, old_pwd);
 	}
-	update_pwds(data, old_pwd);
 }
 
 /*
