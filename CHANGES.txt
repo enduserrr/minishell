@@ -35,3 +35,8 @@ bugfix: 6.8 11:00
         - uptade_pwd siirretty kaikissa kohdissa toteutumaan vain jos chdir ei feilaa.
 --->    getcwd taytyy checkata parissa kohdassa tuplana, koska feilaa jos cwd = poistettu file
         - oma funktio ft_get_cwd() pwd_cmd.c tiedostoon 
+
+added: 7.8 17:20
+- echo redirection 
+
+-->     koko echo_cmd muokattu uudeksi
