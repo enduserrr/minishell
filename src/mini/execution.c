@@ -99,7 +99,8 @@ void simple_arg(t_data *data)
         perror("fork");
     if (p1 == 0)
     {
-        check_redir(data, 0);
+        if (check_redir(data, 0) < 0)
+            return ;
         execute_cmd(data, 0);
     }
     // waitpid(p1, &status, 0);
