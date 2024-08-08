@@ -12,13 +12,14 @@
 
 #include "../../incs/minishell.h"
 
-char 	*ft_get_cwd(t_env *env)
+char	*ft_get_cwd(t_env *env)
 {
-	t_env *temp = env;
-	char *str;
+	t_env	*temp;
+	char	*str;
 
+	temp = env;
 	str = NULL;
-	while(temp->next != NULL)
+	while (temp->next != NULL)
 	{
 		if (ft_strncmp(temp->key, "PWD", ft_strlen(temp->key)) == 0)
 		{

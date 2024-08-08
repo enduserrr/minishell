@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:50:07 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/20 12:48:24 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:37:08 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 		else
 			break ;
 	}
-	// new = (char *)malloc(size * sizeof(char) + 1);
 	new = ft_calloc(size + 1, sizeof(char));
 	if (!new)
 		return (0);

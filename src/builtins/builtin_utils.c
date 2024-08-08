@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 22:30:17 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/05 11:59:45 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:48:42 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strdup_till_c(const char *s1, char c)
 {
 	char	*dup;
 	size_t	i;
-	size_t 	len;
+	size_t	len;
 
 	i = 0;
 	len = 0;
@@ -24,55 +24,55 @@ char	*ft_strdup_till_c(const char *s1, char c)
 	{
 		if (s1[len] == c)
 			break ;
-		len ++;
+		len++;
 	}
 	if (len == 0)
 		i++;
 	dup = malloc((len + 1) * sizeof(char));
 	if (!dup)
 		return (NULL);
-	while(i < len)
+	while (i < len)
 	{
 		dup[i] = s1[i];
-		i ++;
+		i++;
 	}
 	dup[i] = '\0';
 	return (dup);
 }
 
-char *dup_rest(char *s, int start)
+char	*dup_rest(char *s, int start)
 {
-	int 	i;
+	int		i;
 	int		start1;
-	char 	*temp;
+	char	*temp;
 
 	i = 0;
 	start1 = start;
-	while(s[start1] != '\0')
+	while (s[start1] != '\0')
 	{
-		i ++;
-		start1 ++;
+		i++;
+		start1++;
 	}
 	printf("i: %d", i);
-	temp = malloc((i + 1) *sizeof(char));
+	temp = malloc((i + 1) * sizeof(char));
 	if (!temp)
-		return NULL;
+		return (NULL);
 	i = 0;
-	start ++;
-	while(s[start] != '\0')
+	start++;
+	while (s[start] != '\0')
 	{
 		temp[i] = s[start];
 		printf("temp[i]: %c\n", temp[i]);
-		start ++;
-		i ++;
+		start++;
+		i++;
 	}
 	temp[i] = '\0';
-	return temp;
+	return (temp);
 }
 
-int builtin_from_child(t_data *data, t_cmd *cmds)
+int	builtin_from_child(t_data *data, t_cmd *cmds)
 {
-	size_t len;
+	size_t	len;
 
 	if (!data->cmds->av)
 		return (0);
@@ -90,7 +90,7 @@ int builtin_from_child(t_data *data, t_cmd *cmds)
 
 int	is_builtin(t_data *data)
 {
-	size_t len;
+	size_t	len;
 
 	if (!data->cmds->av)
 		return (0);
@@ -111,13 +111,14 @@ int	is_builtin(t_data *data)
 		return (export_cmd(data), 1);
 	return (0);
 }
+
 void	update_pwds(t_data *data, char *old_pwd)
 {
-	char    *pwd;
-    t_env   *temp;
+	char	*pwd;
+	t_env	*temp;
 
 	pwd = getcwd(NULL, 0);
-    temp = data->env_list;
+	temp = data->env_list;
 	while (temp->next != NULL)
 	{
 		if (ft_strncmp(temp->key, "OLDPWD", 6) == 0)

@@ -6,13 +6,13 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 11:49:45 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/23 19:20:08 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:38:37 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/libft.h"
 
-static	int	word_count(const char *s, char c)
+static int	word_count(const char *s, char c)
 {
 	int	i;
 	int	count;
@@ -34,7 +34,7 @@ static	int	word_count(const char *s, char c)
 	return (count - (s[i - 1] == c));
 }
 
-static	int	start_point(const char *s, char c, int w)
+static int	start_point(const char *s, char c, int w)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ static	int	start_point(const char *s, char c, int w)
 	return (i);
 }
 
-static	int	w_len(const char *s, char c, int w)
+static int	w_len(const char *s, char c, int w)
 {
 	int	i;
 	int	a;

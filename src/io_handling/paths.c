@@ -12,24 +12,24 @@
 
 #include "../../incs/minishell.h"
 
-void delete_paths(t_data *data)
+void	delete_paths(t_data *data)
 {
-    free_array(data->paths);
-    data->paths = NULL;
+	free_array(data->paths);
+	data->paths = NULL;
 }
 
-void create_paths(t_data *data)
+void	create_paths(t_data *data)
 {
-    t_env   *temp;
+	t_env	*temp;
 
-    temp = data->env_list;
-    while(temp != NULL)
-    {
-        if (ft_strncmp(temp->key, "PATH", 4) == 0)
-        {
-            data->paths = ft_split(temp->value, ':');
-            break ;
-        }
-        temp = temp->next;
-    }
+	temp = data->env_list;
+	while (temp != NULL)
+	{
+		if (ft_strncmp(temp->key, "PATH", 4) == 0)
+		{
+			data->paths = ft_split(temp->value, ':');
+			break ;
+		}
+		temp = temp->next;
+	}
 }

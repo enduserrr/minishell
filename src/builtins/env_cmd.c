@@ -43,7 +43,7 @@ void	create_env_list(t_data *data)
 
 	i = 1;
 	env = malloc(sizeof(t_env));
-	if(!env)
+	if (!env)
 	{
 		data->exit_code->state = 1;
 		perror("malloc");

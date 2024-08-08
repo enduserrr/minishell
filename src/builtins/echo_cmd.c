@@ -14,20 +14,22 @@
 
 static int	echo_redir(t_data *data)
 {
-	int fd_out;
+	int	fd_out;
 
 	fd_out = -1;
 	if (data->cmds->io_redir->id == 9)
 	{
-		fd_out = open(data->cmds->io_redir->content, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		fd_out = open(data->cmds->io_redir->content,
+				O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		printf("%d\n", fd_out);
-    	if (fd_out == -1)
+		if (fd_out == -1)
 			return (perror("open :"), -1);
 	}
 	else
-    {
-		fd_out = open(data->cmds->io_redir->content, O_WRONLY | O_CREAT | O_APPEND, 0777);
-        if (fd_out == -1)
+	{
+		fd_out = open(data->cmds->io_redir->content,
+				O_WRONLY | O_CREAT | O_APPEND, 0777);
+		if (fd_out == -1)
 			return (perror("open :"), -1);
 	}
 	if (dup2(fd_out, STDOUT_FILENO) == -1)
@@ -38,15 +40,15 @@ static int	echo_redir(t_data *data)
 	return (0);
 }
 
-static void output_echo(t_data *data)
+static void	output_echo(t_data *data)
 {
-	int i;
-	int flag;
+	int	i;
+	int	flag;
 
 	i = 1;
 	flag = 0;
-	if (data->cmds->av[1] != NULL &&
-		ft_strncmp(data->cmds->av[1], "-n", 2) == 0)
+	if (data->cmds->av[1] != NULL && ft_strncmp(data->cmds->av[1], "-n",
+			2) == 0)
 	{
 		flag = 1;
 		i++;
@@ -65,17 +67,17 @@ static void output_echo(t_data *data)
 
 void	echo_cmd(t_data *data)
 {
-	int orig_fd;
+	int	orig_fd;
 
 	orig_fd = -1;
-	if (data->cmds->io_redir && (data->cmds->io_redir->id == 9 ||
-	 data->cmds->io_redir->id == 33))
+	if (data->cmds->io_redir && (data->cmds->io_redir->id == 9
+			|| data->cmds->io_redir->id == 33))
 	{
-	 	orig_fd = dup(STDOUT_FILENO);
+		orig_fd = dup(STDOUT_FILENO);
 		if (orig_fd == -1 || echo_redir(data) == -1)
-		{	
+		{
 			close(orig_fd);
-			data->exit_code->state = 1; 
+			data->exit_code->state = 1;
 			return ;
 		}
 	}
@@ -84,6 +86,6 @@ void	echo_cmd(t_data *data)
 	{
 		if (dup2(orig_fd, STDOUT_FILENO) == -1)
 			perror("dup2: ");
-    	close(orig_fd);
+		close(orig_fd);
 	}
 }

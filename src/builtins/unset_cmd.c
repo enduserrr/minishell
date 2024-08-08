@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:31:39 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/02 11:02:43 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:50:07 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	remove_variable(t_data *data, int i)
 
 	temp = data->env_list;
 	temp2 = data->env_list->next;
-	if (ft_strncmp(data->cmds->av[i], temp->key, ft_strlen(data->cmds->av[i])) == 0)
+	if (ft_strncmp(data->cmds->av[i], temp->key,
+			ft_strlen(data->cmds->av[i])) == 0)
 	{
 		temp = free_node(temp);
 		data->env_list = temp2;
@@ -73,7 +74,7 @@ void	remove_variable(t_data *data, int i)
 void	unset_cmd(t_data *data)
 {
 	int	i;
-	int len;
+	int	len;
 
 	i = 1;
 	len = 0;

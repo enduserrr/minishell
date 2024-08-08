@@ -14,8 +14,8 @@
 # define MINISHELL_H
 
 /* LIBS */
-# include "general.h"
 # include "builtins.h"
+# include "general.h"
 # include "parse.h"
 
 /**
@@ -39,8 +39,6 @@ typedef struct s_data
 	t_exit	*exit_code;
 }			t_data;
 
-
-
 /* BUILTIN */
 void		exit_cmd(t_data *data);
 void		cd_cmd(t_data *data);
@@ -51,7 +49,7 @@ void		unset_cmd(t_data *tools);
 void		export_cmd(t_data *data);
 void		update_pwds(t_data *tools, char *old_pwd);
 int			check_out(t_cmd *temp, int fd);
-int    		heredoc_handler(t_cmd *temp, char *delimiter, int fd_out);
+int			heredoc_handler(t_cmd *temp, char *delimiter, int fd_out);
 
 /* FREE */
 void		free_all(t_data *tools);
@@ -69,7 +67,7 @@ void		create_paths(t_data *data);
 void		delete_paths(t_data *data);
 
 /* EXECUTION */
-int 		builtin_from_child(t_data *data, t_cmd *cmds);
+int			builtin_from_child(t_data *data, t_cmd *cmds);
 int			is_builtin(t_data *data);
 void		execution(t_data *tools);
 void		execute_cmd(t_data *tools, int i);
@@ -81,6 +79,5 @@ void		next_pipe(t_data *data, int *prev_fd, int *fd, int i);
 
 /* REDIRECTIONS */
 int			check_redir(t_data *data, int i);
-
 
 #endif

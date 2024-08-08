@@ -15,7 +15,7 @@
 /**
  * @brief	Checks command count and sets command into token content.
  *			If it's a pipe, skips ahead.
-*/
+ */
 static void	args_to_table(t_token *tokens, t_cmd *commands)
 {
 	size_t	av_count;
@@ -47,8 +47,8 @@ static void	alter_token(t_token **tokens)
 		next = tkn->next;
 		if ((tkn->id & OPERATOR) && tkn->id != PIPE)
 			free(tkn->content);
-		if (((tkn->id & OPERATOR) && tkn->id != PIPE)
-			|| tkn->id == COMMAND || tkn->id == WORD)
+		if (((tkn->id & OPERATOR) && tkn->id != PIPE) || tkn->id == COMMAND
+			|| tkn->id == WORD)
 		{
 			free(tkn);
 			if (temp)

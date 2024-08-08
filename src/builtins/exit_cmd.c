@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:38:10 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/05 12:05:16 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:49:35 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,3 @@ void	exit_cmd(t_data *data)
 		exit(data->exit_code->state);
 	}
 }
-
-/*
- * DELETE THIS
- *
- * exit command exits and frees everything (might need updates with freeing later)
- * exit can take argument, but it needs to be numeric
- * 	- if non numeric outputs error and exits
- * 	- if first is numeric and there are more args outputs "too many args"
- *
- * FEATURES:
- *
- * 	Command:					output:						exit_code:	result:
- *  exit without args			"Exit"						0			exit
- * 	exit with numeric arg		"Exit"						(arg)		exit
- *  exit with multiple args		"Too many arguments"		1			continue
- * 	exit with nonnumeric arg	"Numeric arg required.." 	255			exit
- *
- */

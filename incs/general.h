@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   # include "general.h"                                       :+:      :+:    :+:   */
+/*   general.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 10:03:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/02 11:50:47 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:32:44 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,45 @@
 # define GENERAL_H
 
 # include "libft/incs/libft.h"
-# include <stdlib.h>
-# include <stdio.h>
-# include <sys/stat.h>
 # include <errno.h>
-# include <signal.h>
-# include <sys/wait.h>				/*for waitpid*/
-# include <unistd.h>				/*execve*/
-# include <readline/history.h>		/*readline*/
-# include <readline/readline.h>		/*readline*/
-# include <fcntl.h>					/*open*/
-# include <term.h>					/*tgetent etc*/
-#include <termios.h>
-# include <stdbool.h>
-# include <sys/ioctl.h>
-
+# include <fcntl.h> /*open*/
 # include <limits.h>
+# include <readline/history.h>  /*readline*/
+# include <readline/readline.h> /*readline*/
+# include <signal.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/ioctl.h>
 # include <sys/resource.h>
+# include <sys/stat.h>
+# include <sys/wait.h> /*for waitpid*/
+# include <term.h>     /*tgetent etc*/
+# include <termios.h>
+# include <unistd.h> /*execve*/
 
-# define RED		"\033[1;91m"
-# define GREEN		"\033[1;92m"
-# define YELLOW		"\033[1;93m"
-# define WHITE		"\033[0;37m"
-# define RESET			"\033[0m"
+# define RED "\033[1;91m"
+# define GREEN "\033[1;92m"
+# define YELLOW "\033[1;93m"
+# define WHITE "\033[0;37m"
+# define RESET "\033[0m"
 
-# define WLCM 			"\n\nThis (s)hell emulator was created by two shitty students.\
+# define WLCM "\n\nThis (s)hell emulator was created by two shitty students.\
 							\nUse it  at your own risk.\n\n"
 
-# define	ERRNO_ERR 0
-# define	UNSET_ERR -1
-# define	MEM_ERR 12
-# define	TKN_SYNTAX_ERR 258
-# define	AMBIG_REDIR_ERR -2
-# define	IS_DIR_ERR 126
-# define	UNKNOWN_CMD_ERR 127
-# define	NO_FILE_ERR -3
+# define ERRNO_ERR 0
+# define UNSET_ERR -1
+# define MEM_ERR 12
+# define TKN_SYNTAX_ERR 258
+# define AMBIG_REDIR_ERR -2
+# define IS_DIR_ERR 126
+# define UNKNOWN_CMD_ERR 127
+# define NO_FILE_ERR -3
 
 typedef struct s_exit
 {
 	int	state;
-}	t_exit;
+}		t_exit;
 
 /* CUSTOM ERROR OUTPUT */
 int		set_err(int err, char *context, t_exit *state);
@@ -66,6 +65,6 @@ int		*signal_trigger(void);
 void	sig_handle_nl(int sig);
 
 /* WRITE */
-void write_fd(int fd, const char *color, const char *text);
+void	write_fd(int fd, const char *color, const char *text);
 
 #endif

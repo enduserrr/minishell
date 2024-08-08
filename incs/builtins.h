@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-typedef struct 		s_env
+typedef struct s_env
 {
 	char			*key;
 	char			*value;
@@ -23,8 +23,8 @@ typedef struct 		s_env
 
 }					t_env;
 
-char 	*dup_rest(char *s, int start);
-char	*ft_strdup_till_c(const char *s1, char c);
-char 	*ft_get_cwd(t_env *env);
+char				*dup_rest(char *s, int start);
+char				*ft_strdup_till_c(const char *s1, char c);
+char				*ft_get_cwd(t_env *env);
 
 #endif

@@ -60,6 +60,6 @@ void	sig_handle_heredoc(int sig)
 		*trigger = 1;
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
-        rl_on_new_line();
+		rl_on_new_line();
 	}
 }

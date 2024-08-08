@@ -34,7 +34,7 @@ int	key_exists(t_env *new, t_data *data)
 	return (1);
 }
 
-void 	key_and_value(t_env *new, char *str, char c)
+void	key_and_value(t_env *new, char *str, char c)
 {
 	new->key = ft_strdup_till_c(str, c);
 	if (!new->key)
@@ -48,7 +48,7 @@ void 	key_and_value(t_env *new, char *str, char c)
 		if (!new->value)
 		{
 			perror("malloc :");
-			return;
+			return ;
 		}
 	}
 	else

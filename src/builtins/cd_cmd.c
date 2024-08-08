@@ -32,7 +32,7 @@ static void	trim_last(t_data *data, char *pwd)
 			break ;
 		len--;
 	}
-	data->prev_path = malloc(len + 1* sizeof(char));
+	data->prev_path = malloc(len + 1 * sizeof(char));
 	if (!data->prev_path)
 		perror("malloc: ");
 	while (i < len)
@@ -55,7 +55,7 @@ static void	cd_home(t_data *data, char *old_pwd)
 			if (chdir(temp->value) == -1)
 			{
 				cd_error(data, old_pwd);
-				return ; 
+				return ;
 			}
 			update_pwds(data, old_pwd);
 			data->exit_code->state = 1;
@@ -67,7 +67,7 @@ static void	cd_home(t_data *data, char *old_pwd)
 	data->exit_code->state = 1;
 }
 
-static void cd_prev(t_data *data, char *old_pwd)
+static void	cd_prev(t_data *data, char *old_pwd)
 {
 	trim_last(data, old_pwd);
 	if (chdir(data->prev_path) == -1)
@@ -88,7 +88,7 @@ void	cd_cmd(t_data *data)
 	old_pwd = NULL;
 	data->exit_code->state = 0;
 	old_pwd = getcwd(NULL, 0);
-	if(!old_pwd)
+	if (!old_pwd)
 	{
 		old_pwd = ft_get_cwd(data->env_list);
 		if (!old_pwd)
@@ -96,13 +96,14 @@ void	cd_cmd(t_data *data)
 	}
 	if (data->cmds->av[1] == NULL)
 		cd_home(data, old_pwd);
-	else if (ft_strncmp(data->cmds->av[1], "..", ft_strlen(data->cmds->av[1])) == 0)
+	else if (ft_strncmp(data->cmds->av[1], "..",
+			ft_strlen(data->cmds->av[1])) == 0)
 		cd_prev(data, old_pwd);
 	else
 	{
 		if (chdir(data->cmds->av[1]) == -1)
 			cd_error(data, old_pwd);
-		else 
+		else
 			update_pwds(data, old_pwd);
 	}
 }

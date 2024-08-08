@@ -1,43 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                            :+:      :+:    :+:   */
+/*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:20:32 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/21 12:54:21 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:43:18 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
 
-
 /**
  * @brief	Makes a filepath for the given username.
  */
-static char *create_user_path(const char *username)
+static char	*create_user_path(const char *username)
 {
-    const char	*prefix;
-    size_t		len;
-    char		*path;
+	const char	*prefix;
+	size_t		len;
+	char		*path;
 
 	if (!username)
 		return (NULL);
 	prefix = "/Users/";
 	len = ft_strlen(username) + ft_strlen(prefix);
 	path = ft_calloc(len + 1, sizeof(char));
-    if (!path)
-        return (NULL);
-    ft_memcpy(path, prefix, ft_strlen(prefix));
-    ft_memcpy(&path[ft_strlen(prefix)], username, ft_strlen(username));
-    path[len] = '\0';
-    return (path);
+	if (!path)
+		return (NULL);
+	ft_memcpy(path, prefix, ft_strlen(prefix));
+	ft_memcpy(&path[ft_strlen(prefix)], username, ft_strlen(username));
+	path[len] = '\0';
+	return (path);
 }
 
-static ssize_t set_char(char *s, char c, ssize_t i)
+static ssize_t	set_char(char *s, char c, ssize_t i)
 {
-    if (c == '/' && i < 0)
+	if (c == '/' && i < 0)
 		return (ft_strlen(s));
 	if (!s || i < 0 || i > (ssize_t)ft_strlen(s))
 		return (-1);
@@ -58,11 +57,11 @@ static void	tilde_expander(char **s, size_t i)
 		return ;
 	if (getenv("HOME") && ((*s)[i + 1] == '\0' || (*s)[i + 1] == '/'))
 		ft_strinsrt(s, getenv("HOME"), i, 1);
-	else if (getenv("PWD") && (*s)[i + 1] == '+'
-		&& ((*s)[i + 2] == '\0' || (*s)[i + 2] == '/'))
+	else if (getenv("PWD") && (*s)[i + 1] == '+' && ((*s)[i + 2] == '\0'
+			|| (*s)[i + 2] == '/'))
 		ft_strinsrt(s, getenv("PWD"), i, 2);
-	else if (getenv("OLDPWD") && (*s)[i + 1] == '-'
-		&& ((*s)[i + 2] == '\0' || (*s)[i + 2] == '/'))
+	else if (getenv("OLDPWD") && (*s)[i + 1] == '-' && ((*s)[i + 2] == '\0'
+			|| (*s)[i + 2] == '/'))
 		ft_strinsrt(s, getenv("OLDPWD"), i, 2);
 	else if ((*s)[i + 1])
 	{

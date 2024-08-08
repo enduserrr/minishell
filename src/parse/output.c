@@ -12,20 +12,20 @@
 
 #include "../../incs/parse.h"
 
-static t_token *put_token(t_token *tokens, const char *title)
+static t_token	*put_token(t_token *tokens, const char *title)
 {
-    if (title)
-        printf("\e[1;90m%s\e[0m\n", title);
-    if (!tokens)
-        printf("\33[90mNo tokens\e[0m\n");
-    while (tokens)
-    {
-        if (tokens->id == WORD)
-            printf("\33[90m[WORD]\e[0m ");
-        else if (tokens->id == IN_FILE)
-            printf("\33[90m[IN_FILE]\e[0m ");
-        else if (tokens->id == OUT_FILE)
-            printf("\33[90m[OUT_FILE]\e[0m ");
+	if (title)
+		printf("\e[1;90m%s\e[0m\n", title);
+	if (!tokens)
+		printf("\33[90mNo tokens\e[0m\n");
+	while (tokens)
+	{
+		if (tokens->id == WORD)
+			printf("\33[90m[WORD]\e[0m ");
+		else if (tokens->id == IN_FILE)
+			printf("\33[90m[IN_FILE]\e[0m ");
+		else if (tokens->id == OUT_FILE)
+			printf("\33[90m[OUT_FILE]\e[0m ");
 		else if (tokens->id == HEREDOC_EOF)
 			printf("\33[90m[HEREDOC_EOF]\e[0m ");
 		else if (tokens->id == OUT_A_FILE)
@@ -66,9 +66,10 @@ void	put_command(t_cmd *commands)
 			printf("\33[90m[%s]\e[0m", commands->av[i++]);
 		printf("\33[90m\nredir:\e[0m\t");
 		put_token(commands->io_redir, 0);
-		printf("\33[90mfd_in:\t%d\nfd_out:\t%d\e[0m\n", commands->fd_in, commands->fd_out);
+		printf("\33[90mfd_in:\t%d\nfd_out:\t%d\e[0m\n", commands->fd_in,
+			commands->fd_out);
 		commands = commands->next;
 		if (commands)
-            printf("\33[90m=========================>\e[0m\n");
+			printf("\33[90m=========================>\e[0m\n");
 	}
 }

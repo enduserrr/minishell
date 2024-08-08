@@ -6,13 +6,11 @@ LIBFT	=	incs/libft/libft.a
 SRCS	=	$(addprefix $(SRC_DIR)/token/, checks.c token_utils.c tokens.c) \
 			$(addprefix $(SRC_DIR)/parse/, commands.c expand_utils.c parse_utils.c \
 				expand.c output.c parse.c) \
-			$(addprefix $(SRC_DIR)/mini/, custom_error.c run.c free.c utils.c \
-				execution.c) \
 			$(addprefix $(SRC_DIR)/io_handling/, paths.c pipes.c pipe_utils.c \
 				redirect.c heredoc.c) \
 			$(addprefix $(SRC_DIR)/builtins/, exit_cmd.c pwd_cmd.c cd_cmd.c env_cmd.c \
 				builtin_utils.c echo_cmd.c export_cmd.c unset_cmd.c) \
-			$(addprefix $(SRC_DIR)/, writer.c main.c signal.c)
+			$(addprefix $(SRC_DIR)/, main.c signal.c custom_error.c utils.c execution.c)
 OBJ		=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS:.c=.o))
 
 INCS	=	-I incs/minishell.h -I incs/parse.h -I incs/libft/incs -I incs/builtins.h
