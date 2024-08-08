@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:20:32 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 11:43:18 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 16:39:27 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static ssize_t	set_char(char *s, char c, ssize_t i)
 
 /**
  * @brief	Expands tilde ('~') set dir based on what it's followed by.
+ *			S_ISDIR is simply a macro to check an fd is a file or a dir.
  */
 static void	tilde_expander(char **s, size_t i)
 {

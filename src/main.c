@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 11:18:18 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 17:45:13 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,14 @@ static void	run(t_data *data, t_exit *state, struct termios *original)
 			free(input);
 			continue ;
 		}
-		add_history(input);
-		tokens = ft_token(state, input);
-		data->cmds = ft_parse(state, tokens);
-		process_cmds(data);
-		free_commands(data->cmds);
+		if (input[0])
+		{
+			add_history(input);
+			tokens = ft_token(state, input);
+			data->cmds = ft_parse(state, tokens);
+			process_cmds(data);
+			free_commands(data->cmds);
+		}
 	}
 	free_all(data);
 	restore_terminal_settings(original);

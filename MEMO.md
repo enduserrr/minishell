@@ -3,7 +3,10 @@
 * Simplify or remove custom_error()
   * Remove unused error macros from parse.h
   * Remove errno.h if not in use
-*
+* Possibly replace S_ISDIR from expand()
+* Exit codes
+* CTRL-D in heredoc
+  * bash: warning: here-document at line 1 delimited by end-of-file (wanted `EOF')
 
 ### To do:
 * Signals
