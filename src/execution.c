@@ -63,7 +63,7 @@ void	execute_cmd(t_data *data, int i)
 	else
 	{
 		if (!temp->av)
-			printf("no command\n");
+			exit(0);
 		if (access(temp->av[0], X_OK) == 0)
 		{
 			if (execve(temp->av[0], temp->av, data->envp) == -1)
@@ -72,7 +72,10 @@ void	execute_cmd(t_data *data, int i)
 		else
 		{
 			if (builtin_from_child(data, temp) == 0)
-				printf("%s: command not found\n", temp->av[0]);
+			{
+				write_fd(2, WHITE, temp->av[0]);
+				write_fd(2, WHITE, ": command not found\n");
+			}
 		}
 		data->exit_code->state = 127;
 		exit(data->exit_code->state);

@@ -80,7 +80,7 @@ Repeat multiple times in different directories with a complex relative path (lot
 * unset PATH
 * export PATH=/home/eleppala/bin:/usr/local/sbin:/usr/local/bin
 
-## 14: redirections | ERRORS!
+## 14: redirections | OK kaikki paitsi wc -l 
 * < infile | grep hello ERROR!
 * < infile | grep world ERROR!
 * < infile | grep hello > out ERROR!
