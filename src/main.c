@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 09:39:43 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:18:18 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void process_cmds(t_data *data)
 {
     if (data->cmds == NULL)
         return ;
-    //if (is_builtin(data) != 0)
-        //return ;
     else
         execution(data);
 }
@@ -49,7 +47,6 @@ static void run(t_data *data, t_exit *state, struct termios *original)
         if (!input)
         {
             write_fd(1, WHITE, "exit\n");
-            state->state = 0;
             break ;
         }
         if (ft_strncmp(input, "", ft_strlen(input)) == 0)
@@ -57,19 +54,11 @@ static void run(t_data *data, t_exit *state, struct termios *original)
             free(input);
             continue ;
         }
-        // add_history(input);
-        // tokens = ft_token(state, input);
-        // data->cmds = ft_parse(state, tokens);
-        // process_cmds(data);
-        // free_commands(data->cmds);
-        else
-        {
-            add_history(input);
-            tokens = ft_token(state, input);
-            data->cmds = ft_parse(state, tokens);
-            process_cmds(data);
-            free_commands(data->cmds);
-        }
+        add_history(input);
+        tokens = ft_token(state, input);
+        data->cmds = ft_parse(state, tokens);
+        process_cmds(data);
+        free_commands(data->cmds);
     }
     free_all(data);
     restore_terminal_settings(original);

@@ -2,9 +2,9 @@ bugfix: builtins/export.c: key_exists():
 - changed strncmp arguments from: (temp->key, arr[0], ft_strlen(temp->key))
 -                                 (arr[0], temp->key, ft_strlen(arr[0]))
 
-bugfix: 
-- kaytannossa koko export.c kirjotettu uudestaan koska ft_split oli perseesta.. 
-- bugi jonka korjasin oli export MAIL====eemeli@hive.fi 
+bugfix:
+- kaytannossa koko export.c kirjotettu uudestaan koska ft_split oli perseesta..
+- bugi jonka korjasin oli export MAIL====eemeli@hive.fi
 
 
 
@@ -12,40 +12,44 @@ bugfix: 5.8 18:30
 - env | grep PWD ei toimi, koska jos linessa on | childit ei mene is_buildin kautta.
 - export | grep PWD ei toimi, koska jos linessa on | childit ei mene is_buildin kautta.
 - echo hello hello | wc -l ei toimi
-- pwd grep | / ei toimi 
+- pwd grep | / ei toimi
 
---->    tein buildin_from_child() funktion builtin_utils.c 
---->    addasin execute_cmd() else haaraan iffin, buildin_from_child(), joka tsekkaa etta onko 
-        kyseessa export, env, pwd tai echo. 
---->    lisaksi env on tuplana (buildin ja pathissa), joten taytyy ohjata env komento else haaraan, 
+--->    tein buildin_from_child() funktion builtin_utils.c
+--->    addasin execute_cmd() else haaraan iffin, buildin_from_child(), joka tsekkaa etta onko
+        kyseessa export, env, pwd tai echo.
+--->    lisaksi env on tuplana (buildin ja pathissa), joten taytyy ohjata env komento else haaraan,
         etta se tulee suoritettua buildinin kautta. Muuten env list ei paivity oikein, vaan kayttaa koneen
-        alkuperaista env listia.  
+        alkuperaista env listia.
 --->    lisasin get_path() jalkeiseen iffiin stringcomparen jos komento on "env"
---->    poistin (is_buildin) if checkin process_cmd() funktiossa. ei enaa tarvitse tassa kohtaa. 
+--->    poistin (is_buildin) if checkin process_cmd() funktiossa. ei enaa tarvitse tassa kohtaa.
 
 
 bugfix: 6.8 11:00
 - pwd poistetusta kansiosta ei toimi
 - cd .. poistetusta kansiosta --> segfault
 
---->    isoja muutoksia cd_cmd 
+--->    isoja muutoksia cd_cmd
         - old_pwd riville lisacheckeja
         - jos ".." siirretty omaan funktioon (cd_prev) rivien saastamisen takia
         - cd erroriin lisatty free(old_pwd)
         - uptade_pwd siirretty kaikissa kohdissa toteutumaan vain jos chdir ei feilaa.
 --->    getcwd taytyy checkata parissa kohdassa tuplana, koska feilaa jos cwd = poistettu file
-        - oma funktio ft_get_cwd() pwd_cmd.c tiedostoon 
+        - oma funktio ft_get_cwd() pwd_cmd.c tiedostoon
 
 
 added: 7.8 17:20
-- echo redirection 
+- echo redirection
 
 -->     koko echo_cmd muokattu uudeksi
 
 
 bugfix: 7.8.17:50
-- cat < infile (ei olemassa oleva) jaa jumiin. 
+- cat < infile (ei olemassa oleva) jaa jumiin.
 
 -->     lisatty simplearg() -funktioon if check_redir < 0 -> return
 -->
 
+bug fix 8.8 11:30
+- Incorrect exit code with empty line
+
+--> Return NULL if no tokens (ft_parse & ft_token)

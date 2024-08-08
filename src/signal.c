@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:59:04 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 09:28:30 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:26:56 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sig_handle_nl(int sig)
 		write(1, "\n", 1);
 }
 
-int *signal_trigger(void)
+int	*signal_trigger(void)
 {
 	static int	*trigger;
 

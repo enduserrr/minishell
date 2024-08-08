@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 11:53:27 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/08 09:28:49 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:22:58 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int    write_to_pipe(char *delimiter, int *h_fd)
     free(line);
     return (0);
 }
+
 void h_loop(int *h_fd, char *delim)
 {
     int i;

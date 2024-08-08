@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/08 09:37:01 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:25:18 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@ void get_path(t_data *data, t_cmd *cmd)
     free(temp);
 }
 
-// int check_access(t_cmd *temp)
-// {
-//     if (access(temp->av[0], X_OK) == 0)
-//         return 1;
-//     return (0);
-// }
-
 void execute_cmd(t_data *data, int i)
 {
     t_cmd   *temp;
@@ -62,7 +55,7 @@ void execute_cmd(t_data *data, int i)
     }
     get_path(data, temp);
     if (temp->path != NULL && temp->av && ft_strlen(temp->av[0]) >= 1
-    && ft_strncmp(temp->av[0], "env", ft_strlen(temp->av[0]) != 0))/*command longer than 0 chars. Cathces "" & '' commands*/
+    && ft_strncmp(temp->av[0], "env", ft_strlen(temp->av[0]) != 0))
     {
         if(execve(temp->path, temp->av, data->envp) != 0)
             perror("eitoimi\n");
@@ -72,7 +65,6 @@ void execute_cmd(t_data *data, int i)
         if (!temp->av)
             printf("no command\n");
         if(access(temp->av[0], X_OK) == 0)
-        // if(check_access(temp) != 0)
         {
             if (execve(temp->av[0], temp->av, data->envp) == -1)
                 perror("exe: ");
@@ -106,19 +98,15 @@ void simple_arg(t_data *data)
         }
         execute_cmd(data, 0);
     }
-    // waitpid(p1, &status, 0);
     waitpid(p1, &status, WUNTRACED);
     if (WIFEXITED(status) || WIFSIGNALED(status))
-    // if (WIFEXITED(status))
     {
         data->exit_code->state = WEXITSTATUS(status);
-        //printf("exit_code: %d\n", data->exit_code->state);
     }
 }
 
 void execution(t_data *data)
 {
-    //redir(data);
     if (pipes_in_prompt(data) == 0)
     {
         if (is_builtin(data) == 0)

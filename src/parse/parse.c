@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:19:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/02 11:28:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 11:23:59 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_cmd   *ft_parse(t_exit *state, t_token *tokens)
 
     if (ft_expand(state, &tokens) == 1 || !tokens)
     {
+        if (!tokens)
+            return (NULL);
         state->state = EXIT_FAILURE;
         return (free_tokens(tokens), NULL);
     }

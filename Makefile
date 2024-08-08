@@ -24,6 +24,7 @@ GREY_T	= \33[90m
 GREEN_T	= \33[92m
 ORANG_T	= \33[93m
 RED_T	= \33[91m
+BLUE_T	= \33[94m
 
 RED_B	= \33[1;91m
 GREEN_B	= \33[1;92m
