@@ -6,18 +6,11 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 18:48:36 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/08 11:56:48 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 12:18:25 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
-
-void write_fd(int fd, const char *color, const char *text)
-{
-    write(fd, color, ft_strlen(color));
-    write(fd, text, ft_strlen(text));
-    write(fd, RESET, ft_strlen(RESET));
-}
 
 int	ft_arraylen(char **arr)
 {

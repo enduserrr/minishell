@@ -1,21 +1,9 @@
 # MEMO
-## DEV
-### Copy:
-* main.c X
-* signal.c X
-* execution.c X
-* pipe_utils.c X
-* pipes.c X
-* heredoc.c X
-* parse.c
-* minishell.h X
-
-### Issues
-* $? leaks memory
-* Heredoc SIGINT
-* Make error handling consistant
-
-* env | grep PWD | wc -l doesn't work
+## DO
+* Simplify or remove custom_error()
+  * Remove unused error macros from parse.h
+  * Remove errno.h if not in use
+*
 
 ### To do:
 * Signals

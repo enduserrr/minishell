@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 10:03:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 11:32:44 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 12:18:54 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,16 @@
 # define GENERAL_H
 
 # include "libft/incs/libft.h"
-# include <errno.h>
+# include <errno.h> /*custom_error*/
 # include <fcntl.h> /*open*/
-# include <limits.h>
-# include <readline/history.h>  /*readline*/
+# include <readline/history.h> /*readline*/
 # include <readline/readline.h> /*readline*/
-# include <signal.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <sys/ioctl.h>
-# include <sys/resource.h>
-# include <sys/stat.h>
+# include <signal.h> /*signals*/
+# include <stdio.h> /*printf*/
+# include <sys/ioctl.h> /*heredoc signal disrupt*/
+# include <sys/stat.h> /*expand*/
 # include <sys/wait.h> /*for waitpid*/
-# include <term.h>     /*tgetent etc*/
-# include <termios.h>
-# include <unistd.h> /*execve*/
+# include <termios.h> /*Terminal configuration*/
 
 # define RED "\033[1;91m"
 # define GREEN "\033[1;92m"
@@ -57,14 +51,13 @@ typedef struct s_exit
 /* CUSTOM ERROR OUTPUT */
 int		set_err(int err, char *context, t_exit *state);
 
-/* SIGNAL */
+/* SIGNALS */
 void	sig_handle_heredoc(int sig);
 void	signal_handler(int sig);
 void	sig_handle_child(int sig);
 int		*signal_trigger(void);
 void	sig_handle_nl(int sig);
 
-/* WRITE */
 void	write_fd(int fd, const char *color, const char *text);
 
 #endif

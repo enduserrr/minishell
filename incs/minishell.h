@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/02 11:51:14 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 12:18:47 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,14 @@ void		update_pwds(t_data *tools, char *old_pwd);
 int			check_out(t_cmd *temp, int fd);
 int			heredoc_handler(t_cmd *temp, char *delimiter, int fd_out);
 
-/* FREE */
-void		free_all(t_data *tools);
-void		free_env(t_data *data);
-void		free_array(char **arr);
-
 /* SRC */
 void		create_env_list(t_data *data);
 
 /* UTILS */
 int			ft_arraylen(char **arr);
+void		free_all(t_data *tools);
+void		free_env(t_data *data);
+void		free_array(char **arr);
 
 /* PATHS */
 void		create_paths(t_data *data);
