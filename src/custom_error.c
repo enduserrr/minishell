@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 12:18:35 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 18:02:12 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static void	write_err(char *s, char *context)
  */
 static int	error_case(int err, char *context)
 {
-	if (err == ERRNO_ERR) /*not in use*/
-		return (perror(context), errno);
 	if (err == MEM_ERR)
 		return (write_err("memory allocation fail while", context), err);
 	if (err == TKN_SYNTAX_ERR)
@@ -61,10 +59,6 @@ static int	error_case(int err, char *context)
 		return (write_err("is a directory", context), err);
 	if (err == UNKNOWN_CMD_ERR)
 		return (write_err("command not found", context), err);
-	if (err == NO_FILE_ERR) /*not in use*/
-		return (write_err("no such file or directory", context), 127);
-	if (err == UNSET_ERR) /*not in use*/
-		return (write_err("not set", context), 1);
 	return (0);
 }
 
@@ -79,7 +73,5 @@ int	set_err(int err, char *context, t_exit *state)
 	state->state = err;
 	write(2, "minishell: ", 11);
 	i = error_case(err, context);
-	if (err != ERRNO_ERR)
-		write(2, "\n", 1);
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 11:53:27 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/08 11:22:58 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 17:55:00 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	write_to_pipe(char *delimiter, int *h_fd)
 			free(line);
 		if (*signal_trigger() == 1)
 			return (-2);
+		write(1, "\n", 1);
 		return (-1);
 	}
 	if ((ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0))

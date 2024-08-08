@@ -32,7 +32,7 @@
 * cd .. --> echo $? OK!
 * cd    --> echo $? OK!
 
-## 6: signals
+## 6: signals | ALL OK!
 * ctrl c OK!
   * parent OK!
   * child OK!
@@ -44,7 +44,7 @@
 * ctrl D
   * parent OK!
   * child OK!
-  * heredoc
+  * heredoc OK!
 
 ## 7: douple quotes | ERRORS!
 * echo "hello "" ERROR!

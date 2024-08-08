@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 10:03:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 12:18:54 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 18:00:30 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@
 # define WLCM "\n\nThis (s)hell emulator was created by two shitty students.\
 							\nUse it  at your own risk.\n\n"
 
-# define ERRNO_ERR 0
-# define UNSET_ERR -1
+// # define ERRNO_ERR 0
+// # define UNSET_ERR -1
 # define MEM_ERR 12
 # define TKN_SYNTAX_ERR 258
 # define AMBIG_REDIR_ERR -2
 # define IS_DIR_ERR 126
 # define UNKNOWN_CMD_ERR 127
-# define NO_FILE_ERR -3
+// # define NO_FILE_ERR -3
 
 typedef struct s_exit
 {
