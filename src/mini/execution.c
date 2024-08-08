@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/05 15:37:57 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 09:37:01 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void execute_cmd(t_data *data, int i)
         i --;
     }
     get_path(data, temp);
-    if (temp->path != NULL && temp->av && ft_strlen(temp->av[0]) >= 1 
+    if (temp->path != NULL && temp->av && ft_strlen(temp->av[0]) >= 1
     && ft_strncmp(temp->av[0], "env", ft_strlen(temp->av[0]) != 0))/*command longer than 0 chars. Cathces "" & '' commands*/
     {
         if(execve(temp->path, temp->av, data->envp) != 0)
@@ -78,7 +78,7 @@ void execute_cmd(t_data *data, int i)
                 perror("exe: ");
         }
         else
-        {    
+        {
             if (builtin_from_child(data, temp) == 0)
                 printf("%s: command not found\n", temp->av[0]);
         }
@@ -100,7 +100,7 @@ void simple_arg(t_data *data)
     if (p1 == 0)
     {
         if (check_redir(data, 0) < 0)
-        {    
+        {
             data->exit_code->state = 1;
             exit(data->exit_code->state);
         }

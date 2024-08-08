@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:59:04 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/02 11:52:24 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/08 09:28:30 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@ void	sig_handle_heredoc(int sig)
 	if (sig == SIGINT)
 	{
 		*trigger = 1;
-		// signal(SIGINT, sig_handle_heredoc);
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
         rl_on_new_line();
-		// rl_redisplay();
 	}
 }
