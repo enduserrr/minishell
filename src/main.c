@@ -29,7 +29,7 @@ static void restore_terminal_settings(struct termios *original)
 
 static void configure_terminal(struct termios *original)
 {
-    struct termios new_termios;
+    struct termios  new_termios;
 
     tcgetattr(STDIN_FILENO, original);
     new_termios = *original;
@@ -52,6 +52,11 @@ static void run(t_data *data, t_exit *state, struct termios *original)
             state->state = 0;
             break ;
         }
+        if (ft_strncmp(input, "", ft_strlen(input)) == 0)
+        {
+            free(input);
+            continue ;
+        }
         else
         {
             add_history(input);
@@ -65,12 +70,13 @@ static void run(t_data *data, t_exit *state, struct termios *original)
     restore_terminal_settings(original);
 }
 
+
 int main(int ac, char **av, char **envp)
 {
     (void)av;
-    t_data data;
-    static t_exit exit_state;
-    struct termios original;
+    t_data          data;
+    static t_exit   exit_state;
+    struct termios  original;
 
     if (ac != 1)
         return (write_fd(1, RED, "No args accepted\n"), 0);

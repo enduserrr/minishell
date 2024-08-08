@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../incs/general.h"
-// int	g_sig_status = 0;
 
 void	sig_handle_nl(int sig)
 {
@@ -21,14 +20,14 @@ void	sig_handle_nl(int sig)
 
 int *signal_trigger(void)
 {
-	static int	*triggered;
+	static int	*trigger;
 
-	if (!triggered)
+	if (!trigger)
 	{
-		triggered = (int *)malloc(sizeof(int));
-		*triggered = 0;
+		trigger = (int *)malloc(sizeof(int));
+		*trigger = 0;
 	}
-	return (triggered);
+	return (trigger);
 }
 
 void	sig_handle_child(int sig)
@@ -53,12 +52,16 @@ void	signal_handler(int sig)
 
 void	sig_handle_heredoc(int sig)
 {
-	int	*triggered;
+	int	*trigger;
 
-	triggered = signal_trigger();
+	trigger = signal_trigger();
 	if (sig == SIGINT)
 	{
-		*triggered = 1;
-		signal(SIGINT, sig_handle_heredoc);
+		*trigger = 1;
+		// signal(SIGINT, sig_handle_heredoc);
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		rl_replace_line("", 0);
+        rl_on_new_line();
+		// rl_redisplay();
 	}
 }

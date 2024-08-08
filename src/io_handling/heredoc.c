@@ -20,10 +20,15 @@ int    write_to_pipe(char *delimiter, int *h_fd)
     signal(SIGINT, sig_handle_heredoc);
     write(1, "> ", 2);
     line = get_next_line(STDIN_FILENO);
-    if (!line)
+    if (!line || *signal_trigger() == 1)
+    {
+        if (line)
+            free(line);
+        if (*signal_trigger() == 1)
+            return (-2);
         return (-1);
-    if ((ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
-        || *signal_trigger() == 1)
+    }
+    if ((ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0))
     {
         free(line);
         return (-1);
@@ -32,20 +37,39 @@ int    write_to_pipe(char *delimiter, int *h_fd)
     free(line);
     return (0);
 }
-
-int    heredoc_handler(t_cmd *temp, char *delimiter, int fd_out)
+void h_loop(int *h_fd, char *delim)
 {
-    int     h_fd[2];
-    int     *trigger;
+    int i;
+    int *trigger;
 
-    if (pipe(h_fd) == -1)
-        perror("pipe: ");
+
+    i = 0;
+    trigger = NULL;
     signal(SIGINT, sig_handle_heredoc);
     while (1)
     {
-        if (write_to_pipe(delimiter, h_fd) != 0)
+        i = write_to_pipe(delim, h_fd);
+        if (i == -2)
+        {
+            trigger = signal_trigger();
+            free(trigger);
+            exit (1);
+        }
+        if (i == -1)
             break ;
     }
+}
+
+int    heredoc_handler(t_cmd *temp, char *delimiter, int fd_out)
+{
+    int         h_fd[2];
+    static int  flag;
+    int         *trigger;
+
+    flag = 0;
+    if (pipe(h_fd) == -1)
+        perror("pipe: ");
+    h_loop(h_fd, delimiter);
     trigger = signal_trigger();
     free(trigger);
     close(h_fd[1]);
@@ -57,5 +81,7 @@ int    heredoc_handler(t_cmd *temp, char *delimiter, int fd_out)
         temp->io_redir = temp->io_redir->next;
         check_out(temp, fd_out);
     }
+    if (!temp->av)
+        return (-1);
     return (1);
 }
