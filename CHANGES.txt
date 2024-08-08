@@ -51,5 +51,8 @@ bugfix: 7.8.17:50
 
 bug fix 8.8 11:30
 - Incorrect exit code with empty line
-
 --> Return NULL if no tokens (ft_parse & ft_token)
+
+8.8 12:00
+- Norminette cleaning
+- Cleaning dirs & files
