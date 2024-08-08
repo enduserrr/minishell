@@ -53,7 +53,6 @@ char	*dup_rest(char *s, int start)
 		i++;
 		start1++;
 	}
-	printf("i: %d", i);
 	temp = malloc((i + 1) * sizeof(char));
 	if (!temp)
 		return (NULL);
@@ -62,7 +61,6 @@ char	*dup_rest(char *s, int start)
 	while (s[start] != '\0')
 	{
 		temp[i] = s[start];
-		printf("temp[i]: %c\n", temp[i]);
 		start++;
 		i++;
 	}

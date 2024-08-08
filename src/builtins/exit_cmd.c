@@ -12,14 +12,6 @@
 
 #include "../../incs/minishell.h"
 
-/*
- * Command exit frees everything and closes program
- * Exit with no options - but theres no mention about arguments..
- * exit "sddsss"  --> exit: numeric argument required
- * exit 6 "ffff" --> exit: too many arguments --> Continue program
- * exit 6  --> exits with exit code 6
- */
-
 void	exit_cmd(t_data *data)
 {
 	int	flag;

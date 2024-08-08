@@ -107,27 +107,3 @@ void	cd_cmd(t_data *data)
 			update_pwds(data, old_pwd);
 	}
 }
-
-/*
- * DELETE THIS
- *
- *  works already similar as regular cd with limits of subject:
- * 	- updates env_list: PWD && OLDPWD on every movement
- *  - outputs correct errors in error cases
- *
- *
- *  FEATURES:
- *
- *  Command:						output/result:						Exit_code:
- * 	cd without args 				move to: home 						0
- * 	cd without args (unset HOME)	"home not set"  					1
- *  cd without args (HOME=badpath)	"no such file or dir"				1
- *  cd with .. 						move to: prev dir from path			0
- *  cd with <dir_name>  			moves to: that dir					1
- *  cd/path/paths/pathsss/ 			moves to: end of path 				0
- *
- *  Things to consider:
- *  - what happens if you delete current file from another terminal window
- *  - do you need to handle ../path
- *
- */

@@ -12,7 +12,7 @@
 
 #include "../../incs/minishell.h"
 
-int	write_to_pipe(char *delimiter, int *h_fd)
+static int	write_to_pipe(char *delimiter, int *h_fd)
 {
 	char	*line;
 

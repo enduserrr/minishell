@@ -67,7 +67,6 @@ void	add_new(t_data *data, char *str)
 	if (!new)
 		perror("malloc: ");
 	key_and_value(new, str, '=');
-	printf("%s, %s\n", new->key, new->value);
 	if (key_exists(new, data) == 0)
 		return ;
 	while (temp->next != NULL)
@@ -117,29 +116,3 @@ void	export_cmd(t_data *data)
 		i++;
 	}
 }
-
-/*
- * DELETE THIS
- *
- * export without arguments:
- *  - outputs export list
- *  - if there are vars in export list that has no value, output only keys
- *
- * export with arguments:
- *  - arg needs to start with alphabet
- *  - arg needs to include '=' to make it key/value pair
- *      - if it has no '=' it will be only "key" and value is "NULL"
- *  -  if arg is existing key it has to modify existing variable
- *  -  if arg is existing key but arg has no '=' it does nothing
- *  -  if arg is existing key and has '=' but no value after it makes value ""
- * 	-  if args 5 first letters are PATH= creates data->paths -array
- *
- *
- *  BUGLIST:
- * 		- FIXED!!
- *  - if arg is export kakka=====ripuli:
- *  	- result: kakka="ripuli"
- * 		- bash: kakka="===ripuli"
- * 		- FIXED!!
- *
- */

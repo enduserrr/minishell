@@ -47,12 +47,12 @@
   * heredoc OK!
 
 ## 7: douple quotes | ERRORS!
-* echo "hello "" ERROR!
+* echo "hello "" ERROR!  --> tata ei oo eval sheetissa.. joten annetaanko vaan olla. 
 * echo "" hello "" OK!
 * cat "  infile""
 * ls -la | " grep -hello " OK!
 * echo "cat.lol.c | cat > lol.c" OK!
-* echo "hello" "" | cat -e ERROR!
+* echo "hello" "" | cat -e OK!
 
 ## 8: singlequotes
 -
@@ -81,11 +81,11 @@ Repeat multiple times in different directories with a complex relative path (lot
 * export PATH=/home/eleppala/bin:/usr/local/sbin:/usr/local/bin
 
 ## 14: redirections | OK kaikki paitsi wc -l 
-* < infile | grep hello ERROR!
-* < infile | grep world ERROR!
-* < infile | grep hello > out ERROR!
-* < infile | grep hello >> out ERROR!
-* < infile | wc -l >> out ERROR!
+* < infile | grep hello OK!
+* < infile | grep world OK!
+* < infile | grep hello > out OK!
+* < infile | grep hello >> out OK!
+* < infile | wc -l >> out OK
 * ls -la >> out OK!
 * ls > out OK!
 * echo hello > out OK!
@@ -103,13 +103,13 @@ Repeat multiple times in different directories with a complex relative path (lot
 * ls -la | grep eleppala | grep 2020 | grep mini OK!
 * cat nofile | grep jee | more OK!
 * cat nofile | grep gg | more OK!
-* < Makefile | grep .c > out ERROR!
+* < Makefile | grep .c > out OK
 
 ## 15: go grazy | ERRORS!
 * type something ctrl c --> enter OK!
 * navigate with arrow up and down OK!
 * not working commands like pfsfjrjiorsiojs ororjorsjprs OK!
-* cat | cat | ls ERROR!
+* cat | cat | ls OK!
 * long commands with multiple args OK!
 
 ## 16: environment variables | ALL OK!

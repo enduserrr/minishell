@@ -51,14 +51,3 @@ void	pwd_cmd(t_data *data)
 	printf("%s\n", pwd);
 	free(pwd);
 }
-
-/*
- * DELETE THIS
- *
- * - outputs current pwd
- * - should work with | or other args
- * - "pwd" "randomshit" --> should output pwd
- * - "pwd" | wc -l --> lines of pwd
- * - "pwd"
- *
- */

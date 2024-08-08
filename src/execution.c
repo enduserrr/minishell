@@ -19,14 +19,12 @@ void	get_path(t_data *data, t_cmd *cmd)
 	char	*temp;
 
 	i = 0;
+	cmd->path = NULL;
 	if (!cmd->av)
 		return ;
 	temp = ft_strjoin("/", cmd->av[0]);
 	if (data->paths == NULL)
-	{
-		cmd->path = NULL;
 		return ;
-	}
 	while (data->paths[i] != NULL)
 	{
 		path = ft_strjoin(data->paths[i], temp);
@@ -39,8 +37,28 @@ void	get_path(t_data *data, t_cmd *cmd)
 		free(path);
 		i++;
 	}
-	cmd->path = NULL;
 	free(temp);
+}
+
+static void	no_path_execute(t_cmd *temp, t_data *data)
+{
+	if (!temp->av)
+		exit(0);
+	if (access(temp->av[0], X_OK) == 0)
+	{
+		if (execve(temp->av[0], temp->av, data->envp) == -1)
+			perror("exe: ");
+	}
+	else
+	{
+		if (builtin_from_child(data, temp) == 0)
+		{
+			write_fd(2, WHITE, temp->av[0]);
+			write_fd(2, WHITE, ": command not found\n");
+		}
+	}
+	data->exit_code->state = 127;
+	exit(data->exit_code->state);
 }
 
 void	execute_cmd(t_data *data, int i)
@@ -61,25 +79,7 @@ void	execute_cmd(t_data *data, int i)
 			perror("eitoimi\n");
 	}
 	else
-	{
-		if (!temp->av)
-			exit(0);
-		if (access(temp->av[0], X_OK) == 0)
-		{
-			if (execve(temp->av[0], temp->av, data->envp) == -1)
-				perror("exe: ");
-		}
-		else
-		{
-			if (builtin_from_child(data, temp) == 0)
-			{
-				write_fd(2, WHITE, temp->av[0]);
-				write_fd(2, WHITE, ": command not found\n");
-			}
-		}
-		data->exit_code->state = 127;
-		exit(data->exit_code->state);
-	}
+		no_path_execute(temp, data);
 }
 
 void	simple_arg(t_data *data)

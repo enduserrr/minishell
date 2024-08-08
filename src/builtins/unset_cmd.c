@@ -38,6 +38,18 @@ static t_env	*free_node(t_env *node)
 	return (node);
 }
 
+static int	first_node(t_data *data, t_env *temp, t_env *temp2, int i)
+{
+	if (ft_strncmp(data->cmds->av[i], temp->key,
+			ft_strlen(data->cmds->av[i])) == 0)
+	{
+		temp = free_node(temp);
+		data->env_list = temp2;
+		return (0);
+	}
+	return (1);
+}
+
 void	remove_variable(t_data *data, int i)
 {
 	t_env	*temp;
@@ -45,13 +57,8 @@ void	remove_variable(t_data *data, int i)
 
 	temp = data->env_list;
 	temp2 = data->env_list->next;
-	if (ft_strncmp(data->cmds->av[i], temp->key,
-			ft_strlen(data->cmds->av[i])) == 0)
-	{
-		temp = free_node(temp);
-		data->env_list = temp2;
+	if (first_node(data, temp, temp2, i) == 0)
 		return ;
-	}
 	while (temp->next != NULL)
 	{
 		if (ft_strncmp(data->cmds->av[i], temp2->key,
@@ -93,17 +100,3 @@ void	unset_cmd(t_data *data)
 		i++;
 	}
 }
-
-/*
- * DELETE THIS
- *
- * unset will delete given argument from env_list
- *
- * unset without argument does nothing
- * argument needs to start with alphabet
- *  - if not outputs error
- * 	- with multiple args deletes all matching key/value pairs from env_list
- *  - if multiple args includes one unvalid arg it shows error
- *  - if PATH deletes data->path -array
- *
- */
