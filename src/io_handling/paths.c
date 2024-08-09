@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 10:52:09 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/02 10:13:00 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 15:14:32 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	create_paths(t_data *data)
 		if (ft_strncmp(temp->key, "PATH", 4) == 0)
 		{
 			data->paths = ft_split(temp->value, ':');
+			if (!data->paths)
+				perror("malloc: ");
 			break ;
 		}
 		temp = temp->next;

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 18:02:12 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 15:15:34 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	set_err(int err, char *context, t_exit *state)
 	int	i;
 
 	state->state = err;
-	write(2, "minishell: ", 11);
+	write(2, "$> ", 3);
 	i = error_case(err, context);
 	return (i);
 }

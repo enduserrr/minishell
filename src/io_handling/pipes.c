@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:56:00 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/09 14:31:31 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 15:12:46 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	last_child(t_data *data, int i, int *prev_fd)
 	if (check_redir(data, i) != 1)
 	{
 		if (dup2(prev_fd[0], STDIN_FILENO) == -1)
-			perror("dup2");
+			perror("dup:");
 	}
 	close(prev_fd[0]);
 	execute_cmd(data, i);
@@ -46,14 +46,14 @@ static void	childs(t_data *data, int i, int *prev_fd, int *fd)
 		if (check_redir(data, i) != 1)
 		{
 			if (dup2(prev_fd[0], STDIN_FILENO) == -1)
-				perror("dup 3");
+				perror("dup:");
 		}
 		close(prev_fd[0]);
 		close(fd[0]);
 		if (check_redir(data, i) != 2)
 		{
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
-				perror("dup");
+				perror("dup:");
 		}
 		execute_cmd(data, i);
 	}
