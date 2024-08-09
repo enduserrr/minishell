@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/09 12:32:58 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 14:24:20 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	no_path_execute(t_cmd *temp, t_data *data)
 			perror(": Is a directory");
 		else if (execve(temp->av[0], temp->av, data->envp) == -1)
 			perror("exe: ");
-		exit(1); 
+		exit(1);
 	}
 	else
 	{
