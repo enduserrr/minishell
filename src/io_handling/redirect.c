@@ -6,13 +6,13 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 19:07:21 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/08 11:47:17 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 14:30:24 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
-int	close_perror(char *str, int fd)
+static int	close_perror(char *str, int fd)
 {
 	perror(str);
 	if (fd != -1)

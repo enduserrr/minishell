@@ -6,13 +6,13 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:31:04 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/09 12:14:58 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 14:34:08 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
-int	key_exists(t_env *new, t_data *data)
+static int	key_exists(t_env *new, t_data *data)
 {
 	t_env	*temp;
 
@@ -34,7 +34,7 @@ int	key_exists(t_env *new, t_data *data)
 	return (1);
 }
 
-void	key_and_value(t_env *new, char *str, char c)
+static void	key_and_value(t_env *new, char *str, char c)
 {
 	new->key = ft_strdup_till_c(str, c);
 	if (!new->key)
@@ -56,7 +56,7 @@ void	key_and_value(t_env *new, char *str, char c)
 	new->next = NULL;
 }
 
-void	add_new(t_data *data, char *str)
+static void	add_new(t_data *data, char *str)
 {
 	t_env	*temp;
 	t_env	*new;
@@ -74,7 +74,7 @@ void	add_new(t_data *data, char *str)
 	temp->next = new;
 }
 
-void	output_export(t_env *env)
+static void	output_export(t_env *env)
 {
 	t_env	*ptr;
 

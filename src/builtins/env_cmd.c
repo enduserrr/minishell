@@ -6,13 +6,13 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:37:59 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/09 12:26:56 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 14:34:47 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
-void	add_to_env(t_env *env, t_data *data, int i)
+static void	add_to_env(t_env *env, t_data *data, int i)
 {
 	t_env	*temp;
 	t_env	*temp2;
@@ -60,7 +60,7 @@ void	create_env_list(t_data *data, t_env *env)
 	data->env_list = env;
 }
 
-void	print_env(t_env *env)
+static void	print_env(t_env *env)
 {
 	t_env	*ptr;
 

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/09 14:24:20 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 14:26:18 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	execute_cmd(t_data *data, int i)
 		no_path_execute(temp, data);
 }
 
-void	simple_arg(t_data *data)
+static void	simple_arg(t_data *data)
 {
 	pid_t	p1;
 	int		status;

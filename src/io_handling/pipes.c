@@ -6,13 +6,13 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:56:00 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/08 11:47:31 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 14:31:31 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
-void	first_child(t_data *data, int i, int *fd)
+static void	first_child(t_data *data, int i, int *fd)
 {
 	close(fd[0]);
 	check_redir(data, i);
@@ -22,7 +22,7 @@ void	first_child(t_data *data, int i, int *fd)
 	execute_cmd(data, i);
 }
 
-void	last_child(t_data *data, int i, int *prev_fd)
+static void	last_child(t_data *data, int i, int *prev_fd)
 {
 	close(prev_fd[1]);
 	if (check_redir(data, i) != 1)
@@ -34,7 +34,7 @@ void	last_child(t_data *data, int i, int *prev_fd)
 	execute_cmd(data, i);
 }
 
-void	childs(t_data *data, int i, int *prev_fd, int *fd)
+static void	childs(t_data *data, int i, int *prev_fd, int *fd)
 {
 	if (i == 0)
 		first_child(data, i, fd);
@@ -59,7 +59,7 @@ void	childs(t_data *data, int i, int *prev_fd, int *fd)
 	}
 }
 
-void	wait_childs(t_data *data)
+static void	wait_childs(t_data *data)
 {
 	int	i;
 	int	status;

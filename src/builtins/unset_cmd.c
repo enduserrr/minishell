@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:31:39 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/08 11:50:07 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 14:32:41 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	first_node(t_data *data, t_env *temp, t_env *temp2, int i)
 	return (1);
 }
 
-void	remove_variable(t_data *data, int i)
+static void	remove_variable(t_data *data, int i)
 {
 	t_env	*temp;
 	t_env	*temp2;
