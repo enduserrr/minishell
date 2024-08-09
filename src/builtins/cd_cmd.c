@@ -96,8 +96,8 @@ void	cd_cmd(t_data *data)
 	}
 	if (data->cmds->av[1] == NULL)
 		cd_home(data, old_pwd);
-	else if (ft_strncmp(data->cmds->av[1], "..",
-			ft_strlen(data->cmds->av[1])) == 0)
+	else if (ft_strncmp("..", data->cmds->av[1],
+			2) == 0 && ft_strlen(data->cmds->av[1]) < 3)
 		cd_prev(data, old_pwd);
 	else
 	{

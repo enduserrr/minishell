@@ -52,6 +52,7 @@ static void	no_path_execute(t_cmd *temp, t_data *data)
 			perror(": Is a directory");
 		else if (execve(temp->av[0], temp->av, data->envp) == -1)
 			perror("exe: ");
+		exit(1); 
 	}
 	else
 	{
@@ -80,7 +81,10 @@ void	execute_cmd(t_data *data, int i)
 		&& ft_strncmp(temp->av[0], "env", ft_strlen(temp->av[0]) != 0))
 	{
 		if (execve(temp->path, temp->av, data->envp) != 0)
-			perror("eitoimi\n");
+		{
+			perror("execve: ");
+			exit(1);
+		}
 	}
 	else
 		no_path_execute(temp, data);
