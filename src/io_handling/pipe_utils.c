@@ -12,6 +12,16 @@
 
 #include "../../incs/minishell.h"
 
+void	perror_exit(t_data *data, char *s, int fd)
+{
+	write(2, s, ft_strlen(s));
+	perror(": ");
+	if (fd != -1)
+		close(fd);
+	data->exit_code->state = 1;
+	exit(data->exit_code->state);
+}
+
 int	pipes_in_prompt(t_data *data)
 {
 	t_cmd	*temp;

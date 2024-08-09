@@ -17,7 +17,7 @@ static void	first_child(t_data *data, int i, int *fd)
 	close(fd[0]);
 	check_redir(data, i);
 	if (dup2(fd[1], STDOUT_FILENO) == -1)
-		perror("dup1\n");
+		perror_exit(data, "dup2", fd[1]);
 	close(fd[1]);
 	execute_cmd(data, i);
 }
@@ -28,7 +28,7 @@ static void	last_child(t_data *data, int i, int *prev_fd)
 	if (check_redir(data, i) != 1)
 	{
 		if (dup2(prev_fd[0], STDIN_FILENO) == -1)
-			perror("dup:");
+			perror_exit(data, "dup2", prev_fd[0]);
 	}
 	close(prev_fd[0]);
 	execute_cmd(data, i);
@@ -46,14 +46,17 @@ static void	childs(t_data *data, int i, int *prev_fd, int *fd)
 		if (check_redir(data, i) != 1)
 		{
 			if (dup2(prev_fd[0], STDIN_FILENO) == -1)
-				perror("dup:");
+			{
+				close(prev_fd[0]);
+				perror_exit(data, "dup2:", fd[0]);
+			}
 		}
 		close(prev_fd[0]);
 		close(fd[0]);
 		if (check_redir(data, i) != 2)
 		{
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
-				perror("dup:");
+				perror_exit(data, "dup2:", fd[1]);
 		}
 		execute_cmd(data, i);
 	}

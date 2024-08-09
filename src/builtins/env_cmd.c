@@ -12,6 +12,12 @@
 
 #include "../../incs/minishell.h"
 
+static void	mem_perror(t_data *data)
+{
+	perror("malloc: ");
+	data->exit_code->state = 1; 
+}
+
 static void	add_to_env(t_env *env, t_data *data, int i)
 {
 	t_env	*temp;
@@ -21,13 +27,16 @@ static void	add_to_env(t_env *env, t_data *data, int i)
 	temp2 = env;
 	temp = malloc(sizeof(t_env));
 	if (!temp)
-	{
-		data->exit_code->state = 1;
-		perror("malloc");
-	}
+		mem_perror(data);
 	temp_arr = ft_split(data->envp[i], '=');
+	if (!temp_arr)
+		mem_perror(data);
 	temp->key = ft_strdup(temp_arr[0]);
+	if (!temp->key)
+		mem_perror(data);
 	temp->value = ft_strdup(temp_arr[1]);
+	if (!temp->value)
+		mem_perror(data);
 	free_array(temp_arr);
 	temp->next = NULL;
 	while (temp2->next != NULL)
@@ -43,13 +52,16 @@ void	create_env_list(t_data *data, t_env *env)
 	i = 1;
 	env = malloc(sizeof(t_env));
 	if (!env)
-	{
-		data->exit_code->state = 1;
-		perror("malloc");
-	}
+		mem_perror(data);
 	temp_arr = ft_split(data->envp[0], '=');
+	if (!temp_arr)
+		mem_perror(data);
 	env->key = ft_strdup(temp_arr[0]);
+	if (!env->key)
+		mem_perror(data);
 	env->value = ft_strdup(temp_arr[1]);
+	if (!env->value)
+		mem_perror(data);
 	free_array(temp_arr);
 	env->next = NULL;
 	while (i < ft_arraylen(data->envp))

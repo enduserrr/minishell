@@ -71,6 +71,7 @@ void		execute_cmd(t_data *tools, int i);
 int			pipes_in_prompt(t_data *tools);
 void		create_pids(t_data *tools);
 void		next_pipe(t_data *data, int *prev_fd, int *fd, int i);
+void		perror_exit(t_data *data, char *s, int fd);
 
 /* REDIRECTIONS */
 int			check_redir(t_data *data, int i);

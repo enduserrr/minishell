@@ -6,14 +6,14 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:59:04 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/09 12:57:53 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 15:04:36 by eleppala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/general.h"
 
 void	sig_handle_nl(int sig)
-{
+{	
 	if (sig == SIGINT)
 		write(1, "\n", 1);
 }
