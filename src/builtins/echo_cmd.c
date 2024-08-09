@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:37:44 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/02 11:01:24 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 09:12:19 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,25 @@ static int	echo_redir(t_data *data)
 	return (0);
 }
 
+static void	*n_check(char *s)
+{
+	size_t	i;
+
+	i = 1;
+	if (ft_strlen(s) == 2)
+		return ((void *)0);
+	else
+	{
+		while(s[i])
+		{
+			if (s[i] != 'n')
+				return ((void *)1);
+			i++;
+		}
+	}
+	return (NULL);
+}
+
 static void	output_echo(t_data *data)
 {
 	int	i;
@@ -48,7 +67,7 @@ static void	output_echo(t_data *data)
 	i = 1;
 	flag = 0;
 	if (data->cmds->av[1] != NULL && ft_strncmp(data->cmds->av[1], "-n",
-			2) == 0)
+			2) == 0 && n_check(data->cmds->av[1]) == NULL)
 	{
 		flag = 1;
 		i++;
