@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:37:44 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/09 09:12:19 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 15:03:13 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static int	echo_redir(t_data *data)
 	{
 		fd_out = open(data->cmds->io_redir->content,
 				O_WRONLY | O_CREAT | O_TRUNC, 0777);
-		printf("%d\n", fd_out);
 		if (fd_out == -1)
 			return (perror("open :"), -1);
 	}
