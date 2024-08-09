@@ -34,9 +34,7 @@ typedef struct s_cmd
 	void			*next;
 }					t_cmd;
 
-/**
- * @brief	Token identifiers in binary.
- */
+/* TOKEN ID */
 typedef enum e_token_id
 {
 	WORD = 0b00000001,

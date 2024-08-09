@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:37:59 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/09 14:34:47 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 16:01:45 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	mem_perror(t_data *data)
 {
 	perror("malloc: ");
-	data->exit_code->state = 1; 
+	data->exit_code->state = 1;
 }
 
 static void	add_to_env(t_env *env, t_data *data, int i)

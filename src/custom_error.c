@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:55:15 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/09 15:15:34 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 16:05:29 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,13 @@ static void	write_err(char *s, char *context)
 static int	error_case(int err, char *context)
 {
 	if (err == MEM_ERR)
-		return (write_err("memory allocation fail while", context), err);
+		return (write_err("memory allocation fail while", context), 1);
 	if (err == TKN_SYNTAX_ERR)
-		return (write_err("syntax error near", context), err);
+		return (write_err("syntax error near", context), 1);
 	if (err == AMBIG_REDIR_ERR)
 		return (write_err("ambiguous redirect", context), 1);
-	if (err == IS_DIR_ERR)
-		return (write_err("is a directory", context), err);
 	if (err == UNKNOWN_CMD_ERR)
-		return (write_err("command not found", context), err);
+		return (write_err("command not found", context), 127);
 	return (0);
 }
 
