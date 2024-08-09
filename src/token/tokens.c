@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:01:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 18:03:44 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 11:14:55 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_token	*new_token(char *content, t_exit *state)
  * @brief   Next token from str (readline). Skips white spaces and
  *          deals with quoted tokens. Returns the next token or a NULL.
  */
-static char	*get_next(char *s)
+char	*get_next(char *s)
 {
 	static char	*temp;
 	char		*tkn;
@@ -77,7 +77,7 @@ static char	*get_next(char *s)
  * @brief   Init linked list for tokens. Calls get_next() to init the nbr of
  *          nodes required. Returns ptr to top node
  */
-static t_token	*get_tokens(char *s, t_exit *state)
+t_token	*get_tokens(char *s, t_exit *state)
 {
 	t_token	*tokens;
 	t_token	*last;

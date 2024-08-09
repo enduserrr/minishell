@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 10:03:56 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 18:00:30 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 10:28:17 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@
 # define IS_DIR_ERR 126
 # define UNKNOWN_CMD_ERR 127
 // # define NO_FILE_ERR -3
+
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+
+}					t_env;
 
 typedef struct s_exit
 {

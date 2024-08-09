@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:39:40 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/08 11:56:44 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 12:32:58 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,15 @@ void	get_path(t_data *data, t_cmd *cmd)
 
 static void	no_path_execute(t_cmd *temp, t_data *data)
 {
+	struct stat	stats;
+
 	if (!temp->av)
 		exit(0);
 	if (access(temp->av[0], X_OK) == 0)
 	{
-		if (execve(temp->av[0], temp->av, data->envp) == -1)
+		if (stat(temp->av[0], &stats) == 0 && S_ISDIR(stats.st_mode))
+			perror(": Is a directory");
+		else if (execve(temp->av[0], temp->av, data->envp) == -1)
 			perror("exe: ");
 	}
 	else

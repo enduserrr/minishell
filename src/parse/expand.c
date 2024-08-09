@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:20:32 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 16:39:27 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 11:05:11 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	assignement_tilde(char **s)
  * @brief	Iterates through the token list and
  *			expands tildes (~) or env vars.
  */
-char	ft_expand(t_exit *state, t_token **tokens)
+char	ft_expand(t_exit *state, t_token **tokens, t_env *env)
 {
 	t_token	*tkn;
 	char	return_val;
@@ -108,7 +108,7 @@ char	ft_expand(t_exit *state, t_token **tokens)
 		{
 			tilde_expander(&tkn->content, 0);
 			assignement_tilde(&tkn->content);
-			return_val = expand_env(&tkn->content, state, tkn->id);
+			return_val = expand_env(&tkn->content, state, tkn->id, env);
 			if (return_val == 1)
 				return (1);
 			else if (return_val == REMOVE)

@@ -49,7 +49,7 @@ static void	*n_check(char *s)
 		return ((void *)0);
 	else
 	{
-		while(s[i])
+		while (s[i])
 		{
 			if (s[i] != 'n')
 				return ((void *)1);
@@ -66,8 +66,8 @@ static void	output_echo(t_data *data)
 
 	i = 1;
 	flag = 0;
-	if (data->cmds->av[1] != NULL && ft_strncmp(data->cmds->av[1], "-n",
-			2) == 0 && n_check(data->cmds->av[1]) == NULL)
+	if (data->cmds->av[1] != NULL && ft_strncmp(data->cmds->av[1], "-n", 2) == 0
+		&& n_check(data->cmds->av[1]) == NULL)
 	{
 		flag = 1;
 		i++;

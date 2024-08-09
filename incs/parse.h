@@ -64,13 +64,15 @@ char				split_at_operators(t_token *tokens, t_exit *state);
 void				free_tokens(t_token *tokens);
 
 /*Parse*/
-t_cmd				*ft_parse(t_exit *state, t_token *tokens);
+t_cmd				*ft_parse(t_exit *state, t_token *tokens, t_env *env);
 t_cmd				*alloc_cmd(t_token *tokens);
 t_cmd				*command_table(t_token *tokens, t_exit *state);
 void				check_commands(t_token *tokens);
 void				free_commands(t_cmd *cmds);
-void				put_command(t_cmd *commands);
-char				expand_env(char **s, t_exit *state, char id);
-char				ft_expand(t_exit *state, t_token **tokens);
+char				expand_env(char **s, t_exit *state, char id, \
+						t_env *env_list);
+char				ft_expand(t_exit *state, t_token **tokens, t_env *env);
+char				*find_env(char *env, t_env *env_list);
 
+/*void				put_command(t_cmd *commands);*/
 #endif

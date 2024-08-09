@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 22:37:59 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/02 14:10:48 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 12:26:56 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ void	add_to_env(t_env *env, t_data *data, int i)
 	temp2->next = temp;
 }
 
-void	create_env_list(t_data *data)
+void	create_env_list(t_data *data, t_env *env)
 {
-	t_env	*env;
 	char	**temp_arr;
 	int		i;
 

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:40:06 by asalo             #+#    #+#             */
-/*   Updated: 2024/08/08 17:52:01 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 12:53:44 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	run(t_data *data, t_exit *state, struct termios *original)
 		}
 		add_history(input);
 		tokens = ft_token(state, input);
-		data->cmds = ft_parse(state, tokens);
+		data->cmds = ft_parse(state, tokens, data->env_list);
 		process_cmds(data);
 		free_commands(data->cmds);
 	}
@@ -67,6 +67,7 @@ static void	run(t_data *data, t_exit *state, struct termios *original)
 int	main(int ac, char **av, char **envp)
 {
 	t_data			data;
+	static t_env	env_list;
 	static t_exit	exit_state;
 	struct termios	original;
 
@@ -79,7 +80,7 @@ int	main(int ac, char **av, char **envp)
 	data = (t_data){0};
 	data.envp = envp;
 	data.exit_code = &exit_state;
-	create_env_list(&data);
+	create_env_list(&data, &env_list);
 	create_paths(&data);
 	configure_terminal(&original);
 	write_fd(1, GREEN, WLCM);

@@ -6,7 +6,7 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:11:52 by eleppala          #+#    #+#             */
-/*   Updated: 2024/08/08 12:18:47 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 12:52:41 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # include "general.h"
 # include "parse.h"
 
-/**
- * @brief	List description:
- */
 typedef struct s_data
 {
 	t_cmd	*cmds;
@@ -52,7 +49,7 @@ int			check_out(t_cmd *temp, int fd);
 int			heredoc_handler(t_cmd *temp, char *delimiter, int fd_out);
 
 /* SRC */
-void		create_env_list(t_data *data);
+void		create_env_list(t_data *data, t_env *env);
 
 /* UTILS */
 int			ft_arraylen(char **arr);

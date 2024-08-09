@@ -1,5 +1,9 @@
 # TESTING
 
+## EI TOIMI:
+* $USER --> : command not found (should add 'asalo' in the beginning) OK!
+*
+
 ## 1: simple command with absolute path without options | ALL OK!
 * /bin/ls OK!
 * empty command OK!
@@ -47,7 +51,7 @@
   * heredoc OK!
 
 ## 7: douple quotes | ERRORS!
-* echo "hello "" ERROR!  --> tata ei oo eval sheetissa.. joten annetaanko vaan olla. 
+* echo "hello "" ERROR!  --> tata ei oo eval sheetissa.. joten annetaanko vaan olla.
 * echo "" hello "" OK!
 * cat "  infile""
 * ls -la | " grep -hello " OK!
@@ -80,7 +84,7 @@ Repeat multiple times in different directories with a complex relative path (lot
 * unset PATH
 * export PATH=/home/eleppala/bin:/usr/local/sbin:/usr/local/bin
 
-## 14: redirections | OK kaikki paitsi wc -l 
+## 14: redirections | OK kaikki paitsi wc -l
 * < infile | grep hello OK!
 * < infile | grep world OK!
 * < infile | grep hello > out OK!

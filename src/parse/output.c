@@ -6,13 +6,13 @@
 /*   By: asalo <asalo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 12:34:46 by asalo             #+#    #+#             */
-/*   Updated: 2024/07/27 16:38:22 by asalo            ###   ########.fr       */
+/*   Updated: 2024/08/09 12:52:01 by asalo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
 
-static t_token	*put_token(t_token *tokens, const char *title)
+/*static t_token	*put_token(t_token *tokens, const char *title)
 {
 	if (title)
 		printf("\e[1;90m%s\e[0m\n", title);
@@ -48,9 +48,9 @@ static t_token	*put_token(t_token *tokens, const char *title)
 		tokens = tokens->next;
 	}
 	return (tokens);
-}
+}*/
 
-void	put_command(t_cmd *commands)
+/*void	put_command(t_cmd *commands)
 {
 	size_t	i;
 
@@ -72,4 +72,4 @@ void	put_command(t_cmd *commands)
 		if (commands)
 			printf("\33[90m=========================>\e[0m\n");
 	}
-}
+}*/
