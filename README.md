@@ -3,12 +3,13 @@
 - [Overview](#overview)
 - [Functionality](#functionality)
   - [Summary](#summary)
-  - [Parsing etc](#tokens-parsing-and-expancion)
+  - [Tokens, Parsing and Expancion](#tokens-parsing-and-expancion)
   - [Execution](#execution)
   - [Pipes & Redirection](#pipes-and-redirections)
   - [Signals](#signals)
   - [Memory & Error management](#memory-management--error-handling)
-  - [Possible Improvements](#possible-improvements)
+- [Possible Improvements](#possible-improvements)
+- [Usage](#possible-improvements)
 - [Conclusion](#conclusion)
 - [Contributors](#contributors)
 
@@ -64,18 +65,18 @@ Minishell is a command-line interpreter mimicking the basic functionality of Bas
 * We ensured proper memory allocation and deallocation throughout the shell's lifecycle.
   * Dynamic strings and split tokens are cleaned up after each command execution, and unexpected disruptions are handled at any point during the program's lifecycle.
 
-### USAGE
+## USAGE
 * Make (all/clean/fclean/re)
 `./minishell`
 
-### POSSIBLE IMPROVEMENTS
-* More comprehencive handling of special characters and escape sequences.
-* Adding handling for more signals.
+## POSSIBLE IMPROVEMENTS
+* Enhanced handling of special characters and escape sequences.
+* Handling for additional signals.
 
 ## CONCLUSION
-This project was our first team effort and the largest one either of us has done so far, making it an invaluable learning experience. It significantly enhanced our understanding of Unix shell internals, project management, and collaboration.
+This project was our first major team effort and the largest one either of us has done so far, making it an invaluable learning experience. It significantly enhanced our understanding of Unix shell internals, project management, and collaboration.
 
-Though there are areas where we can improve, this project provided us with a solid foundation in shell functionality. We focused on creating a reliable and efficient command-line interface that mirrors some of Bash's key features.
+Despite areas for improvement, we gained a solid foundation in shell functionality and created a reliable command-line interface that mirrors some of Bash's key features.
 
 ## Contributors
 asalo & eleppala
