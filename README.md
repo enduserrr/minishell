@@ -1,6 +1,5 @@
 # Minishell
 
-## TOC
 - [Overview](#overview)
 - [Functionality](#functionality)
   - [Summary](#summary)
