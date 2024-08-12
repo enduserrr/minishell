@@ -14,7 +14,7 @@
 - [Contributors](#contributors)
 
 ## OVERVIEW
-Minishell is a command-line interpreter mimicking the basic functionality of Bash. This project was a team effort, done with eleppala. It deepened our understanding of shell internals, command execution, environment handling, and other core operating system concepts.
+Minishell is a command-line interpreter mimicking the basic functionality of Bash. This project was a team effort, done together with eleppala. It deepened our understanding of shell internals, command execution, environment handling, and other core operating system concepts.
 
 ## FUNCTIONALITY
 ### Summary
@@ -72,11 +72,12 @@ Minishell is a command-line interpreter mimicking the basic functionality of Bas
 ## POSSIBLE IMPROVEMENTS
 * Enhanced handling of special characters and escape sequences.
 * Handling for additional signals.
+* Adding function to update shell level env
 
 ## CONCLUSION
 This project was our first major team effort and the largest one either of us has done so far, making it an invaluable learning experience. It significantly enhanced our understanding of Unix shell internals, project management, and collaboration.
 
-Despite areas for improvement, we gained a solid foundation in shell functionality and created a reliable command-line interface that mirrors some of Bash's key features.
+Despite there still being multiple areas for improvement, the project allowed us to gain a solid foundation in shell functionality and created a reliable command-line interface that mirrors some of Bash's key features.
 
 ## Contributors
 asalo & eleppala
